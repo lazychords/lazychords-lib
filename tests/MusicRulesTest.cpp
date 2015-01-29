@@ -1,5 +1,5 @@
-#include "../MusicRules.hpp"
-#include "../Music.hpp"
+#include "MusicRules.hpp"
+#include "Music.hpp"
 #include "catch.hpp"
 #include <climits>
 #include <exception>

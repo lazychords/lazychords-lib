@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "../Music.hpp"
+#include "Music.hpp"
 #include <climits>
 #include <exception>
 #include <sstream>
