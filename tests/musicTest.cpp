@@ -5,6 +5,7 @@
 #include <sstream>
 #include <array>
 #include <map>
+#include <string>
 #include <algorithm>
 
 using namespace std;
@@ -782,10 +783,17 @@ TEST_CASE("Test of Pitch","[Pitch]")
             for(auto a : availableAccidentals){
                 for(unsigned i=0;i<11;i++){
                     stringstream ss,ss2;
+                    CAPTURE(i)
+                    Octave o(i>4 ? i-1 : i);
+                    CAPTURE(o)
                     Pitch cn(n,a,Octave(i));
-                    ss<<a<<n<<strOfOctave(Octave(i));
+                    ss<<a<<n<<strOfOctave(o);
+                    string target = ss.str();
+                    if(i>4){
+                        std::transform(target.begin(),target.end(),target.begin(),::tolower);
+                    }
                     ss2<<cn;
-                    REQUIRE(ss.str()==ss2.str());
+                    REQUIRE(target==ss2.str());
                 }
             }
         }
@@ -1068,9 +1076,15 @@ TEST_CASE("Test of Note","[Note]")
                                     frac<<Fraction((int)j,(int)k).denominator();
                                 }
                             }
-                            ss<<a<<n<<strOfOctave(Octave(i))<<frac.str();
+               
+                            Octave o(i>4 ? i-1 : i);
+                            ss<<a<<n<<strOfOctave(Octave(o))<<frac.str();
                             ss2<<N;
-                            REQUIRE(ss.str()==ss2.str());
+                            string target = ss.str();
+                            if(i>4){
+                                std::transform(target.begin(),target.end(),target.begin(),::tolower);
+                            }
+                            REQUIRE(target==ss2.str());
                         }
                     }
                 }
@@ -1471,9 +1485,9 @@ string seventhName(Chord::SeventhType s){
     case Chord::SeventhType::None:
         return "";
     case Chord::SeventhType::Minor:
-        return "7m";
-    case Chord::SeventhType::Major:
         return "7";
+    case Chord::SeventhType::Major:
+        return "7M";
     case Chord::SeventhType::Dim:
         return "7dim";
     }
@@ -1589,7 +1603,6 @@ TEST_CASE("Test of Chord","[Chord]")
                     Chord C;
                     get<0>(c).m_seventh=seventh.first;
                     string name = get<2>(c) + seventhName(seventh.first);
-                    REQUIRE_NOTHROW(C=readChord(name));
                     CAPTURE(name);
                     CAPTURE(get<0>(c).m_seventh);
                     CAPTURE(get<0>(c).m_base);
@@ -1601,6 +1614,7 @@ TEST_CASE("Test of Chord","[Chord]")
                     CAPTURE(C.m_type);
                     CAPTURE(seventh.first);
                     INFO(seventhName(seventh.first));
+                    REQUIRE_NOTHROW(C=readChord(name));
                     REQUIRE(C==get<0>(c));;
                 }
             }
@@ -1614,7 +1628,51 @@ TEST_CASE("Test of Chord","[Chord]")
                     get<0>(c).m_seventh=seventh.first;
                     stringstream ss;
                     REQUIRE_NOTHROW(ss<<get<0>(c));
-                    REQUIRE(ss.str()==get<2>(c) + seventhName(seventh.first));
+                    string name1 = (ss.str()[0]) + (ss.str()[1]=='#' || ss.str()[1]=='b' ? string(1,ss.str()[1]) : "");
+                    string name2 = (get<2>(c)[0]) + (get<2>(c)[1]=='#' || get<2>(c)[1]=='b' ? string(1,get<2>(c)[1]) : "");
+                    string oname1 = name1, oname2 = name2;
+                    transform(name1.begin(),name1.end(),name1.begin(),::toupper);
+                    transform(name2.begin(),name2.end(),name2.begin(),::toupper);
+                    bool valid = name1==name2 ||
+                        (name1=="CB"&&name2=="B") ||
+                        (name2=="CB"&&name1=="B") ||
+                        (name1=="C#"&&name2=="DB") ||
+                        (name2=="C#"&&name1=="DB") ||
+                        (name1=="DB"&&name2=="C#") ||
+                        (name2=="DB"&&name1=="C#") ||
+                        (name1=="D#"&&name2=="EB") ||
+                        (name2=="D#"&&name1=="EB") ||
+                        (name1=="EB"&&name2=="D#") ||
+                        (name2=="EB"&&name1=="D#") ||
+                        (name1=="E#"&&name2=="F") ||
+                        (name2=="E#"&&name1=="F") ||
+                        (name1=="FB"&&name2=="E") ||
+                        (name2=="FB"&&name1=="E") ||
+                        (name1=="F#"&&name2=="GB") ||
+                        (name2=="F#"&&name1=="GB") ||
+                        (name1=="GB"&&name2=="F#") ||
+                        (name2=="GB"&&name1=="F#") ||
+                        (name1=="G#"&&name2=="AB") ||
+                        (name2=="G#"&&name1=="AB") ||
+                        (name1=="AB"&&name2=="G#") ||
+                        (name2=="AB"&&name1=="G#") ||
+                        (name1=="A#"&&name2=="BB") ||
+                        (name2=="A#"&&name1=="BB") ||
+                        (name1=="BB"&&name2=="A#") ||
+                        (name2=="BB"&&name1=="A#") ||
+                        (name1=="B#"&&name2=="C") ||
+                        (name2=="B#"&&name1=="C");
+                    CAPTURE(ss.str());
+                    CAPTURE(get<2>(c));
+                    CAPTURE(seventhName(seventh.first));
+                    CAPTURE(name1);
+                    CAPTURE(name2);
+                    REQUIRE(valid);
+                    string res = ss.str();
+                    size_t start_pos = res.find(oname1);
+                    if(start_pos != std::string::npos)
+                        res.replace(start_pos, oname1.length(), oname2);
+                    REQUIRE(res==get<2>(c) + seventhName(seventh.first));
                 }
             }
         }
@@ -1627,6 +1685,7 @@ TEST_CASE("Test of Chord","[Chord]")
                     Chord C;
                     stringstream ss;
                     REQUIRE_NOTHROW(ss<<get<0>(c));
+                    CAPTURE(ss.str());
                     REQUIRE_NOTHROW(C=readChord(ss.str()));
                     REQUIRE(C==get<0>(c));;
                 }

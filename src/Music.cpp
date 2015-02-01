@@ -587,7 +587,7 @@ Chord readChord(const std::string& str)
     std::map<std::string, Chord::ChordType> ct ={{"", Chord::ChordType::Major}, {"m", Chord::ChordType::Minor},{"dim", Chord::ChordType::Dim}, {"aug", Chord::ChordType::Aug},{"sus2", Chord::ChordType::Sus2}, {"sus4", Chord::ChordType::Sus4}};
     std::map<std::string, Chord::SeventhType> st ={{"7M", Chord::SeventhType::Major}, {"7", Chord::SeventhType::Minor},{"7dim", Chord::SeventhType::Dim}, {"", Chord::SeventhType::None}};
     std::string lower =str;
-    std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+    std::transform(lower.begin(), min(lower.begin()+1,lower.end()), lower.begin(), ::tolower);
     for(auto n : notes)
         for(auto c : acc)
             for(auto t : ct)
