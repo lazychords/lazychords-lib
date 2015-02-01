@@ -1641,6 +1641,7 @@ TEST_CASE("Test of Chord","[Chord]")
                     Chord C;
                     stringstream ss;
                     REQUIRE_NOTHROW(ss<<get<0>(c));
+                    CAPTURE(ss.str());
                     REQUIRE_NOTHROW(C=readChord(ss.str()));
                     REQUIRE(C==get<0>(c));;
                 }
