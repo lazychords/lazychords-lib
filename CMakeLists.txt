@@ -79,3 +79,13 @@ IF(DOXYGEN_FOUND)
         COMMENT "Generating API documentation with Doxygen" VERBATIM
     )
 ENDIF(DOXYGEN_FOUND)
+
+
+############################
+# Coverage
+############################
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
+if(CMAKE_COMPILER_IS_GNUCXX)
+    include(CodeCoverage)
+    setup_target_for_coverage_cobertura(Lazychord_lib_coverage ${PROJECT_SOURCE_DIR}/runTests coverage)
+endif()
