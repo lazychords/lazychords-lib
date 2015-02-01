@@ -1,7 +1,8 @@
 ![logo](logo.png)
 
 # Back-end lib of the LazyChords project
-[![Build Status](https://travis-ci.org/lazychords/lazychords-lib.svg?branch=master)](https://travis-ci.org/lazychords/lazychords-lib)
+travis : [![Build Status](https://travis-ci.org/lazychords/lazychords-lib.svg?branch=master)](https://travis-ci.org/lazychords/lazychords-lib)
+jenkis : [![Build Status](http://jenkins.nicolascarion.com/buildStatus/icon?job=LazyChords)](http://jenkins.nicolascarion.com/job/LazyChords/)
 
 This is the core of the LazyChords project, where the data models (how the melodies, chords,…) are described and the main algorithm is implemented. If you're looking for a gui, please have look [here](https://github.com/lazychords/lazychords-gui)
 
