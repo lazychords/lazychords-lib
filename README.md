@@ -1,6 +1,7 @@
 ![logo](logo.png)
 
 # Back-end lib of the LazyChords project
+[![Build Status](https://travis-ci.org/lazychords/lazychords-lib.svg?branch=master)](https://travis-ci.org/lazychords/lazychords-lib)
 
 This is the core of the LazyChords project, where the data models (how the melodies, chords,…) are described and the main algorithm is implemented.
 
