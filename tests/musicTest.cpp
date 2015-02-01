@@ -5,6 +5,7 @@
 #include <sstream>
 #include <array>
 #include <map>
+#include <string>
 #include <algorithm>
 
 using namespace std;
@@ -782,10 +783,17 @@ TEST_CASE("Test of Pitch","[Pitch]")
             for(auto a : availableAccidentals){
                 for(unsigned i=0;i<11;i++){
                     stringstream ss,ss2;
+                    CAPTURE(i)
+                    Octave o(i>4 ? i-1 : i);
+                    CAPTURE(o)
                     Pitch cn(n,a,Octave(i));
-                    ss<<a<<n<<strOfOctave(Octave(i));
+                    ss<<a<<n<<strOfOctave(o);
+                    string target = ss.str();
+                    if(i>4){
+                        std::transform(target.begin(),target.end(),target.begin(),::tolower);
+                    }
                     ss2<<cn;
-                    REQUIRE(ss.str()==ss2.str());
+                    REQUIRE(target==ss2.str());
                 }
             }
         }
@@ -1068,9 +1076,15 @@ TEST_CASE("Test of Note","[Note]")
                                     frac<<Fraction((int)j,(int)k).denominator();
                                 }
                             }
-                            ss<<a<<n<<strOfOctave(Octave(i))<<frac.str();
+               
+                            Octave o(i>4 ? i-1 : i);
+                            ss<<a<<n<<strOfOctave(Octave(o))<<frac.str();
                             ss2<<N;
-                            REQUIRE(ss.str()==ss2.str());
+                            string target = ss.str();
+                            if(i>4){
+                                std::transform(target.begin(),target.end(),target.begin(),::tolower);
+                            }
+                            REQUIRE(target==ss2.str());
                         }
                     }
                 }
