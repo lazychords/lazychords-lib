@@ -282,6 +282,8 @@ public :
 
 class Chord
 {
+private :
+    //??????
 public :
     bool check() const;
     void save(std::ostream& o) const;
