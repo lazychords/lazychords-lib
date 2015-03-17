@@ -230,7 +230,7 @@ struct Key
     bool operator==(const Key&) const;
     bool operator!=(const Key&) const;
 
-    std::vector<Pitch> getNotes() const;
+    const std::vector<Pitch>& getNotes() const;
 };
 
 class Melody
@@ -278,6 +278,32 @@ public :
     void addFigure(const Figure& f, const PositionFunction& pf = PositionFunction([](const Figure&, const Figure&, unsigned i){return (i+1)%4;}));
 
     Melody transpose(const Key& newKey) const;
+};
+
+class Chord
+{
+public :
+    bool check() const;
+    void save(std::ostream& o) const;
+    static Chord load(std::istream& i);
+    unsigned id() const;
+    static Chord fromId(unsigned hashValue);
+    static Chord randomInstance();
+    static unsigned maxId() const;
+    std::ostream& operator<<(std::ostream& o) const;
+    std::ostream& operator>>(std::istream& i);
+    static Chord fromStream(std::istream& i);
+
+    Chord(/*????*/);
+    Chord(const Chord&) = default;
+    Chord(Chord&&) = default;
+    Chord& operator=(const Chord&) = default;
+    ~Chord() = default;
+
+    bool operator==(const Chord&) const;
+    bool operator!=(const Chord&) const;
+
+    const std::vector<Pitch>& getNotes() const;
 };
 
 /**
