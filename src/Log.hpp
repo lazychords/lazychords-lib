@@ -1,9 +1,10 @@
 #ifndef LOG_HPP_INCLUDED
 #define LOG_HPP_INCLUDED
-
-#define assert(X) Log::reportError(X, __FILE__, __LINE__); assert(X);
-
-
+#ifdef DEBUG
+    #define assert(X) Log::reportError(std::string(#X), std::string(__FILE__), __LINE__); if(!(X)) throw std::runtime_error("assertion failed");
+#else
+    #define assert(X) ;
+#endif
 class LogImpl;
 
 class Log
@@ -11,10 +12,7 @@ class Log
     static std::unique_ptr<LogImpl> l;
 public :
     Log() = delete;
-    static void reportError(const std::string& errorMessage, std::string& file, unsigned line)
-    {
-        f(file + ":" + toString(line) + ":0:"+errorMessage);
-    }
+    static void reportError(const std::string& errorMessage, const std::string& file, unsigned line);
 };
 
 
