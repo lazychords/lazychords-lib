@@ -43,7 +43,107 @@
  * The name is given in the english notation, where C == Do
  *
  */
-enum class NoteName{C,D,E,F,G,A,B};
+class Pitch
+{
+    private :
+        unsigned halfTone///<Number of half tones from C. Must be between 0 and 11;
+    public :
+        bool check() const;
+        void save(std::ostream& o) const;
+        static Pitch load(std::istream& i);
+        unsigned id() const;
+        static Pitch fromId(unsigned hashValue);
+        static Pitch randomInstance();
+        static unsigned maxId() const;
+        std::ostream& operator<<(std::ostream& o) const;
+        std::ostream& operator>>(std::istream& i);
+        static Pitch fromStream(std::istream& i);
+
+        Pitch();
+        Pitch(unsigned halfTones);
+        Pitch(const Pitch&) = default;
+        Pitch(Pitch&&) = default;
+        Pitch& operator=(const Pitch&) = default;
+        ~Pitch() = default;
+
+        bool operator==(const Pitch&) const;
+        bool operator!=(const Pitch&) const;
+
+        Pitch& operator+=(int halfTones);
+        Pitch& operator-=(int halfTones);
+        Pitch operator+(int halfTones) const;
+        Pitch operator-(int halfTones) const;
+};
+
+class Note : public Pitch
+{
+    private :
+        bool silence;
+        Fraction duration;
+    public :
+        bool check() const;
+        void save(std::ostream& o) const;rest
+        static Note load(std::istream& i);
+        static Note randomInstance();
+        std::ostream& operator<<(std::ostream& o) const;
+        std::ostream& operator>>(std::istream& i);
+        static Note fromStream(std::istream& i);
+
+        Note(const Fraction& duration = 1, bool rest = true);
+        Note(unsigned halfTones);
+        Note(unsigned halfTones, const Fraction& duration);
+        Note(const Pitch& p, const Fraction& duration);
+        Note(const Note&) = default;
+        Note(Note&&) = default;
+        Note& operator=(const Note&) = default;
+        ~Note() = default;
+
+        bool operator==(const Note&) const;
+        bool operator!=(const Note&) const;
+
+        Note operator+(int halfTones) const;
+        Note operator-(int halfTones) const;
+
+        bool isrest() const;
+        operator bool() const;
+        const Fraction& getDuration() const;
+        void changeDuration(const Fraction& d);
+
+};
+
+class Figure
+{
+    private :
+        std::vector<Note> notes;
+    public :
+        using const_iterator = std::vector<Note>::const_iterator;
+        using iterator = std::vector<Note>::iterator;
+        bool check() const;
+        void save(std::ostream& o) const;
+        static Figure load(std::istream& i);
+        static Figure randomInstance();
+        std::ostream& operator<<(std::ostream& o) const;
+        std::ostream& operator>>(std::istream& i);
+        static Figure fromStream(std::istream& i);
+
+        Figure() = default;
+        template<typename Iterator>
+        Figure(Iterator begin, Iterator end);
+        Figure(const Figure&) = default;
+        Figure(Figure&&) = default;
+        Figure& operator=(const Figure&) = default;
+        ~Figure() = default;
+
+
+        iterator begin();
+        const_iterator begin() const;
+        iterator end();
+        const_iterator end() const;
+
+        void addNote(const Note& n);
+
+        const Note& getNoteAtTime() const;
+};
 
 /**
  *@brief output operator for NoteName
@@ -373,7 +473,7 @@ public :
      * ponctual events, thus a note is played for a strictly positive amount of time)
      * @param p The position inside the bar (as a fraction of the bar).We must have 0<=p<=1. [CHANGE WARNING]
      * @return The note being played at position p.
-     * @throw std::domain_error If no note is played at position p (ie there is only silence)
+     * @throw std::domain_error If no note is played at position p (ie there is only rest)
      * @throw std::domain_error if !(0<=p<=1)
      */
     ConstIterator getNoteBeingPlayedAt(const Position& p) const __attribute__((pure));
@@ -411,7 +511,7 @@ private :
 
 /**
  *@brief output operator for Measure
- *The format is as follows : The notes, separated by spaces. Silences are written zFractionofbeat
+ *The format is as follows : The notes, separated by spaces. rests are written zFractionofbeat
  *@param o the stream to write in
  *@param m the Measure to write
  *@return o
@@ -421,7 +521,7 @@ std::ostream& operator <<(std::ostream& o, const Measure& m);
 
 /**
  *@brief input operator for Measure
- *The format is as follows : The notes, separated by spaces (or not). Silences are written zFractionofbeat
+ *The format is as follows : The notes, separated by spaces (or not). rests are written zFractionofbeat
  *@param i is the stream to read from
  *@param m the Measure to write in
  *@return i
@@ -456,7 +556,7 @@ struct Key
     /**
      * @brief Change the note (given as a reference) to get the notation corresponding to the key
      * @param c is the note to normalize
-     * @note work in progress 
+     * @note work in progress
      **/
     void normalize(CompleteNoteName& c) const;
     /**
@@ -561,7 +661,7 @@ struct Chord
      *@note done
      */
     bool operator!=(const Chord& o) const __attribute__((pure));
-    
+
     using ChordID = unsigned;
     explicit Chord(ChordID id);
     explicit operator ChordID() const __attribute__((pure));
@@ -700,14 +800,14 @@ public:
      *@note done
      */
     bool operator!=(const Melody& o) const __attribute__((pure));
-    
+
     /**
      *@brief Adds a Chord Progression to a file
      *@param out is the stream to write the ChordProgression to
      *@param chords is the ChordProgression to add
      **/
     std::ostream& createABCChordFile(std::ostream& out, const ChordProgression& chords) const;
-    
+
     unsigned m_BPM;
 private:
     std::vector<Measure> m_measures;///< The list of measures of the melody
