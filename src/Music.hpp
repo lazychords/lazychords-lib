@@ -306,6 +306,8 @@ public :
     const std::vector<Pitch>& getNotes() const;
 };
 
+using ChordProgression = std::vector<Chord>;
+
 /**
  *@brief output operator for NoteName
  *The format is capital letters for the NoteName
