@@ -40,9 +40,10 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/libs/)
 ############################
 
 SET(LazyChordsLib_SRCS
-    src/Music.cpp
-    src/MusicRules.cpp
-    src/Utilities.cpp
+  src/Music.cpp
+  src/Pitch.cpp
+  src/MusicRules.cpp
+  src/Utilities.cpp
 )
 
 
