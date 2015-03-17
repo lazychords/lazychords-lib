@@ -113,7 +113,7 @@ public :
 
 class Figure
 {
-public :
+private :
     struct WeightedNote : public Note
     {
         unsigned weight;
@@ -153,9 +153,44 @@ public :
     std::vector<Fraction> getNotePercentage() const;
 };
 
+struct Signature
+{
+private :
+    unsigned number;
+    unsigned step;
+public :
+    bool check() const;
+    void save(std::ostream& o) const;
+    static Signature load(std::istream& i);
+    unsigned id() const;
+    static Signature fromId(unsigned hashValue);
+    static Signature randomInstance();
+    static unsigned maxId() const;
+    std::ostream& operator<<(std::ostream& o) const;
+    std::ostream& operator>>(std::istream& i);
+    static Signature fromStream(std::istream& i);
+
+
+
+    Signature();
+    Signature(unsigned number, unsigned step);
+    Signature(const Signature&) = default;
+    Signature(Signature&&) = default;
+    Signature& operator=(const Signature&) = default;
+    ~Signature() = default;
+
+    bool operator==(const Signature&) const;
+    bool operator!=(const Signature&) const;
+
+    unsigned getNumber() const;
+    unsigned getStep() const;
+    Fraction measureTime() const;
+};
+
+
 class Melody
 {
-public:
+private:
     struct PositionedFigure : public figure
     {
         unsigned pos; ///< Position inside the progession
