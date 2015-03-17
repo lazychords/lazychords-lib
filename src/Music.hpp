@@ -45,104 +45,125 @@
  */
 class Pitch
 {
-    private :
-        unsigned halfTone///<Number of half tones from C. Must be between 0 and 11;
-    public :
-        bool check() const;
-        void save(std::ostream& o) const;
-        static Pitch load(std::istream& i);
-        unsigned id() const;
-        static Pitch fromId(unsigned hashValue);
-        static Pitch randomInstance();
-        static unsigned maxId() const;
-        std::ostream& operator<<(std::ostream& o) const;
-        std::ostream& operator>>(std::istream& i);
-        static Pitch fromStream(std::istream& i);
+private:
+    unsigned halfTone;///<Number of half tones from C. Must be between 0 and 11;
+public:
+    bool check() const;
+    void save(std::ostream& o) const;
+    static Pitch load(std::istream& i);
+    unsigned id() const;
+    static Pitch fromId(unsigned hashValue);
+    static Pitch randomInstance();
+    static unsigned maxId() const;
+    std::ostream& operator<<(std::ostream& o) const;
+    std::ostream& operator>>(std::istream& i);
+    static Pitch fromStream(std::istream& i);
 
-        Pitch();
-        Pitch(unsigned halfTones);
-        Pitch(const Pitch&) = default;
-        Pitch(Pitch&&) = default;
-        Pitch& operator=(const Pitch&) = default;
-        ~Pitch() = default;
+    Pitch();
+    Pitch(unsigned halfTones);
+    Pitch(const Pitch&) = default;
+    Pitch(Pitch&&) = default;
+    Pitch& operator=(const Pitch&) = default;
+    ~Pitch() = default;
 
-        bool operator==(const Pitch&) const;
-        bool operator!=(const Pitch&) const;
+    bool operator==(const Pitch&) const;
+    bool operator!=(const Pitch&) const;
 
-        Pitch& operator+=(int halfTones);
-        Pitch& operator-=(int halfTones);
-        Pitch operator+(int halfTones) const;
-        Pitch operator-(int halfTones) const;
+    Pitch& operator+=(int halfTones);
+    Pitch& operator-=(int halfTones);
+    Pitch operator+(int halfTones) const;
+    Pitch operator-(int halfTones) const;
 };
 
 class Note : public Pitch
 {
-    private :
-        bool silence;
-        Fraction duration;
-    public :
-        bool check() const;
-        void save(std::ostream& o) const;rest
-        static Note load(std::istream& i);
-        static Note randomInstance();
-        std::ostream& operator<<(std::ostream& o) const;
-        std::ostream& operator>>(std::istream& i);
-        static Note fromStream(std::istream& i);
+private :
+    bool silence;
+    Fraction duration;
+public :
+    bool check() const;
+    void save(std::ostream& o) const;rest
+    static Note load(std::istream& i);
+    static Note randomInstance();
+    std::ostream& operator<<(std::ostream& o) const;
+    std::ostream& operator>>(std::istream& i);
+    static Note fromStream(std::istream& i);
 
-        Note(const Fraction& duration = 1, bool rest = true);
-        Note(unsigned halfTones);
-        Note(unsigned halfTones, const Fraction& duration);
-        Note(const Pitch& p, const Fraction& duration);
-        Note(const Note&) = default;
-        Note(Note&&) = default;
-        Note& operator=(const Note&) = default;
-        ~Note() = default;
+    Note(const Fraction& duration = 1, bool rest = true);
+    Note(unsigned halfTones);
+    Note(unsigned halfTones, const Fraction& duration);
+    Note(const Pitch& p, const Fraction& duration);
+    Note(const Note&) = default;
+    Note(Note&&) = default;
+    Note& operator=(const Note&) = default;
+    ~Note() = default;
 
-        bool operator==(const Note&) const;
-        bool operator!=(const Note&) const;
+    bool operator==(const Note&) const;
+    bool operator!=(const Note&) const;
 
-        Note operator+(int halfTones) const;
-        Note operator-(int halfTones) const;
+    Note operator+(int halfTones) const;
+    Note operator-(int halfTones) const;
 
-        bool isrest() const;
-        operator bool() const;
-        const Fraction& getDuration() const;
-        void changeDuration(const Fraction& d);
+    bool isrest() const;
+    operator bool() const;
+    const Fraction& getDuration() const;
+    void changeDuration(const Fraction& d);
 
 };
 
 class Figure
 {
-    private :
-        std::vector<Note> notes;
-    public :
-        using const_iterator = std::vector<Note>::const_iterator;
-        using iterator = std::vector<Note>::iterator;
-        bool check() const;
-        void save(std::ostream& o) const;
-        static Figure load(std::istream& i);
-        static Figure randomInstance();
-        std::ostream& operator<<(std::ostream& o) const;
-        std::ostream& operator>>(std::istream& i);
-        static Figure fromStream(std::istream& i);
+public :
+    struct WeightedNote : public Note
+    {
+        unsigned weight;
+    };
+private :
+    std::vector<WeightedNote> notes;
+public :
+    using const_iterator = std::vector<WeightedNote>::const_iterator;
+    using iterator = std::vector<WeightedNote>::iterator;
+    bool check() const;
+    void save(std::ostream& o) const;
+    static Figure load(std::istream& i);
+    static Figure randomInstance();
+    std::ostream& operator<<(std::ostream& o) const;
+    std::ostream& operator>>(std::istream& i);
+    static Figure fromStream(std::istream& i);
 
-        Figure() = default;
-        template<typename Iterator>
-        Figure(Iterator begin, Iterator end);
-        Figure(const Figure&) = default;
-        Figure(Figure&&) = default;
-        Figure& operator=(const Figure&) = default;
-        ~Figure() = default;
+    Figure() = default;
+    template<typename Iterator>
+    Figure(Iterator begin, Iterator end);
+    Figure(const Figure&) = default;
+    Figure(Figure&&) = default;
+    Figure& operator=(const Figure&) = default;
+    ~Figure() = default;
 
 
-        iterator begin();
-        const_iterator begin() const;
-        iterator end();
-        const_iterator end() const;
+    iterator begin();
+    const_iterator begin() const;
+    iterator end();
+    const_iterator end() const;
 
-        void addNote(const Note& n);
+    void addNote(const Note& n, unsigned weight = 1);
 
-        const Note& getNoteAtTime() const;
+    const WeightedNote& getNoteAtTime(const Fraction& t) const;
+    Fraction getTotalDuration() const;
+
+    std::vector<Fraction> getNotePercentage() const;
+};
+
+class Melody
+{
+public:
+    struct PositionedFigure : public figure
+    {
+        unsigned pos; ///< Position inside the progession
+    };
+private:
+    std::vector<PositionedFigure> figures;
+    Key k;
+    Signature s;
 };
 
 /**
@@ -173,9 +194,9 @@ std::istream& operator >>(std::istream& i, NoteName& n);
 enum class Accidental
 {
     Flat,///< Means that we add a semitone
-    Sharp,///< Means that we subtract a semitone
-    None///< Means that we use the natural note (no accidental)
-};
+        Sharp,///< Means that we subtract a semitone
+        None///< Means that we use the natural note (no accidental)
+        };
 
 /**
  *@brief output operator for Accidental
@@ -614,12 +635,12 @@ struct Chord
     enum class ChordType
     {
         Minor, ///< Describes a minor chord, meaning that the first third is a minor third
-	    Major, ///< Describes a major chord, meaning that the first third is a major third
-	    Sus4, ///< Describes a suspended fourth chord, meaning that the third is replaced by a forth
-	    Sus2,///< Describes a suspended second chord, meaning that the third is replaced by a second
-	    Dim, ///< Describes a diminished chord, composed of a minor third and a diminished fifth
-	    Aug ///< Describes a augmented chord, in which the fifth is augmented
-	    };
+            Major, ///< Describes a major chord, meaning that the first third is a major third
+            Sus4, ///< Describes a suspended fourth chord, meaning that the third is replaced by a forth
+            Sus2,///< Describes a suspended second chord, meaning that the third is replaced by a second
+            Dim, ///< Describes a diminished chord, composed of a minor third and a diminished fifth
+            Aug ///< Describes a augmented chord, in which the fifth is augmented
+            };
     Fraction m_duration;///< Hold the duration of the chord, in fraction of the bar it is played in. SHOULD BE DELETED ?
     CompleteNoteName m_base; ///< Name of the base name of the note
     /**
@@ -628,10 +649,10 @@ struct Chord
     enum class SeventhType
     {
         Major,
-	    Minor,
-	    Dim,
-	    None
-	    };
+            Minor,
+            Dim,
+            None
+            };
     SeventhType m_seventh; ///< if it's not None, the seventh is added according to this value (Dim = double Flat)
     ChordType m_type; ///<Type of the chord
 
