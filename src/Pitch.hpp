@@ -12,7 +12,6 @@
 
 #include <vector>
 #include <iostream>
-#include <boost/rational.hpp>
 
 class Pitch;
 
