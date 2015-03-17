@@ -73,6 +73,24 @@ public:
     Pitch& operator-=(int halfTones);
     Pitch operator+(int halfTones) const;
     Pitch operator-(int halfTones) const;
+
+    static const Pitch C = Pitch(0);
+    static const Pitch Cs = Pitch(1);
+    static const Pitch Df = Pitch(1);
+    static const Pitch D = Pitch(2);
+    static const Pitch Ds = Pitch(3);
+    static const Pitch Ef = Pitch(3);
+    static const Pitch E = Pitch(4);
+    static const Pitch F = Pitch(5);
+    static const Pitch Fs = Pitch(6);
+    static const Pitch Gf = Pitch(6);
+    static const Pitch G = Pitch(7);
+    static const Pitch Gs = Pitch(8);
+    static const Pitch Af = Pitch(8);
+    static const Pitch A = Pitch(9);
+    static const Pitch As = Pitch(10);
+    static const Pitch Bf = Pitch(10);
+    static const Pitch B = Pitch(11);
 };
 
 class Note : public Pitch
@@ -170,8 +188,6 @@ public :
     std::ostream& operator>>(std::istream& i);
     static Signature fromStream(std::istream& i);
 
-
-
     Signature();
     Signature(unsigned number, unsigned step);
     Signature(const Signature&) = default;
@@ -187,6 +203,34 @@ public :
     Fraction measureTime() const;
 };
 
+
+struct Key
+{
+    Pitch base; ///< Base note of the key
+    Pitch mode; ///< Mode of the key
+
+    bool check() const;
+    void save(std::ostream& o) const;
+    static Key load(std::istream& i);
+    unsigned id() const;
+    static Key fromId(unsigned hashValue);
+    static Key randomInstance();
+    static unsigned maxId() const;
+    std::ostream& operator<<(std::ostream& o) const;
+    std::ostream& operator>>(std::istream& i);
+    static Key fromStream(std::istream& i);
+
+    Key(const Pitch& base = Pitch::C, const Pitch& mode = Pitch::C);
+    Key(const Key&) = default;
+    Key(Key&&) = default;
+    Key& operator=(const Key&) = default;
+    ~Key() = default;
+
+    bool operator==(const Key&) const;
+    bool operator!=(const Key&) const;
+
+    std::vector<Pitch> getNotes() const;
+};
 
 class Melody
 {
