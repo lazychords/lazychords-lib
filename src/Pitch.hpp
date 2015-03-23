@@ -2,10 +2,10 @@
  * @file   Pitch.hpp
  * @author  <nicolas@archimede>
  * @date   Tue Mar 17 17:13:48 2015
- * 
+ *
  * @brief  This file defines the Pitch structure
- * 
- * 
+ *
+ *
  */
 #ifndef PITCH_HPP_INCLUDED
 #define PITCH_HPP_INCLUDED
@@ -31,8 +31,7 @@ public:
     std::ostream& operator>>(std::istream& i);
     static Pitch fromStream(std::istream& i);
 
-    Pitch();
-    Pitch(unsigned halfTones);
+    Pitch(unsigned halfTones = 0);
     Pitch(const Pitch&) = default;
     Pitch(Pitch&&) = default;
     Pitch& operator=(const Pitch&) = default;

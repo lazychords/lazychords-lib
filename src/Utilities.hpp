@@ -6,11 +6,9 @@
 #include <sstream>
 #include <vector>
 
-#include "Music.hpp"
+using Fraction =unsigned;
 
 using Number = double;
-using MachineLearningOutput = std::vector<std::pair<ChordProgression, Number> >;
-
 
 class Time
 {
@@ -63,10 +61,5 @@ std::vector<std::vector<T> > createAllPossibilities(const std::vector<T>& v, uns
     }
     return res;
 }
-
-
-
-
-MachineLearningOutput getExhaustiveChordProgression(const std::vector<std::string>& c, unsigned size);
 
 #endif // UTILITIES_HPP_INCLUDED

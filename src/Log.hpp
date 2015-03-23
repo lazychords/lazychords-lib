@@ -5,6 +5,8 @@
 #else
     #define assert(X) ;
 #endif
+#include <memory>
+
 class LogImpl;
 
 class Log

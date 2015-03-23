@@ -11,9 +11,7 @@
 #define SIGNATURE_HPP_INCLUDED
 
 #include <iostream>
-#include <boost/rational.hpp>
-
-using Fraction = boost::rational<int>;
+#include "Utilities.hpp"
 
 struct Signature
 {

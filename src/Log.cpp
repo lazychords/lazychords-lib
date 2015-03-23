@@ -1,13 +1,16 @@
 
 #include "Log.hpp"
-
-template<typename T>
+#include <string>
+#include <sstream>
+#include <iostream>
+#include "Utilities.hpp"
+/*template<typename T>
 std::string toString(const T& t)
 {
     std::stringstream s;
     s<<t;
     return s.str();
-}
+}*/
 
 class LogImpl
 {

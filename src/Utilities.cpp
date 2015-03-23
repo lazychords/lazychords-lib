@@ -12,7 +12,7 @@ std::string getFile(const std::string& str)
     return s.str();
 }
 float unitToMicro(Time::Unit u) __attribute__((const));
-float unitToMicro(Time::Unit u) 
+float unitToMicro(Time::Unit u)
 {
     switch(u)
     {
@@ -77,14 +77,4 @@ Time Time::operator*(float v) const
     return r;
 }
 
-MachineLearningOutput getExhaustiveChordProgression(const std::vector<std::string>& c, unsigned size)
-{
-    std::vector<Chord> chords;
-    for(auto it : c)
-        chords.push_back(readChord(it));
-    std::vector<ChordProgression> distinctChordProgressions = createAllPossibilities(chords, size);
-    MachineLearningOutput res;
-    for(auto& it : distinctChordProgressions)
-        res.push_back(std::make_pair(it, 30));
-    return res;
-}
+

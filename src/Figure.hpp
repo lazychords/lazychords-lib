@@ -2,14 +2,17 @@
  * @file   Figure.hpp
  * @author  <nicolas@archimede>
  * @date   Wed Mar 18 00:27:19 2015
- * 
+ *
  * @brief  Describe the Figure structure
- * 
- * 
+ *
+ *
  */
+#ifndef FIGURE_HPP
+#define FIGURE_HPP
+
 #include <vector>
 #include <iostream>
-#include "Note.hpp" 
+#include "Note.hpp"
 
 class Figure
 {
@@ -53,3 +56,5 @@ public :
 
     std::vector<Fraction> getNotePercentage() const;
 };
+
+#endif // FIGURE_HPP

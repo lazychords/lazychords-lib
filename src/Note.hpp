@@ -2,20 +2,19 @@
  * @file   Note.hpp
  * @author  <nicolas@archimede>
  * @date   Wed Mar 18 00:19:30 2015
- * 
+ *
  * @brief  Describe the Note structure
- * 
- * 
+ *
+ *
  */
 #ifndef NOTE_HPP_INCLUDED
 #define NOTE_HPP_INCLUDED
 
 #include <iostream>
 #include <vector>
-#include <boost/rational.hpp>
+#include "Utilities.hpp"
 #include "Pitch.hpp"
 
-using Fraction = boost::rational<int>;
 
 class Note : public Pitch
 {

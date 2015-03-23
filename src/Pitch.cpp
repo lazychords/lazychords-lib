@@ -1,4 +1,5 @@
 #include "Pitch.hpp"
+#include "Log.hpp"
 
 using namespace std;
 const Pitch Pitch::C = Pitch(0);
@@ -19,6 +20,11 @@ const Pitch Pitch::As = Pitch(10);
 const Pitch Pitch::Bf = Pitch(10);
 const Pitch Pitch::B = Pitch(11);
 
+
+Pitch::Pitch(unsigned halfTones) : halfTone(halfTones)
+{
+    assert(check());
+}
 
 bool Pitch::check() const
 {
