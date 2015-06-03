@@ -51,7 +51,7 @@ SET(LazyChordsLib_SRCS
   src/Pitch.cpp
   src/Log.cpp
 #  src/MusicRules.cpp
-#  src/Utilities.cpp
+  src/Utilities.cpp
 )
 
 
