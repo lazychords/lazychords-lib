@@ -4,6 +4,8 @@ ENABLE_TESTING()
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 
+SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} "C:/Users/Julien/Desktop/boost_1_57_0")
+
 FIND_PACKAGE(Doxygen)
 FIND_PACKAGE(Boost REQUIRED)
 
@@ -48,7 +50,7 @@ SET(LazyChordsLib_SRCS
   src/Note.cpp
   src/Pitch.cpp
   src/Log.cpp
-  src/MusicRules.cpp
+#  src/MusicRules.cpp
   src/Utilities.cpp
 )
 
@@ -74,6 +76,14 @@ TARGET_LINK_LIBRARIES(runTests LazyChordsLib)
 TARGET_LINK_LIBRARIES(runTests m)
 
 ADD_TEST(runTests runTests -d yes)
+
+SET(Main_SRCS
+    main.cpp
+)
+ADD_EXECUTABLE(main ${Main_SRCS})
+TARGET_LINK_LIBRARIES(main LazyChordsLib)
+TARGET_LINK_LIBRARIES(main m)
+
 
 ############################
 # DOxygen
