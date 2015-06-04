@@ -9,16 +9,24 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/LazychordLib" prefix_auto="1" extension_auto="1" />
+				<Option output="Build/main" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
+				<MakeCommands>
+					<Build command="$make -f $makefile" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile" />
+					<SilentBuild command="$make -f $makefile &gt; $(CMD_NULL)" />
+				</MakeCommands>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/LazychordLib" prefix_auto="1" extension_auto="1" />
+				<Option output="Build/main" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -34,6 +42,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Build/Makefile" />
+		<Unit filename="CMakeLists.txt" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Chord.cpp" />
 		<Unit filename="src/Chord.hpp" />
@@ -55,6 +65,14 @@
 		<Unit filename="src/Signature.hpp" />
 		<Unit filename="src/Utilities.cpp" />
 		<Unit filename="src/Utilities.hpp" />
+		<Unit filename="tests/MusicRulesTest.cxx" />
+		<Unit filename="tests/MusicRulesTest.test" />
+		<Unit filename="tests/TestMain.cxx" />
+		<Unit filename="tests/TestMain.test" />
+		<Unit filename="tests/catch.hpp" />
+		<Unit filename="tests/genericTests.cxx" />
+		<Unit filename="tests/musicTest.cxx" />
+		<Unit filename="tests/musicTest.test" />
 		<Extensions>
 			<code_completion />
 			<envvars />
