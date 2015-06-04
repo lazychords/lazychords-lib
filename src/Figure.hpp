@@ -1,6 +1,6 @@
 /**
  * @file   Figure.hpp
- * @author  <nicolas@archimede>
+ * @author  Julien and Nicolas
  * @date   Wed Mar 18 00:27:19 2015
  *
  * @brief  Describe the Figure structure

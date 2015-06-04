@@ -1,11 +1,11 @@
 /**
  * @file   Key.hpp
- * @author  <nicolas@archimede>
+ * @author  Julien and Nicolas
  * @date   Wed Mar 18 00:33:48 2015
- * 
+ *
  * @brief  Describe the Key structure
- * 
- * 
+ *
+ *
  */
 #ifndef KEY_HPP_INCLUDED
 #define KEY_HPP_INCLUDED

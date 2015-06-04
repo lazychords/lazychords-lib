@@ -1,11 +1,11 @@
 /**
  * @file   Chord.hpp
- * @author  <nicolas@archimede>
+ * @author  Julien and Nicolas
  * @date   Wed Mar 18 00:41:19 2015
- * 
+ *
  * @brief  Describe the Chord structure
- * 
- * 
+ *
+ *
  */
 #ifndef CHORD_HPP_INCLUDED
 #define CHORD_HPP_INCLUDED
@@ -45,4 +45,4 @@ public :
 using ChordProgression = std::vector<Chord>;
 
 
-#endif 
+#endif

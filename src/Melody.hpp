@@ -1,11 +1,11 @@
 /**
  * @file   Melody.hpp
- * @author  <nicolas@archimede>
+ * @author  Julien and Nicolas
  * @date   Wed Mar 18 00:37:15 2015
- * 
+ *
  * @brief  Describe the melody structure
- * 
- * 
+ *
+ *
  */
 #ifndef MELODY_HPP_INCLUDED
 #define MELODY_HPP_INCLUDED

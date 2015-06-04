@@ -1,6 +1,6 @@
 /**
  * @file   Pitch.hpp
- * @author  <nicolas@archimede>
+ * @author  Julien and Nicolas
  * @date   Tue Mar 17 17:13:48 2015
  *
  * @brief  This file defines the Pitch structure
