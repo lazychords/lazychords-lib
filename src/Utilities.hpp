@@ -6,7 +6,8 @@
 #include <sstream>
 #include <vector>
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-w"
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Weffc++"
 #include <boost/rational.hpp>
 using Fraction = boost::rational<int>;
 #pragma GCC diagnostic pop
