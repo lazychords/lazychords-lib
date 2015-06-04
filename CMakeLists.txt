@@ -18,7 +18,12 @@ FIND_PACKAGE(Boost REQUIRED COMPONENTS filesystem)
 
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+IF(OPTIMIZE)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wunsafe-loop-optimizations ")
+ELSE(OPTIMIZE)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+ENDIF(OPTIMIZE)
 IF(WARNNONE)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 ELSE(WARNNONE)
@@ -34,7 +39,7 @@ ELSE(WARNNONE)
         SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wstrict-aliasing -Wstrict-overflow -Wconversion")
         SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdisabled-optimization -Wsuggest-attribute=noreturn ")
         SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -Wsuggest-attribute=pure ")
-        SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op -Wunsafe-loop-optimizations ")
+        SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op")
         SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -Wunused-parameter -Wshadow  -Weffc++")
     ENDIF(WARNALL)
 ENDIF(WARNNONE)
@@ -65,7 +70,6 @@ SET(LazyChordsLib_SRCS
   src/Note.cpp
   src/Pitch.cpp
   src/Log.cpp
-#  src/MusicRules.cpp
   src/Utilities.cpp
 )
 
