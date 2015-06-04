@@ -115,6 +115,12 @@ IF(DOXYGEN_FOUND)
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         COMMENT "Generating API documentation with Doxygen" VERBATIM
     )
+    #Wanted to change location of main file of documentation or at least automatically open documentation
+    add_custom_command(TARGET doc
+                     POST_BUILD
+                     #COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/doc/html/index.html ${PROJECT_SOURCE_DIR}/doc.html
+                     COMMAND #firefox ${PROJECT_SOURCE_DIR}/doc/html/index.html
+    )
 ENDIF(DOXYGEN_FOUND)
 
 
