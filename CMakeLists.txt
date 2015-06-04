@@ -4,7 +4,12 @@ ENABLE_TESTING()
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/Build)
 
-#SET(BOOST_ROOT ${BOOST_ROOT} "C:/Users/Julien/Desktop/boost_1_57_0")
+IF(MY_BOOST)
+    message("Using custom BOOST path : ${MY_BOOST}")
+    SET(BOOST_ROOT ${BOOST_ROOT} ${MY_BOOST})
+ELSE(MY_BOOST)
+    message("Using automatic boost path, please set MY_BOOST variable to the boost root to specify the boost folder")
+ENDIF(MY_BOOST)
 
 
 FIND_PACKAGE(Doxygen)
