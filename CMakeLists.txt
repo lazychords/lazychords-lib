@@ -85,9 +85,10 @@ ADD_LIBRARY(LazyChordsLib ${LazyChordsLib_SRCS})
 
 #SET(CMAKE_CXX_FLAGS "${SOFT_FLAGS}")
 SET(Tests_SRCS
-    tests/MusicRulesTest.cpp
-    tests/musicTest.cpp
-    tests/TestMain.cpp
+    tests/MusicRulesTest.cxx
+    tests/musicTest.cxx
+    tests/TestMain.cxx
+    tests/genericTests.cxx
 )
 
 INCLUDE_DIRECTORIES(tests/)

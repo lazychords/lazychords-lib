@@ -1,4 +1,5 @@
 build/*
+doxygen
 Doxyfile.in
 CMakeCache.txt
 CMakeFiles
