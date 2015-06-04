@@ -1,6 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.7)
 ENABLE_TESTING()
 
+message("You can affect the compilation options with the WARNNONE, WARNALL, and OPTIMIZE macros. By default, none are active and the default options are -Wall -Wextra -pedantic and no optimizations")
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/Build)
 
