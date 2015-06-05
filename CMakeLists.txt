@@ -9,7 +9,7 @@ IF(MY_BOOST)
     message("Using custom BOOST path : ${MY_BOOST}")
     SET(BOOST_ROOT ${BOOST_ROOT} ${MY_BOOST})
 ELSE(MY_BOOST)
-    message("Using automatic boost path, please set MY_BOOST variable to the boost root to specify the boost folder")
+    message("Using automatic boost path, please set MY_BOOST variable to the boost root to specify the boost folder if Cmake can not find boost")
 ENDIF(MY_BOOST)
 
 
