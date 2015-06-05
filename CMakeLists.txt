@@ -101,9 +101,10 @@ ADD_TEST(runTests runTests -d yes)
 SET(Main_SRCS
     main.cpp
 )
+
 ADD_EXECUTABLE(main ${Main_SRCS})
 TARGET_LINK_LIBRARIES(main LazyChordsLib)
-TARGET_LINK_LIBRARIES(main ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+TARGET_LINK_LIBRARIES(main ${Boost_LIBRARIES})
 TARGET_LINK_LIBRARIES(main m)
 
 

@@ -1,5 +1,6 @@
 build/*
 doxygen
+*.layout
 Doxyfile.in
 CMakeCache.txt
 CMakeFiles
