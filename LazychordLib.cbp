@@ -66,13 +66,10 @@
 		<Unit filename="src/Utilities.cpp" />
 		<Unit filename="src/Utilities.hpp" />
 		<Unit filename="tests/MusicRulesTest.cxx" />
-		<Unit filename="tests/MusicRulesTest.test" />
 		<Unit filename="tests/TestMain.cxx" />
-		<Unit filename="tests/TestMain.test" />
 		<Unit filename="tests/catch.hpp" />
 		<Unit filename="tests/genericTests.cxx" />
 		<Unit filename="tests/musicTest.cxx" />
-		<Unit filename="tests/musicTest.test" />
 		<Extensions>
 			<code_completion />
 			<envvars />
