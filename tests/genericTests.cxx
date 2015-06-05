@@ -38,6 +38,6 @@ Of course, do not forget that these are generic tests, you still have to write t
 
 **/
 
-
+#define GENERIC_TEST(T) TEST_CASE("Generic Tests for #T", "[#T]"){generic_tests<T, "#T">::go();}
 
 
