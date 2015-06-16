@@ -48,7 +48,7 @@ bool Pitch::operator!=(const Pitch& other) const
 Pitch& Pitch::operator+=(int added)
 {
     assert(check());
-    halfTone = (halfTone+added)%11;
+    halfTone = (halfTone+added)%12;
     assert(check());
     return (*this);
 }
@@ -56,7 +56,7 @@ Pitch& Pitch::operator+=(int added)
 Pitch& Pitch::operator-=(int sub)
 {
     assert(check());
-    halfTone = (halfTone-sub)%11;
+    halfTone = (halfTone-sub)%12;
     assert(check());
     return (*this);
 }
