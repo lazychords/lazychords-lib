@@ -18,9 +18,15 @@ class Pitch;
 class Pitch
 {
 private:
-    unsigned halfTone;///<Number of half tones from C. Must be between 0 and 11;
+    unsigned halfTone;///<Number of semitones from C. Must be between 0 and 11;
 public:
+    /**@author alcinos 
+     * Sanity check of the class
+     * Implemented
+     * @return true iff the class's invariants are met
+     */
     bool check() const;
+    
     void save(std::ostream& o) const;
     static Pitch load(std::istream& i);
     unsigned id() const;
@@ -31,20 +37,69 @@ public:
     std::ostream& operator>>(std::istream& i);
     static Pitch fromStream(std::istream& i);
 
+    /** @author alcinos 
+     * Construction from distance to base note
+     * Implemented
+     * @param halfTones distance in semitones from the base note C. 
+     */
     Pitch(unsigned halfTones = 0);
     Pitch(const Pitch&) = default;
     Pitch(Pitch&&) = default;
     Pitch& operator=(const Pitch&) = default;
     ~Pitch() = default;
 
+    /** @author alcinos 
+     * Usual equality testing operator
+     * Implemented
+     * @return true iff both Pitches are equal
+     */
     bool operator==(const Pitch&) const;
+    /** @author 
+     * Usual difference testing operator
+     * Implemented
+     * @return true iff both Pitches are different
+     */
     bool operator!=(const Pitch&) const;
 
+    /** @author alcinos 
+     * Add some semitones to the current note. 
+     * Note that the addition occurs modulo the number of semitones in the scale (12)
+     * Implemented
+     * @param halfTones number of semitones to add 
+     * @return a reference to the resulting object
+     */
     Pitch& operator+=(int halfTones);
+    
+    /** @author alcinos 
+     * Subtract some semitones to the current note. 
+     * Note that the subtraction occurs modulo the number of semitones in the scale (12)
+     * Implemented
+     * @param halfTones number of semitones to subtract 
+     * @return a reference to the resulting object
+     */
     Pitch& operator-=(int halfTones);
+
+    /** @author alcinos 
+     * Binary addition operator
+     * Note that the addition occurs modulo the number of semitones in the scale (12)
+     * Implemented
+     * @param halfTones number of semitones to add 
+     * @return the resulting object
+     */
     Pitch operator+(int halfTones) const;
+
+    /** @author alcinos 
+     * Binary subtractio operator
+     * Note that the subtraction occurs modulo the number of semitones in the scale (12)
+     * Implemented
+     * @param halfTones number of semitones to subtract
+     * @return the resulting object
+     */
     Pitch operator-(int halfTones) const;
 
+
+    //the following are definitions of the natural notes of the scales.
+    //s stands for "sharp" and f for "flat"
     static const Pitch C;
     static const Pitch Cs;
     static const Pitch Df;
