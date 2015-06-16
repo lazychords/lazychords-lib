@@ -34,3 +34,45 @@ bool Pitch::check() const
     return true;
 }
 
+
+bool Pitch::operator==(const Pitch& other) const
+{
+    return halfTone==other.halfTone;
+}
+
+bool Pitch::operator!=(const Pitch& other) const
+{
+    return !(other == (*this));
+}
+
+Pitch& Pitch::operator+=(int added)
+{
+    assert(check());
+    halfTone = (halfTone+added)%11;
+    assert(check());
+    return (*this);
+}
+
+Pitch& Pitch::operator-=(int sub)
+{
+    assert(check());
+    halfTone = (halfTone-sub)%11;
+    assert(check());
+    return (*this);
+}
+
+Pitch Pitch::operator+(int add) const
+{
+    Pitch result(*this);
+    result += add;
+    assert(result->check());
+    return result;
+}
+
+Pitch Pitch::operator-(int sub) const
+{
+    Pitch result(*this);
+    result -= sub;
+    assert(result->check());
+    return result;
+}
