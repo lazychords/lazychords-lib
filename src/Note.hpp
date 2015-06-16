@@ -31,8 +31,7 @@ public :
     static Note fromStream(std::istream& i);
 
     Note(const Fraction& duration = 1, bool rest = true);
-    Note(unsigned halfTones);
-    Note(unsigned halfTones, const Fraction& duration);
+    Note(unsigned halfTones, const Fraction& duration = 1);
     Note(const Pitch& p, const Fraction& duration);
     Note(const Note&) = default;
     Note(Note&&) = default;
@@ -42,11 +41,14 @@ public :
     bool operator==(const Note&) const;
     bool operator!=(const Note&) const;
 
+    Note& operator+=(int halfTones);
+    Note& operator-=(int halfTones);
+
     Note operator+(int halfTones) const;
     Note operator-(int halfTones) const;
 
-    bool isrest() const;
-    operator bool() const;
+    bool isRest() const;
+    operator bool() const; //WTF ??
     const Fraction& getDuration() const;
     void changeDuration(const Fraction& d);
 
