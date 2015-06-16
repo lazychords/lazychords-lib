@@ -3,7 +3,7 @@ ENABLE_TESTING()
 
 message("You can affect the compilation options with the WARNNONE, WARNALL, and OPTIMIZE macros. By default, none are active and the default options are -Wall -Wextra -pedantic and no optimizations")
 
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/Build)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 
 IF(MY_BOOST)
     message("Using custom BOOST path : ${MY_BOOST}")
