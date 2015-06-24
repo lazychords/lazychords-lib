@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <vector>
+#include <boost/serialization/access.hpp>
 #include "Utilities.hpp"
 #include "Pitch.hpp"
 
@@ -21,6 +22,15 @@ class Note : public Pitch
 private :
     bool silence;
     Fraction duration;
+
+    //we declare this class as friend to allow serialization
+    friend class boost::serialization::access;
+    // When the class Archive corresponds to an output archive, the
+    // & operator is defined similar to <<.  Likewise, when the class Archive
+    // is a type of input archive the & operator is defined similar to >>.
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version);
+
 public :
     /**@author alcinos 
      * Sanity check of the class
@@ -28,7 +38,20 @@ public :
      * @return true iff the class's invariants are met
      */
     bool check() const;
+
+    /** @author alcinos 
+     * Serialize the object to the given output stream 
+     * Behind the scenes, it relies on Boost's serialization mechanisms
+     * Implemented
+     * @param o the output stream
+     */
     void save(std::ostream& o) const;
+    /** @author alcinos 
+     * Deserialization of an object written on the input stream 
+     * Implemented
+     * @param i input stream containing the object to read
+     * @return a fresh object
+     */
     static Note load(std::istream& i);
     static Note randomInstance();
     std::ostream& operator<<(std::ostream& o) const;

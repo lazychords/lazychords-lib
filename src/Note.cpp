@@ -1,4 +1,8 @@
 #include "Note.hpp"
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include "Utilities.hpp"
+
 
 using namespace std;
 
@@ -96,4 +100,27 @@ void Note::changeDuration(const Fraction& d)
     assert(check());
     duration = d;
     assert(check());
+}
+
+template<class Archive>
+void Note::serialize(Archive & ar, const unsigned int)
+{
+    // serialize base class information
+    ar & boost::serialization::base_object<Pitch>(*this);
+    ar & silence;
+    ar & duration;
+}
+
+void Note::save(std::ostream& o) const
+{
+    boost::archive::text_oarchive oa(o);
+    oa << (*this);
+}
+
+Note Note::load(std::istream& i)
+{
+    boost::archive::text_iarchive ia(i);
+    Note result;
+    ia >> result;
+    return result;
 }
