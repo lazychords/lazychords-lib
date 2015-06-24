@@ -65,7 +65,7 @@ Pitch Pitch::operator+(int add) const
 {
     Pitch result(*this);
     result += add;
-    assert(result->check());
+    assert(result.check());
     return result;
 }
 
@@ -73,6 +73,6 @@ Pitch Pitch::operator-(int sub) const
 {
     Pitch result(*this);
     result -= sub;
-    assert(result->check());
+    assert(result.check());
     return result;
 }
