@@ -53,6 +53,13 @@ public :
      * @return a fresh object
      */
     static Note load(std::istream& i);
+
+    /** @author alcinos 
+     * Generate a random valid instance of the Note structure
+     * Note that the duration of the note is bounded to 4 beats
+     * Implemented
+     * @return A random instance
+     */
     static Note randomInstance();
     std::ostream& operator<<(std::ostream& o) const;
     std::ostream& operator>>(std::istream& i);

@@ -2,6 +2,9 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include "Utilities.hpp"
+#include <random>
+#include <chrono>
+
 
 
 using namespace std;
@@ -123,4 +126,17 @@ Note Note::load(std::istream& i)
     Note result;
     ia >> result;
     return result;
+}
+
+Note Note::randomInstance()
+{
+      unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
+      std::minstd_rand0 generator (seed1);
+      int num = (generator() % 4)+1;
+      int den = (generator() % (num*8)) + 1;
+      Fraction l(num,den);
+      if (generator() & 1){ //choose between rest and normal note
+          return Note(l,true);
+      }
+      return Note(Pitch::randomInstance(),l);
 }
