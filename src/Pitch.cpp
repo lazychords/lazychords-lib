@@ -2,6 +2,8 @@
 #include "Log.hpp"
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
+#include <random>
+#include <chrono>
 
 using namespace std;
 const Pitch Pitch::C = Pitch(0);
@@ -98,4 +100,12 @@ Pitch Pitch::load(std::istream& i)
     Pitch result;
     ia >> result;
     return result;
+}
+
+
+Pitch Pitch::randomInstance()
+{
+      unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
+      std::minstd_rand0 generator (seed1);
+      return Pitch(generator() % 12);
 }

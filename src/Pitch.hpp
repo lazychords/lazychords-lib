@@ -36,14 +36,16 @@ public:
      */
     bool check() const;
 
-    /** Serialize the object to the given output stream 
+    /** @author alcinos 
+     * Serialize the object to the given output stream 
      * Behind the scenes, it relies on Boost's serialization mechanisms
      * Implemented
      * @param o the output stream
      */
     void save(std::ostream& o) const;
 
-    /** Deserialization of an object written on the input stream 
+    /** @author alcinos 
+     * Deserialization of an object written on the input stream 
      * Implemented
      * @param i input stream containing the object to read
      * @return a fresh object
@@ -51,8 +53,14 @@ public:
     static Pitch load(std::istream& i);
     unsigned id() const;
     static Pitch fromId(unsigned hashValue);
-    static Pitch randomInstance();
     static unsigned maxId();
+    
+    /** @author alcinos 
+     * Generate a random valid instance of the pitch structure
+     * Implemented
+     * @return A random instance
+     */
+    static Pitch randomInstance();
     std::ostream& operator<<(std::ostream& o) const;
     std::ostream& operator>>(std::istream& i);
     static Pitch fromStream(std::istream& i);
