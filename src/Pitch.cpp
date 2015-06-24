@@ -1,5 +1,7 @@
 #include "Pitch.hpp"
 #include "Log.hpp"
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 using namespace std;
 const Pitch Pitch::C = Pitch(0);
@@ -24,6 +26,13 @@ const Pitch Pitch::B = Pitch(11);
 Pitch::Pitch(unsigned halfTones) : halfTone(halfTones)
 {
     assert(check());
+}
+
+
+template<class Archive>
+void Pitch::serialize(Archive & ar, const unsigned int)
+{
+    ar & halfTone;
 }
 
 bool Pitch::check() const
@@ -74,5 +83,19 @@ Pitch Pitch::operator-(int sub) const
     Pitch result(*this);
     result -= sub;
     assert(result.check());
+    return result;
+}
+
+void Pitch::save(std::ostream& o) const
+{
+    boost::archive::text_oarchive oa(o);
+    oa << (*this);
+}
+
+Pitch Pitch::load(std::istream& i)
+{
+    boost::archive::text_iarchive ia(i);
+    Pitch result;
+    ia >> result;
     return result;
 }

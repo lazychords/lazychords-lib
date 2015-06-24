@@ -47,6 +47,6 @@ TEST_CASE("Testing test framework","[testFramework]")
 {
     SECTION("success"){
         REQUIRE(1 > 0);
-        }
+    }
     SECTION("fail"){REQUIRE(0 > 1);}
 }

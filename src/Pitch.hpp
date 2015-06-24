@@ -12,13 +12,22 @@
 
 #include <vector>
 #include <iostream>
-
+#include <boost/serialization/access.hpp>
 class Pitch;
 
 class Pitch
 {
 private:
     unsigned halfTone;///<Number of semitones from C. Must be between 0 and 11;
+
+    //we declare this class as friend to allow serialization
+    friend class boost::serialization::access;
+    // When the class Archive corresponds to an output archive, the
+    // & operator is defined similar to <<.  Likewise, when the class Archive
+    // is a type of input archive the & operator is defined similar to >>.
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version);
+    
 public:
     /**@author alcinos 
      * Sanity check of the class
@@ -26,8 +35,19 @@ public:
      * @return true iff the class's invariants are met
      */
     bool check() const;
-    
+
+    /** Serialize the object to the given output stream 
+     * Behind the scenes, it relies on Boost's serialization mechanisms
+     * Implemented
+     * @param o the output stream
+     */
     void save(std::ostream& o) const;
+
+    /** Deserialization of an object written on the input stream 
+     * Implemented
+     * @param i input stream containing the object to read
+     * @return a fresh object
+     */
     static Pitch load(std::istream& i);
     unsigned id() const;
     static Pitch fromId(unsigned hashValue);
