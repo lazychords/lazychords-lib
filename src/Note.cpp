@@ -59,7 +59,7 @@ Note Note::operator+(int halfTones) const
     assert(check());
     Note result(*this);
     result+=halfTones;
-    assert(check());
+    assert(result.check());
     return result;
 }
 
@@ -77,7 +77,7 @@ Note Note::operator-(int halfTones) const
     assert(check());
     Note result(*this);
     result-=halfTones;
-    assert(check());
+    assert(result.check());
     return result;
 }
 
