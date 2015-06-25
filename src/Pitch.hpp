@@ -27,25 +27,25 @@ private:
     // is a type of input archive the & operator is defined similar to >>.
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version);
-    
+
 public:
-    /**@author alcinos 
+    /**@author alcinos
      * Sanity check of the class
      * Implemented
      * @return true iff the class's invariants are met
      */
     bool check() const;
 
-    /** @author alcinos 
-     * Serialize the object to the given output stream 
+    /** @author alcinos
+     * Serialize the object to the given output stream
      * Behind the scenes, it relies on Boost's serialization mechanisms
      * Implemented
      * @param o the output stream
      */
     void save(std::ostream& o) const;
 
-    /** @author alcinos 
-     * Deserialization of an object written on the input stream 
+    /** @author alcinos
+     * Deserialization of an object written on the input stream
      * Implemented
      * @param i input stream containing the object to read
      * @return a fresh object
@@ -54,21 +54,21 @@ public:
     unsigned id() const;
     static Pitch fromId(unsigned hashValue);
     static unsigned maxId();
-    
-    /** @author alcinos 
+
+    /** @author alcinos
      * Generate a random valid instance of the pitch structure
      * Implemented
      * @return A random instance
      */
     static Pitch randomInstance();
     std::ostream& operator<<(std::ostream& o) const;
-    std::ostream& operator>>(std::istream& i);
+    std::istream& operator>>(std::istream& i);
     static Pitch fromStream(std::istream& i);
 
-    /** @author alcinos 
+    /** @author alcinos
      * Construction from distance to base note
      * Implemented
-     * @param halfTones distance in semitones from the base note C. 
+     * @param halfTones distance in semitones from the base note C.
      */
     Pitch(unsigned halfTones = 0);
     Pitch(const Pitch&) = default;
@@ -76,47 +76,47 @@ public:
     Pitch& operator=(const Pitch&) = default;
     ~Pitch() = default;
 
-    /** @author alcinos 
+    /** @author alcinos
      * Usual equality testing operator
      * Implemented
      * @return true iff both Pitches are equal
      */
     bool operator==(const Pitch&) const;
-    /** @author 
+    /** @author
      * Usual difference testing operator
      * Implemented
      * @return true iff both Pitches are different
      */
     bool operator!=(const Pitch&) const;
 
-    /** @author alcinos 
-     * Add some semitones to the current note. 
+    /** @author alcinos
+     * Add some semitones to the current note.
      * Note that the addition occurs modulo the number of semitones in the scale (12)
      * Implemented
-     * @param halfTones number of semitones to add 
+     * @param halfTones number of semitones to add
      * @return a reference to the resulting object
      */
     Pitch& operator+=(int halfTones);
-    
-    /** @author alcinos 
-     * Subtract some semitones to the current note. 
+
+    /** @author alcinos
+     * Subtract some semitones to the current note.
      * Note that the subtraction occurs modulo the number of semitones in the scale (12)
      * Implemented
-     * @param halfTones number of semitones to subtract 
+     * @param halfTones number of semitones to subtract
      * @return a reference to the resulting object
      */
     Pitch& operator-=(int halfTones);
 
-    /** @author alcinos 
+    /** @author alcinos
      * Binary addition operator
      * Note that the addition occurs modulo the number of semitones in the scale (12)
      * Implemented
-     * @param halfTones number of semitones to add 
+     * @param halfTones number of semitones to add
      * @return the resulting object
      */
     Pitch operator+(int halfTones) const;
 
-    /** @author alcinos 
+    /** @author alcinos
      * Binary subtractio operator
      * Note that the subtraction occurs modulo the number of semitones in the scale (12)
      * Implemented

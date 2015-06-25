@@ -62,7 +62,7 @@ public :
      */
     static Note randomInstance();
     std::ostream& operator<<(std::ostream& o) const;
-    std::ostream& operator>>(std::istream& i);
+    std::istream& operator>>(std::istream& i);
     static Note fromStream(std::istream& i);
 
     /** @author alcinos
@@ -89,7 +89,7 @@ public :
      * @param p pitch of the note
      * @param duration the duration of the note, in fraction of beats
      */
-    Note(const Pitch& p, const Fraction& duration);
+    Note(const Pitch& p, const Fraction& duration = 1);
     Note(const Note&) = default;
     Note(Note&&) = default;
     Note& operator=(const Note&) = default;
