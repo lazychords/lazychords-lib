@@ -17,7 +17,7 @@
 #include "Pitch.hpp"
 
 
-class Note : public Pitch
+class Note : private Pitch
 {
 private :
     bool silence;
@@ -32,29 +32,29 @@ private :
     void serialize(Archive & ar, const unsigned int version);
 
 public :
-    /**@author alcinos 
+    /**@author alcinos
      * Sanity check of the class
      * Implemented
      * @return true iff the class's invariants are met
      */
     bool check() const;
 
-    /** @author alcinos 
-     * Serialize the object to the given output stream 
+    /** @author alcinos
+     * Serialize the object to the given output stream
      * Behind the scenes, it relies on Boost's serialization mechanisms
      * Implemented
      * @param o the output stream
      */
     void save(std::ostream& o) const;
-    /** @author alcinos 
-     * Deserialization of an object written on the input stream 
+    /** @author alcinos
+     * Deserialization of an object written on the input stream
      * Implemented
      * @param i input stream containing the object to read
      * @return a fresh object
      */
     static Note load(std::istream& i);
 
-    /** @author alcinos 
+    /** @author alcinos
      * Generate a random valid instance of the Note structure
      * Note that the duration of the note is bounded to 4 beats
      * Implemented
@@ -65,7 +65,7 @@ public :
     std::ostream& operator>>(std::istream& i);
     static Note fromStream(std::istream& i);
 
-    /** @author alcinos 
+    /** @author alcinos
      * Construction from a duration and a boolean indicating whether the note is a rest
      * This constructor is typically used to construct rests
      * If the rest parameter is set to false, then it creates a default note (C)
@@ -75,16 +75,16 @@ public :
      */
     Note(const Fraction& duration = 1, bool rest = true);
 
-    /**@author alcinos 
-     * Construction from distance to base note and a duration 
+    /**@author alcinos
+     * Construction from distance to base note and a duration
      * Implemented
-     * @param halfTones distance in semitones from the base note C. 
+     * @param halfTones distance in semitones from the base note C.
      * @param duration the duration of the note, in fraction of beats
      */
     Note(unsigned halfTones, const Fraction& duration = 1);
 
-    /**@author alcinos 
-     * Construction from a pitch and a duration 
+    /**@author alcinos
+     * Construction from a pitch and a duration
      * Implemented
      * @param p pitch of the note
      * @param duration the duration of the note, in fraction of beats
@@ -95,46 +95,46 @@ public :
     Note& operator=(const Note&) = default;
     ~Note() = default;
 
-    /** @author alcinos 
+    /** @author alcinos
      * Usual equality testing operator
      * Implemented
      * @return true iff both Notes are equal
      */
     bool operator==(const Note&) const;
-    /** @author 
+    /** @author
      * Usual difference testing operator
      * Implemented
      * @return true iff both Notes are different
      */
     bool operator!=(const Note&) const;
 
-    /** @author alcinos 
-     * Add some semitones to the current note. 
+    /** @author alcinos
+     * Add some semitones to the current note.
      * Note that the addition occurs modulo the number of semitones in the scale (12)
      * Implemented
-     * @param halfTones number of semitones to add 
+     * @param halfTones number of semitones to add
      * @return a reference to the resulting object
      */
     Note& operator+=(int halfTones);
 
-    /** @author alcinos 
-     * Subtract some semitones to the current note. 
+    /** @author alcinos
+     * Subtract some semitones to the current note.
      * Note that the subtraction occurs modulo the number of semitones in the scale (12)
      * Implemented
-     * @param halfTones number of semitones to subtract 
+     * @param halfTones number of semitones to subtract
      * @return a reference to the resulting object
      */
     Note& operator-=(int halfTones);
 
-    /** @author alcinos 
+    /** @author alcinos
      * Binary addition operator
      * Note that the addition occurs modulo the number of semitones in the scale (12)
      * Implemented
-     * @param halfTones number of semitones to add 
+     * @param halfTones number of semitones to add
      * @return the resulting object
      */
     Note operator+(int halfTones) const;
-    /** @author alcinos 
+    /** @author alcinos
      * Binary subtractio operator
      * Note that the subtraction occurs modulo the number of semitones in the scale (12)
      * Implemented
@@ -149,7 +149,7 @@ public :
      * @return true iff the note is a rest
      */
     bool isRest() const;
-    /** @author alcinos 
+    /** @author alcinos
      * Simple getter for the duration
      * Implemented
      * @return the duration of the note
@@ -157,7 +157,7 @@ public :
     const Fraction& getDuration() const;
 
     /** @author alcinos
-     * Setter for the duration 
+     * Setter for the duration
      * Implemented
      * @param d a positive fraction representing, in fraction of beats, the new duration of the note
      */
