@@ -15,5 +15,6 @@ int main()
     std::cout<<"Global toto : "<<IS_CALLABLE_GLOBAL(toto, unsigned, int, int)<<"\n";
     //Le truc qui bug chez moi mais qui ne devrait pas je crois
     //std::cout<<"const Note : "<<IS_CALLABLE_MEMBER(id, unsigned ( Note::*)(void) const)<<"\n";
+    std::ofstream f("tmp.txt");
     std::cout.flush();
 }
