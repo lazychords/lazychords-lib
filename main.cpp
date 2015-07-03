@@ -1,8 +1,17 @@
 #include <iostream>
 #include "src/Music.hpp"
 #include <boost/filesystem.hpp>
+#include "src/Concepts.hpp"
+
+ENABLE_CALLABLE_TEST(id)
+ENABLE_CALLABLE_TEST(toto)
+
+void toto(double, int);
 
 int main()
 {
-	std::cout<<"hello\n";
+    std::cout<<"Pitch : "<<IS_CALLABLE_MEMBER(id, int (Pitch::*)(void))<<"\n";
+    std::cout<<"const Pitch : "<<IS_CALLABLE_MEMBER(id, unsigned ( Pitch::*)(void) const)<<"\n";
+    std::cout<<"Global toto : "<<IS_CALLABLE_GLOBAL(toto, unsigned, int, int)<<"\n";
+    std::cout.flush();
 }
