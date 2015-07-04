@@ -89,6 +89,7 @@ SET(Tests_SRCS
     tests/musicTest.cxx
     tests/TestMain.cxx
     tests/genericTests.cxx
+    tests/signatureTests.cxx
 )
 
 INCLUDE_DIRECTORIES(tests/)

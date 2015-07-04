@@ -32,7 +32,7 @@ public :
 
     /** @author Valentin
      * Default constructor for a signature, 4 quarter notes a bar
-     * Implemented not tested
+     * Implemented and tested (alcinos)
      * @return a default 4/4 signature
      */
     Signature();
