@@ -30,7 +30,20 @@ public :
     std::ostream& operator>>(std::istream& i);
     static Signature fromStream(std::istream& i);
 
+    /** @author Valentin
+     * Default constructor for a signature, 4 quarter notes a bar
+     * 
+     * @return a default 4/4 signature
+     */
     Signature();
+
+    /** @author Valentin
+     * Basic constructor for any signature
+     * 
+	 * @param number is the number of steps in a bar
+	 * @param step defines the step value (most often 4 for binary, 8 for ternary)
+     * @return a number/step signature
+     */
     Signature(unsigned number, unsigned step);
     Signature(const Signature&) = default;
     Signature(Signature&&) = default;
