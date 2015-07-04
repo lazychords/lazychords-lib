@@ -32,16 +32,16 @@ public :
 
     /** @author Valentin
      * Default constructor for a signature, 4 quarter notes a bar
-     * 
+     * Implemented not tested
      * @return a default 4/4 signature
      */
     Signature();
 
     /** @author Valentin
      * Basic constructor for any signature
-     * 
-	 * @param number is the number of steps in a bar
-	 * @param step defines the step value (most often 4 for binary, 8 for ternary)
+     * Implemented not tested
+	 * @param number is a positive number of steps in a bar
+	 * @param step defines the step value (most often 4 for binary, 8 for ternary), must be a power of 2
      * @return a number/step signature
      */
     Signature(unsigned number, unsigned step);
@@ -50,12 +50,41 @@ public :
     Signature& operator=(const Signature&) = default;
     ~Signature() = default;
 
+    /** @author Valentin
+     * Usual equality testing operator
+     * Implemented not tested
+     * @return true iff both Signatures are equal
+     */ 
     bool operator==(const Signature&) const;
+
+    /** @author Valentin
+     * Usual difference testing operator
+     * Implemented not tested
+     * @return true iff both Signatures are different
+     */ 
     bool operator!=(const Signature&) const;
 
+    /** @author Valentin
+     * Getter for the number parameter
+     * Implemented not tested
+     * @return the number parameter of the signature
+     */ 
     unsigned getNumber() const;
+
+    /** @author Valentin
+     * Getter for the step parameter
+     * Implemented not tested
+     * @return the step parameter of the signature
+     */ 
     unsigned getStep() const;
+
+    /** @author Valentin
+     * Function to get a relative duration of a measure in this signature (4/4 has a duration of 1)
+     * Implemented not tested
+     * @return the relative duration of a measure
+     */
     Fraction measureTime() const;
+
 };
 
 #endif

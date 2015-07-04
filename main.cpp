@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "src/Music.hpp"
 #include <boost/filesystem.hpp>
 #include "src/Concepts.hpp"
