@@ -33,13 +33,13 @@ TEST_CASE("Test of Signature structure","Signature")
             FOR(i,33){
                 REQUIRE_THROWS(Signature(0,i));
                 REQUIRE_THROWS(Signature(i,0));
-                REQUIRE_THROWS(Signature(i,1));
                 REQUIRE_THROWS(Signature(i,3));
                 REQUIRE_THROWS(Signature(i,5));
                 REQUIRE_THROWS(Signature(i,6));
                 REQUIRE_THROWS(Signature(i,7));
                 REQUIRE_THROWS(Signature(i,9));
                 REQUIRE_THROWS(Signature(i,10));
+                REQUIRE_THROWS(Signature(i,11));
                 REQUIRE_THROWS(Signature(i,12));
             }
         }

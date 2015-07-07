@@ -4,14 +4,16 @@ Signature::Signature()
 {
 	number = 4;
 	step = 4;
-	assert(check());
+	if (!check())
+		throw std::runtime_error("Invalid signature definition.");
 }
 
 Signature::Signature(unsigned number, unsigned step)
 {
 	this->number = number;
 	this->step = step;
-	assert(check());
+	if (!check())
+		throw std::runtime_error("Invalid signature definition.");
 }
 
 bool Signature::check() const
@@ -23,7 +25,7 @@ bool Signature::check() const
 			return false;
 		test /= 2;
 	}
-	return true;
+	return (number>0 && step>0);
 }
 
 bool Signature::operator==(const Signature& other) const
