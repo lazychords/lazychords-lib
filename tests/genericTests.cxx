@@ -1,5 +1,7 @@
 #include "catch.hpp"
-
+#include "../src/Concepts.hpp"
+#include "Pitch.hpp"
+#include "Figure.hpp"
 /**Generic verifications :
 
 Note :I will be implementing functions such as IsHashable<T>::value, IsComparable<T>::value, ...
@@ -42,11 +44,34 @@ Of course, do not forget that these are generic tests, you still have to write t
 
 //#define GENERIC_TEST(T) TEST_CASE("Generic Tests for #T", "[#T]"){generic_tests<T, "#T">::go();}
 
+template<typename C, typename Test>
+void forAll(const Test& test, unsigned n = 1000)
+{
+    /*using namespace Concepts;
+    auto f = StaticIf<HasId<C>::value>::get([test]()
+    {
+        for(unsigned i = 0; i < C::maxId(); i++)
+        {
+            C tmp = C::fromId(i);
+            test(tmp);
+        }
+    }, [test, n]()
+    {
+        for(unsigned i = 0; i < n; i++)
+        {
+            C tmp = C::randomInstance();
+            test(tmp);
+        }
+    });
+    f();*/
+}
+
 ///Just testing if test framework works
 TEST_CASE("Testing test framework","[testFramework]")
 {
     SECTION("success"){
-        REQUIRE(1 > 0);
+        forAll<Pitch>([](const Pitch&){;});
+        forAll<Figure>([](const Pitch&){;});
     }
     SECTION("fail"){
 	REQUIRE_FALSE(0 > 1);

@@ -20,9 +20,12 @@ void toto(double, int);
 template<typename D>
 bool CheckInstances(int n)
 {
-    auto f = Concepts::StaticIf<HasId<D>::value>::get([](){for(int i=0;i<Pitch::maxId();i++); return true;}, [n](){for(int i=0;i<n;i++) auto tmp = Pitch::randomInstance(); return false;});
+    auto f = Concepts::StaticIf<HasId<D>::value>::get([](){for(int i=0;i<D::maxId();i++); return true;}, [n](){for(int i=0;i<n;i++) auto tmp = Pitch::randomInstance(); return false;});
     return f();
 }
+
+
+
 int main()
 {
     std::cout<<Concepts::HasId<Pitch>::value;

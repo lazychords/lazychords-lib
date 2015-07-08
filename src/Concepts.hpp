@@ -15,7 +15,6 @@ namespace Concepts
 template<bool b>
 struct StaticIf;
 
-
 template<typename C>
 struct HasId
 {
