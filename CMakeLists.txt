@@ -14,7 +14,7 @@ ENDIF(MY_BOOST)
 
 
 FIND_PACKAGE(Doxygen)
-FIND_PACKAGE(Boost COMPONENTS system filesystem REQUIRED)
+FIND_PACKAGE(Boost COMPONENTS serialization system filesystem REQUIRED)
 
 
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
