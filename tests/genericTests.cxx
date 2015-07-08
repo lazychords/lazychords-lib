@@ -44,26 +44,24 @@ Of course, do not forget that these are generic tests, you still have to write t
 
 //#define GENERIC_TEST(T) TEST_CASE("Generic Tests for #T", "[#T]"){generic_tests<T, "#T">::go();}
 
-template<typename C, typename Test>
+template<typename C, typename Test, typename = typename std::enable_if<Concepts::HasId<C>::value>::type >
 void forAll(const Test& test, unsigned n = 1000)
 {
-    /*using namespace Concepts;
-    auto f = StaticIf<HasId<C>::value>::get([test]()
+    for(unsigned i = 0; i < C::maxId(); i++)
     {
-        for(unsigned i = 0; i < C::maxId(); i++)
-        {
-            C tmp = C::fromId(i);
-            test(tmp);
-        }
-    }, [test, n]()
+        C tmp = C::fromId(i);
+        test(tmp);
+    }
+}
+
+template<typename C, typename Test, typename = typename std::enable_if<!Concepts::HasId<C>::value>::type, typename =void >
+void forAll(const Test& test, unsigned n = 1000)
+{
+    for(unsigned i = 0; i < n; i++)
     {
-        for(unsigned i = 0; i < n; i++)
-        {
-            C tmp = C::randomInstance();
-            test(tmp);
-        }
-    });
-    f();*/
+        C tmp = C::randomInstance();
+        test(tmp);
+    }
 }
 
 ///Just testing if test framework works
@@ -71,7 +69,7 @@ TEST_CASE("Testing test framework","[testFramework]")
 {
     SECTION("success"){
         forAll<Pitch>([](const Pitch&){;});
-        forAll<Figure>([](const Pitch&){;});
+        forAll<Figure>([](const Figure&){;});
     }
     SECTION("fail"){
 	REQUIRE_FALSE(0 > 1);
