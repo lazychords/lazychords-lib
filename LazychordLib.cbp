@@ -47,6 +47,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Chord.cpp" />
 		<Unit filename="src/Chord.hpp" />
+		<Unit filename="src/ConceptBase.hpp" />
 		<Unit filename="src/Concepts.hpp" />
 		<Unit filename="src/Figure.cpp" />
 		<Unit filename="src/Figure.hpp" />
