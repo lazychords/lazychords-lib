@@ -36,19 +36,19 @@ unsigned Signature::id() const
     return logDenom * maxNumber + (number-1);
 }
 
-static Signature Signature::fromId(unsigned hashValue);
+Signature Signature::fromId(unsigned hashValue)
 {
     return Signature(hashValue%maxNumber+1, 1<<(hashValue/maxNumber));
 }
 
-static Signature Signature::randomInstance()
+Signature Signature::randomInstance()
 {
     return fromId(rand()%(maxId()+1));
 }
 
-static unsigned maxId()
+unsigned Signature::maxId()
 {
-    return Signature(maxNumber,maxDenom).id();
+    return Signature(maxNumber,maxStep).id();
 }
 
 bool Signature::operator==(const Signature& other) const

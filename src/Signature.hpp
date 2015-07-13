@@ -11,6 +11,7 @@
 #define SIGNATURE_HPP_INCLUDED
 
 #include <iostream>
+#include <cmath>
 #include "Utilities.hpp"
 
 struct Signature
@@ -19,8 +20,8 @@ private :
     unsigned number;
     unsigned step;
 public :
-    static constexpr maxStep = 64;
-    static constexpr maxNumber = 128;
+    static constexpr unsigned maxStep = 64;
+    static constexpr unsigned maxNumber = 128;
 
     /** @author Valentin
      *  Sanity check for Signature
