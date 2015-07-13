@@ -1,6 +1,6 @@
 /**
  * @file   Signature.hpp
- * @author  Julien and Nicolas
+ * @author  Julien and Nicolas and Valentin
  * @date   Wed Mar 18 00:29:40 2015
  *
  * @brief  Describe the signature structure
@@ -19,17 +19,46 @@ private :
     unsigned number;
     unsigned step;
 public :
+    static constexpr maxStep = 64;
+    static constexpr maxNumber = 128;
+
+    /** @author Valentin
+     *  Sanity check for Signature
+     *  Implemented
+     *  @return true iff the signature is valid
+     */ 
     bool check() const;
     void save(std::ostream& o) const;
     static Signature load(std::istream& i);
+    
+    /** @author Valentin
+        Gets the id associated to the Signature
+        Implemented not tested
+        @return unsigned value corresponding to the unique id of the signature
+     */
     unsigned id() const;
+    /** @author Valentin
+        Creates a Signature given an ID
+        Implemented not tested
+        @param unsigned value that should be a valid ID for Signature
+        @return the Signature corresponding to the ID
+     */
     static Signature fromId(unsigned hashValue);
+    /** @author Valentin
+        Creates a random Signature among all the possible Signatures
+        Implemented not tested
+        @return a random Signature
+     */
     static Signature randomInstance();
+    /** @author Valentin
+        Gets the greatest ID for Signature
+        Implemented not tested
+        @return the maximum of the different ID
+     */
     static unsigned maxId();
     std::ostream& operator<<(std::ostream& o) const;
     std::ostream& operator>>(std::istream& i);
     static Signature fromStream(std::istream& i);
-
     /** @author Valentin
      * Default constructor for a signature, 4 quarter notes a bar
      * Implemented and tested (alcinos)
@@ -39,7 +68,7 @@ public :
 
     /** @author Valentin
      * Basic constructor for any signature
-     * Implemented not tested
+     * Implemented and tested
 	 * @param number is a positive number of steps in a bar
 	 * @param step defines the step value (most often 4 for binary, 8 for ternary), must be a power of 2
      * @return a number/step signature

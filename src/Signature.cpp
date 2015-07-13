@@ -18,6 +18,8 @@ Signature::Signature(unsigned number, unsigned step)
 
 bool Signature::check() const
 {
+    if (number > maxNumber) return false;
+    if (step > maxStep) return false;
 	unsigned test = step;
 	while (test > 1)
 	{
@@ -26,6 +28,27 @@ bool Signature::check() const
 		test /= 2;
 	}
 	return (number>0 && step>0);
+}
+
+unsigned Signature::id() const
+{
+    unsigned logDenom = (unsigned)(log((double)step)/log(2.0));
+    return logDenom * maxNumber + (number-1);
+}
+
+static Signature Signature::fromId(unsigned hashValue);
+{
+    return Signature(hashValue%maxNumber+1, 1<<(hashValue/maxNumber));
+}
+
+static Signature Signature::randomInstance()
+{
+    return fromId(rand()%(maxId()+1));
+}
+
+static unsigned maxId()
+{
+    return Signature(maxNumber,maxDenom).id();
 }
 
 bool Signature::operator==(const Signature& other) const
