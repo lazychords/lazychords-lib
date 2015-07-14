@@ -22,8 +22,8 @@ TEST_CASE("Test of Signature structure","Signature")
     
     SECTION("Custom Constructor"){
         SECTION("Valid Constructions"){
-            FOR(i,8){
-                FOR(j,15){
+            FOR(i,6){
+                FOR(j,127){
                     REQUIRE_NOTHROW(Signature(j+1,1<<i));
                 }
             }
