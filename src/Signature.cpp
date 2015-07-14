@@ -48,7 +48,7 @@ Signature Signature::randomInstance()
 
 unsigned Signature::maxId()
 {
-    return Signature(maxNumber,maxStep).id();
+    return ((unsigned)(log((double)maxStep)/log(2.0))+1)*maxNumber;
 }
 
 bool Signature::operator==(const Signature& other) const
