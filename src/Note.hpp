@@ -72,7 +72,7 @@ public :
      * @param duration the duration of the note, in fraction of beats
      * @param rest whether the note is a rest
      */
-    Note(const Fraction& duration = 1, bool rest = true);
+    explicit Note(const Fraction& duration = 1, bool rest = true);
 
     /**@author alcinos
      * Construction from distance to base note and a duration
@@ -80,7 +80,7 @@ public :
      * @param halfTones distance in semitones from the base note C.
      * @param duration the duration of the note, in fraction of beats
      */
-    Note(unsigned halfTones, const Fraction& duration = 1);
+    explicit Note(unsigned halfTones, const Fraction& duration = 1);
 
     /**@author alcinos
      * Construction from a pitch and a duration
@@ -88,7 +88,7 @@ public :
      * @param p pitch of the note
      * @param duration the duration of the note, in fraction of beats
      */
-    Note(const Pitch& p, const Fraction& duration = 1);
+    explicit Note(const Pitch& p, const Fraction& duration = 1);
     Note(const Note&) = default;
     Note(Note&&) = default;
     Note& operator=(const Note&) = default;
