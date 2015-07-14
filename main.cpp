@@ -21,6 +21,7 @@ void toto(double, int);
 
 int main()
 {
+    std::cout<<"hello world";
     /*std::cout<<Concepts::HasId<Pitch>::value;
     std::cout<<Concepts::HasId<Chord>::value;
     std::cout<<Concepts::HasId<testTT>::value;*/

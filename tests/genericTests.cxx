@@ -68,8 +68,8 @@ void forAll(const Test& test, unsigned n = 1000)
 TEST_CASE("Testing test framework","[testFramework]")
 {
     SECTION("success"){
-        forAll<Pitch>([](const Pitch& p){REQUIRE(p.check());});
-        forAll<Figure>([](const Figure& f){REQUIRE(f.check());});
+        //forAll<Pitch>([](const Pitch& p){REQUIRE(p.check());});
+        //forAll<Figure>([](const Figure& f){REQUIRE(f.check());});
     }
     SECTION("fail"){
 	REQUIRE_FALSE(0 > 1);
