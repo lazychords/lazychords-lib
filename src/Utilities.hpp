@@ -68,7 +68,23 @@ unsigned pow(unsigned p)
 {
     unsigned x=1;
     for(unsigned i=0;i<p;i++)
-        x*p;
+        x*=p;
     return x;
+}
+
+template<unsigned B>
+unsigned log(unsigned x)
+{
+    static_assert(B>1, "The base must be bigger than 1");
+    unsigned p=0;
+    while(x >= B)
+    {
+        x/=B;
+        p++;
+    }
+
+    if(x!=1)
+        throw std::runtime_error("x must be an exact power of the base. This is not the case (x = " + toString(x) + ", B="+toString(B));
+    return p;
 }
 #endif // UTILITIES_HPP_INCLUDED
