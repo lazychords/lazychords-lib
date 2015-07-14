@@ -63,4 +63,12 @@ namespace boost { namespace serialization {
 BOOST_SERIALIZATION_SPLIT_FREE(boost::rational<int>)
 
 
+template<unsigned B>
+unsigned pow(unsigned p)
+{
+    unsigned x=1;
+    for(unsigned i=0;i<p;i++)
+        x*p;
+    return x;
+}
 #endif // UTILITIES_HPP_INCLUDED
