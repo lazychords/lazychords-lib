@@ -71,7 +71,7 @@ public:
      * Implemented
      * @param halfTones distance in semitones from the base note C.
      */
-    Pitch(unsigned halfTones = 0);
+    explicit Pitch(unsigned halfTones = 0);
     Pitch(const Pitch&) = default;
     Pitch(Pitch&&) = default;
     Pitch& operator=(const Pitch&) = default;

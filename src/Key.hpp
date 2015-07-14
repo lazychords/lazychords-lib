@@ -29,7 +29,7 @@ struct Key
     std::ostream& operator>>(std::istream& i);
     static Key fromStream(std::istream& i);
 
-    Key(const Pitch& base = Pitch::C, const Pitch& mode = Pitch::C);
+    explicit Key(const Pitch& base = Pitch::C, const Pitch& mode = Pitch::C);
     Key(const Key&) = default;
     Key(Key&&) = default;
     Key& operator=(const Key&) = default;
