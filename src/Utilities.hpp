@@ -6,13 +6,21 @@
 #include <sstream>
 #include <vector>
 #pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsign-conversion"
 #pragma GCC diagnostic ignored "-Wconversion"
 #pragma GCC diagnostic ignored "-Weffc++"
+#pragma GCC diagnostic ignored "-Wshadow"
+#pragma GCC diagnostic ignored "-Wundef"
+#pragma GCC diagnostic ignored "-Wsuggest-attribute=noreturn"
+#include <boost/filesystem.hpp>
 #include <boost/rational.hpp>
 using Fraction = boost::rational<int>;
-#pragma GCC diagnostic pop
+#include <boost/serialization/access.hpp>
 #include <boost/serialization/serialization.hpp>
 #include <boost/serialization/split_free.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#pragma GCC diagnostic pop
 /**
  *@brief Puts a file into a string
  *@param str is the file name to read

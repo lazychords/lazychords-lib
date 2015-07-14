@@ -1,9 +1,8 @@
 #include "Pitch.hpp"
 #include "Log.hpp"
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
 #include <random>
 #include <chrono>
+#include "Utilities.hpp"
 
 using namespace std;
 const Pitch Pitch::C = Pitch(0);

@@ -12,7 +12,6 @@
 
 #include <iostream>
 #include <vector>
-#include <boost/serialization/access.hpp>
 #include "Utilities.hpp"
 #include "Pitch.hpp"
 

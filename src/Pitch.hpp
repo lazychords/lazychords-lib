@@ -12,7 +12,8 @@
 
 #include <vector>
 #include <iostream>
-#include <boost/serialization/access.hpp>
+#include "Utilities.hpp"
+
 class Pitch;
 
 class Pitch
