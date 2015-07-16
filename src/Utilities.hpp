@@ -119,5 +119,14 @@ unsigned pow(unsigned base, unsigned power);
 **/
 unsigned log(unsigned base, unsigned x);
 
+/**
+ *@brief returns a uniform random element of type T
+ *@return a uniform random element of type T
+ *@pre T must either be a primitive type or a type with randomInstance function
+ *@note This function should not be used for cryptographic applications as their is no guaranty on the unpredictability.
+ *@author Julien
+**/
+template<typename T>
+T rand();
 #include "Utilities.ipp"
 #endif // UTILITIES_HPP_INCLUDED
