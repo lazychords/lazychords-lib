@@ -68,7 +68,7 @@ unsigned Signature::getStep() const
 	return step;
 }
 
-Fraction Signature::measureTime() const
+UFraction Signature::measureTime() const
 {
-	return Fraction(static_cast<int>(number), static_cast<int>(step));
+	return UFraction(number, step);
 }

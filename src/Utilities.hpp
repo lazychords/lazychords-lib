@@ -19,6 +19,7 @@ _Pragma("GCC diagnostic ignored \"-Weffc++\"") \
 _Pragma("GCC diagnostic ignored \"-Wshadow\"") \
 _Pragma("GCC diagnostic ignored \"-Wundef\"") \
 _Pragma("GCC diagnostic ignored \"-Wsuggest-attribute=noreturn\"") \
+_Pragma("GCC diagnostic ignored \"-Wtype-limits\"") \
 _Pragma("GCC diagnostic ignored \"-Wlogical-op\"")
 
 /**
@@ -41,10 +42,10 @@ GCC_PUT_BACK_WARNINGS
 
 /**
  *@brief We will be using the boost Fraction class for Fractions.
- *@note Fraction do not have to be positive, but will be used a such most of the time.
+ *@note UFraction are unsigned Fractions.
  *@author Julien
 **/
-using Fraction = boost::rational<int>;
+using UFraction = boost::rational<unsigned>;
 
 /**
  *@brief Puts the content of a file into a string
@@ -93,7 +94,7 @@ void load(Archive& ar, ::boost::rational<T>& r, unsigned version);
  *@todo explain this
  *@author Nicolas
 **/
-BOOST_SERIALIZATION_SPLIT_FREE(boost::rational<int>)
+BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
 
 /**
  *@brief pow function in for unsigned integers.

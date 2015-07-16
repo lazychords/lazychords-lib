@@ -20,7 +20,7 @@ class Note : private Pitch
 {
 private :
     bool silence;
-    Fraction duration;
+    UFraction duration;
 
     //we declare this class as friend to allow serialization
     friend class boost::serialization::access;
@@ -72,7 +72,7 @@ public :
      * @param duration the duration of the note, in fraction of beats
      * @param rest whether the note is a rest
      */
-    explicit Note(const Fraction& duration = 1, bool rest = true);
+    explicit Note(const UFraction& duration = 1, bool rest = true);
 
     /**@author alcinos
      * Construction from distance to base note and a duration
@@ -80,7 +80,7 @@ public :
      * @param halfTones distance in semitones from the base note C.
      * @param duration the duration of the note, in fraction of beats
      */
-    explicit Note(unsigned halfTones, const Fraction& duration = 1);
+    explicit Note(unsigned halfTones, const UFraction& duration = 1);
 
     /**@author alcinos
      * Construction from a pitch and a duration
@@ -88,7 +88,7 @@ public :
      * @param p pitch of the note
      * @param duration the duration of the note, in fraction of beats
      */
-    explicit Note(const Pitch& p, const Fraction& duration = 1);
+    explicit Note(const Pitch& p, const UFraction& duration = 1);
     Note(const Note&) = default;
     Note(Note&&) = default;
     Note& operator=(const Note&) = default;
@@ -153,14 +153,14 @@ public :
      * Implemented
      * @return the duration of the note
      */
-    const Fraction& getDuration() const;
+    const UFraction& getDuration() const;
 
     /** @author alcinos
      * Setter for the duration
      * Implemented
      * @param d a positive fraction representing, in fraction of beats, the new duration of the note
      */
-    void changeDuration(const Fraction& d);
+    void changeDuration(const UFraction& d);
 
 };
 

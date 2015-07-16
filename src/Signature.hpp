@@ -27,11 +27,11 @@ public :
      *  Sanity check for Signature
      *  Implemented
      *  @return true iff the signature is valid
-     */ 
+     */
     bool check() const;
     void save(std::ostream& o) const;
     static Signature load(std::istream& i);
-    
+
     /** @author Valentin
         Gets the id associated to the Signature
         Implemented not tested
@@ -84,28 +84,28 @@ public :
      * Usual equality testing operator
      * Implemented not tested
      * @return true iff both Signatures are equal
-     */ 
+     */
     bool operator==(const Signature&) const;
 
     /** @author Valentin
      * Usual difference testing operator
      * Implemented not tested
      * @return true iff both Signatures are different
-     */ 
+     */
     bool operator!=(const Signature&) const;
 
     /** @author Valentin
      * Getter for the number parameter
      * Implemented not tested
      * @return the number parameter of the signature
-     */ 
+     */
     unsigned getNumber() const;
 
     /** @author Valentin
      * Getter for the step parameter
      * Implemented not tested
      * @return the step parameter of the signature
-     */ 
+     */
     unsigned getStep() const;
 
     /** @author Valentin
@@ -113,7 +113,7 @@ public :
      * Implemented not tested
      * @return the relative duration of a measure
      */
-    Fraction measureTime() const;
+    UFraction measureTime() const;
 
 };
 

@@ -51,10 +51,10 @@ public :
 
     void addNote(const Note& n, unsigned weight = 1);
 
-    const WeightedNote& getNoteAtTime(const Fraction& t) const;
-    Fraction getTotalDuration() const;
+    const WeightedNote& getNoteAtTime(const UFraction& t) const;
+    UFraction getTotalDuration() const;
 
-    std::vector<Fraction> getNotePercentage() const;
+    std::vector<UFraction> getNotePercentage() const;
 };
 
 #endif // FIGURE_HPP
