@@ -6,6 +6,11 @@
 #include <sstream>
 #include <vector>
 
+/**
+ *@brief Disables g++ warnings, use it before including external libraries.
+ Do not forget to use GCC_PUT_BACK_WARNINGS after having including them.
+ *@author Julien
+**/
 #define GCC_IGNORE_WARNINGS \
 _Pragma("GCC diagnostic push") \
 _Pragma("GCC diagnostic ignored \"-Wsign-conversion\"") \
@@ -16,6 +21,10 @@ _Pragma("GCC diagnostic ignored \"-Wundef\"") \
 _Pragma("GCC diagnostic ignored \"-Wsuggest-attribute=noreturn\"") \
 _Pragma("GCC diagnostic ignored \"-Wlogical-op\"")
 
+/**
+ *@brief Reactivates g++ warnings after having used GCC_IGNORE_WARNINGS
+ *@author Julien
+**/
 #define GCC_PUT_BACK_WARNINGS _Pragma("GCC diagnostic pop")
 
 GCC_IGNORE_WARNINGS
@@ -28,72 +37,87 @@ GCC_IGNORE_WARNINGS
 #include <boost/archive/text_iarchive.hpp>
 GCC_PUT_BACK_WARNINGS
 
+#include "Log.hpp"
+
+/**
+ *@brief We will be using the boost Fraction class for Fractions.
+ *@note Fraction do not have to be positive, but will be used a such most of the time.
+ *@author Julien
+**/
 using Fraction = boost::rational<int>;
 
 /**
- *@brief Puts a file into a string
+ *@brief Puts the content of a file into a string
  *@param str is the file name to read
- *@return the string in the file
+ *@return the string representing the content of the file
+ *@author Julien
 **/
 std::string getFile(const std::string& str);
 
-
+/**
+ *@brief Tries to convert a type into a string using operator<<
+ *@param a, the object to convert into a string
+ *@return the string that represents the object
+ *@author Julien
+**/
 template<typename T>
-std::string toString(const T& a)
-{
-    std::ostringstream o;
-    o<<a;
-    return o.str();
-}
+std::string toString(const T& a);
 
 
-//the following provides serialization mechanism for the Fraction type
 namespace boost { namespace serialization {
 
-    template <typename Archive, typename T>
-        void save(Archive& ar, ::boost::rational<T> const& r, unsigned /*version*/)
-        {
-            int n = r.numerator(), d = r.denominator();
-            ar & n;
-            ar & d;
-        }
+/**
+ *@brief Serialization (saving part) for boost::rational<T>
+ *@param ar is the archive in which we are saving the fraction
+ *@param r is the fraction
+ *@param version is the serialization version
+ *@author Nicolas
+**/
+template <typename Archive, typename T>
+void save(Archive& ar, ::boost::rational<T> const& r, unsigned version);
 
-    template <typename Archive, typename T>
-        void load(Archive& ar, ::boost::rational<T>& r, unsigned /*version*/)
-        {
-            int n, d;
-            ar & n;
-            ar & d;
-            r = ::boost::rational<T>(n, d);
-        }
+/**
+ *@brief Serialization (loading part) for boost::rational<T>
+ *@param ar is the archive from which we are loading the fraction
+ *@param r is the fraction
+ *@param version is the serialization version
+ *@author Nicolas
+**/
+template <typename Archive, typename T>
+void load(Archive& ar, ::boost::rational<T>& r, unsigned version);
 
 } }
 
+/**
+ *@brief What does this mean ?
+ *@author Nicolas
+**/
 BOOST_SERIALIZATION_SPLIT_FREE(boost::rational<int>)
 
+/**
+ *@brief pow function in for unsigned integers.
+ *@note the function does not use quick exponentiation as p should be under 64 and in practice under 8.
+ *@param power is the power
+ *@param base is the base
+ *@pre base^power must fit into an unsigned
+ *@return base^power mod std::numeric_limits<unsigned>::max()
+ *@author Julien
+ *@todo Check precondition with assert
+**/
+unsigned pow(unsigned base, unsigned power);
 
-template<unsigned B>
-unsigned pow(unsigned p)
-{
-    unsigned x=1;
-    for(unsigned i=0;i<p;i++)
-        x*=p;
-    return x;
-}
+/**
+ *@brief log function in for unsigned integers.
+ *@note the function uses naive logarithm algorithm
+ *@param x is the number from which to take the log
+ *@param base is the base.
+ *@pre base must be strictly bigger than 1
+ *@pre there must exist an integer p such that x = pow(base, p)
+ *@note You should use another function if you want a truncated output
+ *@return log(x) in base base.
+ *@author Julien
+**/
+unsigned log(unsigned base, unsigned x);
 
-template<unsigned B>
-unsigned log(unsigned x)
-{
-    static_assert(B>1, "The base must be bigger than 1");
-    unsigned p=0;
-    while(x >= B)
-    {
-        x/=B;
-        p++;
-    }
-
-    if(x!=1)
-        throw std::runtime_error("x must be an exact power of the base. This is not the case (x = " + toString(x) + ", B="+toString(B));
-    return p;
-}
+#include "Utilities.ipp"
 #endif // UTILITIES_HPP_INCLUDED

@@ -67,11 +67,13 @@
 		<Unit filename="src/Signature.hpp" />
 		<Unit filename="src/Utilities.cpp" />
 		<Unit filename="src/Utilities.hpp" />
+		<Unit filename="src/Utilities.ipp" />
 		<Unit filename="tests/MusicRulesTest.cxx" />
 		<Unit filename="tests/TestMain.cxx" />
 		<Unit filename="tests/catch.hpp" />
 		<Unit filename="tests/genericTests.cxx" />
 		<Unit filename="tests/musicTest.cxx" />
+		<Unit filename="tests/signatureTests.cxx" />
 		<Extensions>
 			<code_completion />
 			<envvars />
