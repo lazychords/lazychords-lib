@@ -35,11 +35,18 @@ void load(Archive& ar, ::boost::rational<T>& r, unsigned version)
 
 namespace impl
 {
+
+inline decltype(std::chrono::high_resolution_clock::now().time_since_epoch().count()) getSeed()
+{
+    auto res = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    Log::debugInfo("Seed used is : " + toString(res), __FILE__, __LINE__);
+    return res;
+}
+
 template<typename T, typename = typename std::enable_if<std::is_integral<T>::value>::type>
 T rand()
 {
-    static auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-    Log::debugInfo("Seed used is : " + toString(seed), __FILE__, __LINE__);
+    static auto seed = getSeed();
     static std::mt19937 gen(static_cast<std::mt19937::result_type>(seed));
     std::uniform_int_distribution<T> uniform;
     T r =  uniform(gen);

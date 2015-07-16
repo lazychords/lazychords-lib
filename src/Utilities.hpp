@@ -8,7 +8,7 @@
 
 /**
  *@brief Disables g++ warnings, use it before including external libraries.
- Do not forget to use GCC_PUT_BACK_WARNINGS after having including them.
+ Do not forget to use GCC_PUT_BACK_WARNINGS after including them.
  *@author Julien
 **/
 #define GCC_IGNORE_WARNINGS \
@@ -90,6 +90,7 @@ void load(Archive& ar, ::boost::rational<T>& r, unsigned version);
 
 /**
  *@brief What does this mean ?
+ *@todo explain this
  *@author Nicolas
 **/
 BOOST_SERIALIZATION_SPLIT_FREE(boost::rational<int>)
@@ -100,21 +101,21 @@ BOOST_SERIALIZATION_SPLIT_FREE(boost::rational<int>)
  *@param power is the power
  *@param base is the base
  *@pre base^power must fit into an unsigned
- *@return base^power mod std::numeric_limits<unsigned>::max()
+ *@return base^power
  *@author Julien
  *@todo Check precondition with assert
 **/
 unsigned pow(unsigned base, unsigned power);
 
 /**
- *@brief log function in for unsigned integers.
+ *@brief log function for unsigned integers.
  *@note the function uses naive logarithm algorithm
  *@param x is the number from which to take the log
  *@param base is the base.
  *@pre base must be strictly bigger than 1
  *@pre there must exist an integer p such that x = pow(base, p)
  *@note You should use another function if you want a truncated output
- *@return log(x) in base base.
+ *@return p such that x = pow(base, p)
  *@author Julien
 **/
 unsigned log(unsigned base, unsigned x);
@@ -123,10 +124,11 @@ unsigned log(unsigned base, unsigned x);
  *@brief returns a uniform random element of type T
  *@return a uniform random element of type T
  *@pre T must either be a primitive type or a type with randomInstance function
- *@note This function should not be used for cryptographic applications as their is no guaranty on the unpredictability.
+ *@note This function should not be used for cryptographic applications as the output is predictable.
  *@author Julien
 **/
 template<typename T>
 T rand();
+
 #include "Utilities.ipp"
 #endif // UTILITIES_HPP_INCLUDED
