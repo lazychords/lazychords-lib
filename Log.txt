@@ -1,0 +1,3 @@
+C:\Users\Julien\Documents\GitHub\lazychords-lib\src/Utilities.ipp:42:0: info: Seed used is : 1437030372050149
+C:\Users\Julien\Documents\GitHub\lazychords-lib\src/Utilities.ipp:42:0: info: Seed used is : 1437030372050149
+C:\Users\Julien\Documents\GitHub\lazychords-lib\src/Utilities.ipp:42:0: info: Seed used is : 1437030372050149

@@ -6,6 +6,8 @@
 
 int main()
 {
-    std::cout<<"hello world";
+    std::cout<<"hello world\n";
+    std::cout<<rand<uint64_t>()<<"\n";
+    std::cout<<rand<uint64_t>()<<"\n";
     std::cout<<rand<uint64_t>()<<"\n";
 }
