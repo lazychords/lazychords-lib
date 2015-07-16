@@ -12,7 +12,7 @@ Note::Note(const UFraction& d, bool rest) :
     silence(rest),
     duration(d)
 {
-    assert(check());
+    ASSERT(check());
 }
 
 Note::Note(unsigned halfTones, const UFraction& d) :
@@ -20,7 +20,7 @@ Note::Note(unsigned halfTones, const UFraction& d) :
     silence(false),
     duration(d)
 {
-    assert(check());
+    ASSERT(check());
 }
 
 Note::Note(const Pitch& p, const UFraction& d) :
@@ -28,7 +28,7 @@ Note::Note(const Pitch& p, const UFraction& d) :
     silence(false),
     duration(d)
 {
-    assert(check());
+    ASSERT(check());
 }
 
 
@@ -53,36 +53,36 @@ bool Note::operator!=(const Note& other) const
 
 Note& Note::operator+=(int halfTones)
 {
-    assert(check());
+    ASSERT(check());
     Pitch::operator+=(halfTones);
-    assert(check());
+    ASSERT(check());
     return (*this);
 }
 
 Note Note::operator+(int halfTones) const
 {
-    assert(check());
+    ASSERT(check());
     Note result(*this);
     result+=halfTones;
-    assert(result.check());
+    ASSERT(result.check());
     return result;
 }
 
 
 Note& Note::operator-=(int halfTones)
 {
-    assert(check());
+    ASSERT(check());
     Pitch::operator-=(halfTones);
-    assert(check());
+    ASSERT(check());
     return (*this);
 }
 
 Note Note::operator-(int halfTones) const
 {
-    assert(check());
+    ASSERT(check());
     Note result(*this);
     result-=halfTones;
-    assert(result.check());
+    ASSERT(result.check());
     return result;
 }
 
@@ -98,9 +98,9 @@ const UFraction& Note::getDuration() const
 
 void Note::changeDuration(const UFraction& d)
 {
-    assert(check());
+    ASSERT(check());
     duration = d;
-    assert(check());
+    ASSERT(check());
 }
 
 template<class Archive>

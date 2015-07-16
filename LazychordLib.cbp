@@ -57,7 +57,6 @@
 		<Unit filename="src/Log.hpp" />
 		<Unit filename="src/Melody.cpp" />
 		<Unit filename="src/Melody.hpp" />
-		<Unit filename="src/Music.cpp" />
 		<Unit filename="src/Music.hpp" />
 		<Unit filename="src/Note.cpp" />
 		<Unit filename="src/Note.hpp" />

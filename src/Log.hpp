@@ -1,5 +1,8 @@
 #ifndef LOG_HPP_INCLUDED
 #define LOG_HPP_INCLUDED
+
+///@todo comment this file + add GPL information
+///@todo comment ASSERT
 #ifdef DEBUG
     #define ASSERT(X) if(!X) Log::reportError(std::string(#X), std::string(__FILE__), __LINE__);
 #else
@@ -11,6 +14,7 @@ class LogImpl;
 
 class Log
 {
+    ///@todo comment this class
     static std::unique_ptr<LogImpl> l;
     static bool fatalErrors;
 public :

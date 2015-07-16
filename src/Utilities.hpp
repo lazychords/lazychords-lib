@@ -2,6 +2,7 @@
 #ifndef UTILITIES_HPP_INCLUDED
 #define UTILITIES_HPP_INCLUDED
 
+///@todo comment this file + add GPL information
 #include <string>
 #include <sstream>
 #include <vector>
@@ -52,14 +53,19 @@ using UFraction = boost::rational<unsigned>;
  *@param str is the file name to read
  *@return the string representing the content of the file
  *@author Julien
+ *@todo tests
+ *@todo say what this function does when open fails
 **/
 std::string getFile(const std::string& str);
 
 /**
  *@brief Tries to convert a type into a string using operator<<
  *@param a, the object to convert into a string
+ *@pre T must have ostream& operator<<(ostream& const T& defined)
  *@return the string that represents the object
  *@author Julien
+ *@todo tests
+ *@todo create static_assert for precondition
 **/
 template<typename T>
 std::string toString(const T& a);
@@ -73,6 +79,8 @@ namespace boost { namespace serialization {
  *@param r is the fraction
  *@param version is the serialization version
  *@author Nicolas
+ *@todo tests
+ *@remark Shouldn't you add a precondition on T ?
 **/
 template <typename Archive, typename T>
 void save(Archive& ar, ::boost::rational<T> const& r, unsigned version);
@@ -83,6 +91,8 @@ void save(Archive& ar, ::boost::rational<T> const& r, unsigned version);
  *@param r is the fraction
  *@param version is the serialization version
  *@author Nicolas
+ *@todo tests
+ *@remark Shouldn't you add a precondition on T ?
 **/
 template <typename Archive, typename T>
 void load(Archive& ar, ::boost::rational<T>& r, unsigned version);
@@ -105,6 +115,7 @@ BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
  *@return base^power
  *@author Julien
  *@todo Check precondition with assert
+ *@todo tests
 **/
 unsigned pow(unsigned base, unsigned power);
 
@@ -118,6 +129,7 @@ unsigned pow(unsigned base, unsigned power);
  *@note You should use another function if you want a truncated output
  *@return p such that x = pow(base, p)
  *@author Julien
+ *@todo tests
 **/
 unsigned log(unsigned base, unsigned x);
 
@@ -127,6 +139,7 @@ unsigned log(unsigned base, unsigned x);
  *@pre T must either be a primitive type or a type with randomInstance function
  *@note This function should not be used for cryptographic applications as the output is predictable.
  *@author Julien
+ *@todo tests
 **/
 template<typename T>
 T rand();

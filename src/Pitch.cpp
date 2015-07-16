@@ -26,7 +26,7 @@ const Pitch Pitch::B = Pitch(11);
 
 Pitch::Pitch(unsigned halfTones) : halfTone(halfTones)
 {
-    assert(check());
+    ASSERT(check());
 }
 
 
@@ -57,17 +57,17 @@ bool Pitch::operator!=(const Pitch& other) const
 
 Pitch& Pitch::operator+=(int added)
 {
-    assert(check());
+    ASSERT(check());
     halfTone = (halfTone+added)%12;
-    assert(check());
+    ASSERT(check());
     return (*this);
 }
 
 Pitch& Pitch::operator-=(int sub)
 {
-    assert(check());
+    ASSERT(check());
     halfTone = (halfTone-sub)%12;
-    assert(check());
+    ASSERT(check());
     return (*this);
 }
 
@@ -75,7 +75,7 @@ Pitch Pitch::operator+(int add) const
 {
     Pitch result(*this);
     result += add;
-    assert(result.check());
+    ASSERT(result.check());
     return result;
 }
 
@@ -83,7 +83,7 @@ Pitch Pitch::operator-(int sub) const
 {
     Pitch result(*this);
     result -= sub;
-    assert(result.check());
+    ASSERT(result.check());
     return result;
 }
 
