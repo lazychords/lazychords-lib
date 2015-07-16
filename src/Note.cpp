@@ -7,26 +7,26 @@
 
 using namespace std;
 
-Note::Note(const Fraction& duration, bool rest) :
+Note::Note(const Fraction& d, bool rest) :
     Pitch(),
     silence(rest),
-    duration(duration)
+    duration(d)
 {
     assert(check());
 }
 
-Note::Note(unsigned halfTones, const Fraction& duration) :
+Note::Note(unsigned halfTones, const Fraction& d) :
     Pitch(halfTones),
     silence(false),
-    duration(duration)
+    duration(d)
 {
     assert(check());
 }
 
-Note::Note(const Pitch& p, const Fraction& duration) :
+Note::Note(const Pitch& p, const Fraction& d) :
     Pitch(p),
     silence(false),
-    duration(duration)
+    duration(d)
 {
     assert(check());
 }
@@ -128,11 +128,11 @@ Note Note::load(std::istream& i)
 
 Note Note::randomInstance()
 {
-      unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
+      auto seed1 = std::chrono::system_clock::now().time_since_epoch().count();
       std::minstd_rand0 generator (seed1);
-      int num = (generator() % 4)+1;
-      int den = (generator() % (num*8)) + 1;
-      Fraction l(num,den);
+      auto num = (generator() % 4)+1;
+      auto den = (generator() % (num*8)) + 1;
+      Fraction l(static_cast<int>(num),static_cast<int>(den));
       if (generator() & 1){ //choose between rest and normal note
           return Note(l,true);
       }

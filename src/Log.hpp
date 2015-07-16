@@ -1,9 +1,9 @@
 #ifndef LOG_HPP_INCLUDED
 #define LOG_HPP_INCLUDED
 #ifdef DEBUG
-    #define assert(X) Log::reportError(std::string(#X), std::string(__FILE__), __LINE__); if(!(X)) throw std::runtime_error("assertion failed");
+    #define ASSERT(X) Log::reportError(std::string(#X), std::string(__FILE__), __LINE__); if(!(X)) throw std::runtime_error("assertion failed");
 #else
-    #define assert(X) ;
+    #define ASSERT(X) ;
 #endif
 #include <memory>
 

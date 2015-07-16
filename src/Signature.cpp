@@ -1,17 +1,13 @@
 #include "Signature.hpp"
 
-Signature::Signature()
+Signature::Signature() : number(4), step(4)
 {
-	number = 4;
-	step = 4;
 	if (!check())
 		throw std::runtime_error("Invalid signature definition.");
 }
 
-Signature::Signature(unsigned number, unsigned step)
+Signature::Signature(unsigned n, unsigned s) : number(n), step(s)
 {
-	this->number = number;
-	this->step = step;
 	if (!check())
 		throw std::runtime_error("Invalid signature definition.");
 }
@@ -38,7 +34,8 @@ unsigned Signature::id() const
 
 Signature Signature::fromId(unsigned hashValue)
 {
-    return Signature(hashValue%maxNumber+1, 1<<(hashValue/maxNumber));
+    return Signature(hashValue%maxNumber+1,
+                     1u<<(hashValue/maxNumber));
 }
 
 Signature Signature::randomInstance()
@@ -72,6 +69,6 @@ unsigned Signature::getStep() const
 }
 
 Fraction Signature::measureTime() const
-{	
-	return (Fraction)number/(Fraction)step;
+{
+	return Fraction(static_cast<int>(number), static_cast<int>(step));
 }

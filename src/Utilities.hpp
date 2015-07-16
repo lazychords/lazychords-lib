@@ -5,22 +5,31 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wconversion"
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wshadow"
-#pragma GCC diagnostic ignored "-Wundef"
-#pragma GCC diagnostic ignored "-Wsuggest-attribute=noreturn"
+
+#define GCC_IGNORE_WARNINGS \
+_Pragma("GCC diagnostic push") \
+_Pragma("GCC diagnostic ignored \"-Wsign-conversion\"") \
+_Pragma("GCC diagnostic ignored \"-Wconversion\"") \
+_Pragma("GCC diagnostic ignored \"-Weffc++\"") \
+_Pragma("GCC diagnostic ignored \"-Wshadow\"") \
+_Pragma("GCC diagnostic ignored \"-Wundef\"") \
+_Pragma("GCC diagnostic ignored \"-Wsuggest-attribute=noreturn\"") \
+_Pragma("GCC diagnostic ignored \"-Wlogical-op\"")
+
+#define GCC_PUT_BACK_WARNINGS _Pragma("GCC diagnostic pop")
+
+GCC_IGNORE_WARNINGS
 #include <boost/filesystem.hpp>
 #include <boost/rational.hpp>
-using Fraction = boost::rational<int>;
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/serialization.hpp>
 #include <boost/serialization/split_free.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
-#pragma GCC diagnostic pop
+GCC_PUT_BACK_WARNINGS
+
+using Fraction = boost::rational<int>;
+
 /**
  *@brief Puts a file into a string
  *@param str is the file name to read

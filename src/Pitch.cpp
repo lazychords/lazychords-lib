@@ -104,7 +104,7 @@ Pitch Pitch::load(std::istream& i)
 
 Pitch Pitch::randomInstance()
 {
-      unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
+      auto seed1 = std::chrono::system_clock::now().time_since_epoch().count();
       std::minstd_rand0 generator (seed1);
       return Pitch(generator() % 12);
 }
