@@ -8,6 +8,7 @@
  If many functions that can be grouped together are created, they will be merged to a separate file.
  *@author Julien
  *@todo Add GPL license to the file
+ *@defgroup def Defines
 **/
 
 #include <string>
@@ -15,6 +16,8 @@
 #include <vector>
 
 /**
+ *@addtogroup def
+ *@{
  *@def GCC_IGNORE_WARNINGS
  *@brief Disables g++ warnings, use it before including external libraries.
  Do not forget to use GCC_PUT_BACK_WARNINGS after including them.
@@ -38,6 +41,9 @@ _Pragma("GCC diagnostic ignored \"-Wlogical-op\"")
 **/
 #define GCC_PUT_BACK_WARNINGS _Pragma("GCC diagnostic pop")
 
+/**
+ *@}
+ **/
 GCC_IGNORE_WARNINGS
 #include <boost/filesystem.hpp>
 #include <boost/rational.hpp>
