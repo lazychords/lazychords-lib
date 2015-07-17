@@ -8,7 +8,9 @@
 **/
 
 /**
- *@fn template<typename T> bool T::check() const
+ *@file
+ *@anchor GlobalCheck
+ *@brief template<typename T> bool T::check() const
  *@pre This function should exist for any T in the public interface of the BaseMusic Module
  *@throw This function never throws
  *@return true if the invariants are respected
