@@ -42,15 +42,17 @@ struct HasId
     /**
      *@anchor ConceptId
      *@brief If HasId<C>::value = true, checks if C::id, C::maxId, C::fromId respect the dynamic part of the concept id concept. Otherwise does not do anything.
+     *
      *@details Respecting the Id concept means :
-     - From x = 0 to maxId -1 we have :
-       -# fromId(x) never throws
-       -# We have check(fromId(x))
-       -# id(fromId(x)) never throws and is equal to x
-     - For each randomInstance :
-       -# id(randomInstance) does not throw
-       -# id(randomInstance) is between 0 and maxId-1
-     - For each x >= maxId, fromId throws
+     *- From x = 0 to maxId -1 we have :
+     *  -# fromId(x) never throws
+     *  -# We have check(fromId(x))
+     *  -# id(fromId(x)) never throws and is equal to x
+     *- For each randomInstance :
+     *  -# id(randomInstance) does not throw
+     *  -# id(randomInstance) is between 0 and maxId-1
+     *- For each x >= maxId, fromId throws
+     *
      *@throw never throws
      *@note this function is equivalent to a test.
     **/
