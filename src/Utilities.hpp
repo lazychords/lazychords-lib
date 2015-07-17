@@ -1,6 +1,7 @@
 
 #ifndef UTILITIES_HPP_INCLUDED
 #define UTILITIES_HPP_INCLUDED
+
 /**
  *@file
  *@brief Needs to be done
@@ -103,7 +104,7 @@ void save(Archive& ar, ::boost::rational<T> const& r, unsigned version);
  *@param version is the serialization version
  *@author Nicolas
  *@todo tests
- *@remark Shouldn't you add a precondition on T ?
+ *@remark Shouldn't you add a precondition on T ? (Question from Julien)
 **/
 template <typename Archive, typename T>
 void load(Archive& ar, ::boost::rational<T>& r, unsigned version);
@@ -111,8 +112,9 @@ void load(Archive& ar, ::boost::rational<T>& r, unsigned version);
 } }
 
 /**
- *@brief What does this mean ?
- *@todo explain this
+ *@internal
+ *@brief Enables separate load and save functions for UFraction.
+ *@remark Why separate load and save functions ? (Question from Julien)
  *@author Nicolas
 **/
 BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
