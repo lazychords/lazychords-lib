@@ -1,6 +1,10 @@
 
 #ifndef UTILITIES_HPP_INCLUDED
 #define UTILITIES_HPP_INCLUDED
+/**
+ *@file
+ *@brief Needs to be done
+**/
 
 ///@todo comment this file + add GPL information
 #include <string>
@@ -8,6 +12,7 @@
 #include <vector>
 
 /**
+ *@def GCC_IGNORE_WARNINGS
  *@brief Disables g++ warnings, use it before including external libraries.
  Do not forget to use GCC_PUT_BACK_WARNINGS after including them.
  *@author Julien
@@ -24,6 +29,7 @@ _Pragma("GCC diagnostic ignored \"-Wtype-limits\"") \
 _Pragma("GCC diagnostic ignored \"-Wlogical-op\"")
 
 /**
+ *@def GCC_PUT_BACK_WARNINGS
  *@brief Reactivates g++ warnings after having used GCC_IGNORE_WARNINGS
  *@author Julien
 **/
@@ -42,6 +48,7 @@ GCC_PUT_BACK_WARNINGS
 #include "Log.hpp"
 
 /**
+ *@typedef UFraction = boost::rational<unsigned>
  *@brief We will be using the boost Fraction class for Fractions.
  *@note UFraction are unsigned Fractions.
  *@author Julien
@@ -49,6 +56,7 @@ GCC_PUT_BACK_WARNINGS
 using UFraction = boost::rational<unsigned>;
 
 /**
+ *@fn std::string getFile(const std::string& str)
  *@brief Puts the content of a file into a string
  *@param str is the file name to read
  *@return the string representing the content of the file
@@ -59,6 +67,7 @@ using UFraction = boost::rational<unsigned>;
 std::string getFile(const std::string& str);
 
 /**
+ *@fn template<typename T> std::string toString(const T& a)
  *@brief Tries to convert a type into a string using operator<<
  *@param a, the object to convert into a string
  *@pre T must have ostream& operator<<(ostream& const T& defined)
@@ -74,6 +83,7 @@ std::string toString(const T& a);
 namespace boost { namespace serialization {
 
 /**
+ *@fn template <typename Archive, typename T> void save(Archive& ar, ::boost::rational<T> const& r, unsigned version)
  *@brief Serialization (saving part) for boost::rational<T>
  *@param ar is the archive in which we are saving the fraction
  *@param r is the fraction
@@ -86,6 +96,7 @@ template <typename Archive, typename T>
 void save(Archive& ar, ::boost::rational<T> const& r, unsigned version);
 
 /**
+ *@fn template <typename Archive, typename T> void load(Archive& ar, ::boost::rational<T>& r, unsigned version)
  *@brief Serialization (loading part) for boost::rational<T>
  *@param ar is the archive from which we are loading the fraction
  *@param r is the fraction
@@ -107,6 +118,7 @@ void load(Archive& ar, ::boost::rational<T>& r, unsigned version);
 BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
 
 /**
+ *@fn unsigned pow(unsigned base, unsigned power)
  *@brief pow function in for unsigned integers.
  *@note the function does not use quick exponentiation as p should be under 64 and in practice under 8.
  *@param power is the power
@@ -120,6 +132,7 @@ BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
 unsigned pow(unsigned base, unsigned power);
 
 /**
+ *@fn unsigned log(unsigned base, unsigned x)
  *@brief log function for unsigned integers.
  *@note the function uses naive logarithm algorithm
  *@param x is the number from which to take the log
@@ -134,6 +147,7 @@ unsigned pow(unsigned base, unsigned power);
 unsigned log(unsigned base, unsigned x);
 
 /**
+ *@fn template<typename T> T rand()
  *@brief returns a uniform random element of type T
  *@return a uniform random element of type T
  *@pre T must either be a primitive type or a type with randomInstance function
