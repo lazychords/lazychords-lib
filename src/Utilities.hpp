@@ -61,9 +61,9 @@ using UFraction = boost::rational<unsigned>;
  *@brief Puts the content of a file into a string
  *@param str is the file name to read
  *@return the string representing the content of the file
+ *@throw std::runtime_error("Could not read file") when the file described by str could not be opened.
  *@author Julien
  *@todo tests
- *@todo say what this function does when open fails
 **/
 std::string getFile(const std::string& str);
 
@@ -75,7 +75,7 @@ std::string getFile(const std::string& str);
  *@return the string that represents the object
  *@author Julien
  *@todo tests
- *@todo create static_assert for precondition
+ *@todo check precondition through a concept
 **/
 template<typename T>
 std::string toString(const T& a);
@@ -91,7 +91,7 @@ namespace boost { namespace serialization {
  *@param version is the serialization version
  *@author Nicolas
  *@todo tests
- *@remark Shouldn't you add a precondition on T ?
+ *@remark Shouldn't you add a precondition on T ? (Question from Julien)
 **/
 template <typename Archive, typename T>
 void save(Archive& ar, ::boost::rational<T> const& r, unsigned version);
@@ -128,7 +128,7 @@ BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
  *@pre base^power must fit into an unsigned
  *@return base^power
  *@author Julien
- *@todo Check precondition with assert
+ *@todo Check precondition with ASSERT
  *@todo tests
 **/
 unsigned pow(unsigned base, unsigned power);
