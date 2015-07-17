@@ -4,10 +4,12 @@
 
 /**
  *@file
- *@brief Needs to be done
+ *@brief This file is used for functions/defines/typedefs that are used almost everywhere and do not have many similar functions.
+ If many functions that can be grouped together are created, they will be merged to a separate file.
+ *@author Julien
+ *@todo Add GPL licence to the file
 **/
 
-///@todo comment this file + add GPL information
 #include <string>
 #include <sstream>
 #include <vector>
