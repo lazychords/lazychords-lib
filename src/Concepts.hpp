@@ -51,7 +51,7 @@ struct HasId
        -# id(randomInstance) does not throw
        -# id(randomInstance) is between 0 and maxId-1
      - For each x >= maxId, fromId throws
-     *@throw this function never throws
+     *@throw never throws
      *@note this function is equivalent to a test.
     **/
     static void test();
