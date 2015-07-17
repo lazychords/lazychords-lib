@@ -24,16 +24,26 @@ private :
     Type5 fifth;
     Type7 seventh;
 public :
-    /**
-     *@ref GlobalCheck
-    **/
     bool check() const;
     void save(std::ostream& o) const;
     static Chord load(std::istream& i);
+
+    /**
+     *@ref ConceptId
+    **/
     unsigned id() const;
+
+    /**
+     *@ref ConceptId
+    **/
     static Chord fromId(unsigned hashValue);
-    static Chord randomInstance();
+
+    /**
+     *@ref ConceptId
+    **/
     static unsigned maxId();
+    static Chord randomInstance();
+
     std::ostream& operator<<(std::ostream& o) const;
     std::ostream& operator>>(std::istream& i);
     static Chord fromStream(std::istream& i);
