@@ -7,7 +7,7 @@
  *@brief This file is used for functions/defines/typedefs that are used almost everywhere and do not have many similar functions.
  If many functions that can be grouped together are created, they will be merged to a separate file.
  *@author Julien
- *@todo Add GPL licence to the file
+ *@todo Add GPL license to the file
 **/
 
 #include <string>
