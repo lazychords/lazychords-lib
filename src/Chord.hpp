@@ -29,7 +29,7 @@ public :
     static Chord load(std::istream& i);
 
     /**
-     *@ref ConceptId
+     *@pre Must follow the @ref ConceptId "Id" concept
     **/
     unsigned id() const;
 
