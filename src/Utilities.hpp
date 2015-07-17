@@ -128,7 +128,6 @@ BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
  *@pre base^power must fit into an unsigned
  *@return base^power
  *@author Julien
- *@todo Check precondition with ASSERT
  *@todo tests
 **/
 unsigned pow(unsigned base, unsigned power);

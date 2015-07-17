@@ -16,7 +16,10 @@ unsigned pow(unsigned base, unsigned power)
 {
     unsigned x=1;
     for(unsigned i=0;i<power;i++)
+    {
+        ASSERT(std::numeric_limits<unsigned>::max()/base > x);
         x*=base;
+    }
     return x;
 }
 
