@@ -29,7 +29,8 @@ public :
     static Chord load(std::istream& i);
 
     /**
-     *@pre Must follow the @ref ConceptId "Id" concept
+     *@brief Follows the @ref ConceptId "Id" concept
+     *@detailed Say whats special about this id function compared to others
     **/
     unsigned id() const;
 
