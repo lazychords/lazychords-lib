@@ -24,7 +24,7 @@ public :
     static constexpr unsigned maxNumber = 128;
 
     /** @author Valentin
-     *  Sanity check for Signature
+     *  @brief Sanity check for Signature
      *  Implemented
      *  @return true iff the signature is valid
      */
@@ -33,26 +33,26 @@ public :
     static Signature load(std::istream& i);
 
     /** @author Valentin
-        Gets the id associated to the Signature
+        @brief Gets the id associated to the Signature
         Implemented not tested
         @return unsigned value corresponding to the unique id of the signature
      */
     unsigned id() const;
     /** @author Valentin
-        Creates a Signature given an ID
+        @brief Creates a Signature given an ID
         Implemented not tested
         @param unsigned value that should be a valid ID for Signature
         @return the Signature corresponding to the ID
      */
     static Signature fromId(unsigned hashValue);
     /** @author Valentin
-        Creates a random Signature among all the possible Signatures
+        @brief Creates a random Signature among all the possible Signatures
         Implemented not tested
         @return a random Signature
      */
     static Signature randomInstance();
     /** @author Valentin
-        Gets the greatest ID for Signature
+        @brief Gets the greatest ID for Signature
         Implemented not tested
         @return the maximum of the different ID
      */
@@ -61,14 +61,14 @@ public :
     std::ostream& operator>>(std::istream& i);
     static Signature fromStream(std::istream& i);
     /** @author Valentin
-     * Default constructor for a signature, 4 quarter notes a bar
+     * @brief Default constructor for a signature, 4 quarter notes a bar
      * Implemented and tested (alcinos)
      * @return a default 4/4 signature
      */
     Signature();
 
     /** @author Valentin
-     * Basic constructor for any signature
+     * @brief Basic constructor for any signature
      * Implemented and tested
 	 * @param number is a positive number of steps in a bar
 	 * @param step defines the step value (most often 4 for binary, 8 for ternary), must be a power of 2
@@ -81,35 +81,35 @@ public :
     ~Signature() = default;
 
     /** @author Valentin
-     * Usual equality testing operator
+     * @brief Usual equality testing operator
      * Implemented not tested
      * @return true iff both Signatures are equal
      */
     bool operator==(const Signature&) const;
 
     /** @author Valentin
-     * Usual difference testing operator
+     * @brief Usual difference testing operator
      * Implemented not tested
      * @return true iff both Signatures are different
      */
     bool operator!=(const Signature&) const;
 
     /** @author Valentin
-     * Getter for the number parameter
+     * @brief Getter for the number parameter
      * Implemented not tested
      * @return the number parameter of the signature
      */
     unsigned getNumber() const;
 
     /** @author Valentin
-     * Getter for the step parameter
+     * @brief Getter for the step parameter
      * Implemented not tested
      * @return the step parameter of the signature
      */
     unsigned getStep() const;
 
     /** @author Valentin
-     * Function to get a relative duration of a measure in this signature (4/4 has a duration of 1)
+     * @brief Function to get a relative duration of a measure in this signature (4/4 has a duration of 1)
      * Implemented not tested
      * @return the relative duration of a measure
      */
