@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include "Utilities.hpp"
+#include <fstream>
 
 class LogImpl
 {
