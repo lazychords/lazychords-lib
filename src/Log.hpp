@@ -9,6 +9,7 @@
     #define ASSERT(X) ;
 #endif
 #include <memory>
+#include <fstream>
 
 class LogImpl;
 
