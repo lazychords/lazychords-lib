@@ -25,6 +25,7 @@ TEST_CASE("Test of Signature structure","Signature")
             FOR(i,6){
                 FOR(j,127){
                     REQUIRE_NOTHROW(Signature(j+1,1<<i));
+                    Signature S(j+1,1<<i);
                 }
             }
             REQUIRE_NOTHROW(Signature(4,4));
@@ -90,6 +91,25 @@ TEST_CASE("Test of Signature structure","Signature")
                 REQUIRE_THROWS(Signature(i,61));
                 REQUIRE_THROWS(Signature(i,62));
                 REQUIRE_THROWS(Signature(i,63));
+            }
+        }
+    }
+    SECTION("Comparison operators"){
+        FOR(i,6){
+            FOR(j,63){
+                Signature S1(j+1,1<<i);
+                FOR(k,6){
+                    FOR(l,63){
+                        Signature S2(l+1,1<<k);
+                        if(i==k && j==l){
+                             REQUIRE(S1==S2);
+                             REQUIRE_FALSE(S1!=S2);
+                         }else{
+                             REQUIRE(S1!=S2);
+                             REQUIRE_FALSE(S1==S2);
+                         }
+                    }
+                }
             }
         }
     }

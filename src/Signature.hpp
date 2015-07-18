@@ -82,14 +82,14 @@ public :
 
     /** @author Valentin
      * @brief Usual equality testing operator
-     * Implemented not tested
+     * Implemented and tested (alcinos)
      * @return true iff both Signatures are equal
      */
     bool operator==(const Signature&) const;
 
     /** @author Valentin
      * @brief Usual difference testing operator
-     * Implemented not tested
+     * Implemented and tested (alcinos)
      * @return true iff both Signatures are different
      */
     bool operator!=(const Signature&) const;
