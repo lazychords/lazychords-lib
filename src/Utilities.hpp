@@ -163,6 +163,7 @@ unsigned log(unsigned base, unsigned x);
  *@note This function should not be used for cryptographic applications as the output is predictable.
  *@author Julien
  *@todo tests
+ *@todo allow to use user seed
 **/
 template<typename T>
 T rand();

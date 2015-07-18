@@ -45,7 +45,6 @@
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
 				<ExtraCommands>
-					<Add before="mingw32-make" />
 					<Add after="mingw32-make doc" />
 					<Add after="firefox ../doc/html/index.html" />
 					<Mode after="always" />
