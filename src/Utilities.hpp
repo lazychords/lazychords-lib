@@ -163,7 +163,7 @@ unsigned log(unsigned base, unsigned x);
  if x is known at runtime and is not a power of two, this function will not compile
  * @return p such that x = 2^p;
  * @author alcinos
- * @todo test
+ * @note tested (alcinos)
  */
 constexpr unsigned binary_log(unsigned x);
 

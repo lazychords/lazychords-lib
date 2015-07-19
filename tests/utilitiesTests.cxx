@@ -25,8 +25,13 @@ TEST_CASE("Test of Utilities","Utilities")
         }
     }
 
-    SECTION("pow"){
-        REQUIRE(pow(0,0)==1);
+    SECTION("binary logarithm"){
+        FOR(i,30){
+            REQUIRE(binary_log(safe_cast<unsigned>(1<<i))==i);
+            if(i & (i-1)){
+                REQUIRE_THROWS(binary_log(i));
+            }
+        }
     }
 }
 

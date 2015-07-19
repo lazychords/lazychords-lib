@@ -43,10 +43,6 @@ Signature Signature::randomInstance()
     return fromId(Random::uniform_int(0u,maxId()));
 }
 
-constexpr unsigned Signature::maxId()
-{
-    return (binary_log(maxStep)+1)*maxNumber;
-}
 
 bool Signature::operator==(const Signature& other) const
 {
