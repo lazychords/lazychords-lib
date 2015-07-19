@@ -3,6 +3,10 @@ ENABLE_TESTING()
 
 message("You can affect the compilation options with the WARNNONE, WARNALL, and OPTIMIZE macros. By default, none are active and the default options are -Wall -Wextra -pedantic and no optimizations")
 
+option(OPTIMIZE "Build project for maximal speed and minimal warnings" OFF)
+option(WARNONE "Disable all warnings" OFF)
+option(WARNALL "Enable all warnings" OFF)
+
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 
 IF(MY_BOOST)
@@ -21,9 +25,9 @@ INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 IF(OPTIMIZE)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wunsafe-loop-optimizations ")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wunsafe-loop-optimizations ")
 ELSE(OPTIMIZE)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fprofile-arcs -ftest-coverage")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -coverage -O0 -fprofile-arcs -ftest-coverage")
 ENDIF(OPTIMIZE)
 IF(WARNNONE)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
