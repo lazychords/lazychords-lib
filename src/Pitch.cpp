@@ -105,5 +105,5 @@ Pitch Pitch::load(std::istream& i)
 
 Pitch Pitch::randomInstance()
 {
-      return Pitch(Random::uniform_int(0,11));
+      return Pitch(Random::uniform_int(0u,11u));
 }

@@ -128,8 +128,8 @@ Note Note::load(std::istream& i)
 Note Note::randomInstance()
 {
     //picking random integers > 1
-    unsigned num = Random::uniform_int(1);
-    unsigned den = Random::uniform_int(1);
+    unsigned num = Random::uniform_int(1u);
+    unsigned den = Random::uniform_int(1u);
     UFraction l(num,den);
     if (Random::random_bool()==0){ //choose between rest and normal note
         return Note(l,true);
