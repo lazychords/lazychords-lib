@@ -28,7 +28,7 @@ bool Signature::check() const
 
 unsigned Signature::id() const
 {
-    unsigned logDenom = (unsigned)(log((double)step)/log(2.0));
+    unsigned logDenom = binary_log(step);
     return logDenom * maxNumber + (number-1);
 }
 
@@ -43,9 +43,9 @@ Signature Signature::randomInstance()
     return fromId(Random::uniform_int(0u,maxId()));
 }
 
-unsigned Signature::maxId()
+constexpr unsigned Signature::maxId()
 {
-    return ((unsigned)(log((double)maxStep)/log(2.0))+1)*maxNumber;
+    return (binary_log(maxStep)+1)*maxNumber;
 }
 
 bool Signature::operator==(const Signature& other) const

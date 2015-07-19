@@ -156,6 +156,17 @@ unsigned pow(unsigned base, unsigned power);
 **/
 unsigned log(unsigned base, unsigned x);
 
+/** @brief compute log_2(x)
+ * @param x the parameter
+ * @pre x must be a power of two
+ * @throw std::runtime_error if x is not known at compile time and is not a power of two.
+ if x is known at runtime and is not a power of two, this function will not compile
+ * @return p such that x = 2^p;
+ * @author alcinos
+ * @todo test
+ */
+constexpr unsigned binary_log(unsigned x);
+
 /** 
  * @brief safe modulo functions that gives correct result even if number is negative
  * @param number integer to take modulo from

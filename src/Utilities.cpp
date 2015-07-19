@@ -44,3 +44,5 @@ unsigned safe_mod(int number, unsigned mod)
         return safe_mod(number+safe_cast<int>(mod),mod);
     return safe_cast<unsigned>(number)%mod;
 }
+
+
