@@ -13,9 +13,9 @@ before_install:
     - "sudo update-alternatives --config gcc"
     - "sudo update-alternatives --config g++"
     - "gcc --version"
-
+    - sudo pip install cpp-coveralls
     
 script: mkdir build && cd build && cmake ../ && make -j && ../runTests
 
 after_success:
-    - coveralls
+    - coveralls --exclude build --exclude tests --exclude libs --gcov-options '\-lp'
