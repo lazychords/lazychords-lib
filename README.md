@@ -3,7 +3,7 @@
 # Back-end lib of the LazyChords project
 travis : [![Build Status](https://travis-ci.org/lazychords/lazychords-lib.svg?branch=feature-structures)](https://travis-ci.org/lazychords/lazychords-lib)
 jenkis : [![Build Status](http://jenkins.nicolascarion.com/buildStatus/icon?job=LazyChords)](http://jenkins.nicolascarion.com/job/LazyChords/)
-
+coveralls : [![Coverage Status](https://coveralls.io/repos/lazychords/lazychords-lib/badge.svg?branch=feature-structures&service=github)](https://coveralls.io/github/lazychords/lazychords-lib?branch=feature-structures)
 This is the core of the LazyChords project, where the data models (how the melodies, chords,…) are described and the main algorithm is implemented. If you're looking for a gui, please have look [here](https://github.com/lazychords/lazychords-gui)
 
 Due to the essential aspect of this library for the project, we'll focus on the code quality, the test coverage, and the overall stability.
