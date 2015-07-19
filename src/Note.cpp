@@ -1,7 +1,6 @@
 #include "Note.hpp"
 #include "Utilities.hpp"
-#include <random>
-#include <chrono>
+#include "Random.hpp"
 
 
 
@@ -128,13 +127,12 @@ Note Note::load(std::istream& i)
 
 Note Note::randomInstance()
 {
-      auto seed1 = std::chrono::system_clock::now().time_since_epoch().count();
-      std::minstd_rand0 generator (seed1);
-      auto num = (generator() % 4)+1;
-      auto den = (generator() % (num*8)) + 1;
-      UFraction l(num,den);
-      if (generator() & 1){ //choose between rest and normal note
-          return Note(l,true);
-      }
-      return Note(Pitch::randomInstance(),l);
+    //picking random integers > 1
+    unsigned num = Random::uniform_int(1);
+    unsigned den = Random::uniform_int(1);
+    UFraction l(num,den);
+    if (Random::random_bool()==0){ //choose between rest and normal note
+        return Note(l,true);
+    }
+    return Note(Pitch::randomInstance(),l);
 }

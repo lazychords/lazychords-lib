@@ -1,5 +1,5 @@
 #include "Signature.hpp"
-
+#include "Random.hpp"
 Signature::Signature() : number(4), step(4)
 {
 	if (!check())
@@ -40,7 +40,7 @@ Signature Signature::fromId(unsigned hashValue)
 
 Signature Signature::randomInstance()
 {
-    return fromId(rand()%(maxId()+1));
+    return fromId(Random::uniform_int(0u,maxId()));
 }
 
 unsigned Signature::maxId()

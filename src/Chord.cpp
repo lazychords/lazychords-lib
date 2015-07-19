@@ -1,4 +1,5 @@
 #include "Chord.hpp"
+#include "Random.hpp"
 
 unsigned Chord::id() const
 {
@@ -17,7 +18,7 @@ Chord Chord::fromId(unsigned hashValue)
 
 Chord Chord::randomInstance()
 {
-    return fromId(rand()%maxId());
+    return fromId(Random::uniform_int(0u,maxId()));
 }
 
 unsigned Chord::maxId()

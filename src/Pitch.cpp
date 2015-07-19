@@ -1,5 +1,6 @@
 #include "Pitch.hpp"
 #include "Log.hpp"
+#include "Random.hpp"
 #include <random>
 #include <chrono>
 #include "Utilities.hpp"
@@ -104,7 +105,5 @@ Pitch Pitch::load(std::istream& i)
 
 Pitch Pitch::randomInstance()
 {
-      auto seed1 = std::chrono::system_clock::now().time_since_epoch().count();
-      std::minstd_rand0 generator (seed1);
-      return Pitch(generator() % 12);
+      return Pitch(Random::uniform_int(0,11));
 }

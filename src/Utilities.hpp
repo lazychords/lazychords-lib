@@ -166,18 +166,7 @@ unsigned log(unsigned base, unsigned x);
  */
 unsigned safe_mod(int number, unsigned mod);
 
-/**
- *@fn template<typename T> T rand()
- *@brief returns a uniform random element of type T
- *@return a uniform random element of type T
- *@pre T must either be a primitive type or a type with randomInstance function
- *@note This function should not be used for cryptographic applications as the output is predictable.
- *@author Julien
- *@todo tests
- *@todo allow to use user seed
-**/
-template<typename T>
-T rand();
+
 
 #include "Utilities.ipp"
 #endif // UTILITIES_HPP_INCLUDED
