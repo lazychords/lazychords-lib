@@ -41,6 +41,6 @@ unsigned safe_mod(int number, unsigned mod)
 {
     ASSERT(mod != 0);
     if(number<0)
-        return safe_mod(number+mod,mod);
-    return safe_cast<unsigned>(number%mod);
+        return safe_mod(number+safe_cast<int>(mod),mod);
+    return safe_cast<unsigned>(number)%mod;
 }

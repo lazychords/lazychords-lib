@@ -18,15 +18,15 @@ namespace boost { namespace serialization {
 template <typename Archive, typename T>
 void save(Archive& ar, ::boost::rational<T> const& r, unsigned /*version*/)
 {
-    int n = r.numerator(), d = r.denominator();
+    T n = r.numerator(), d = r.denominator();
     ar & n;
     ar & d;
 }
 
 template <typename Archive, typename T>
-void load(Archive& ar, ::boost::rational<T>& r, unsigned version)
+void load(Archive& ar, ::boost::rational<T>& r, unsigned /*version*/)
 {
-    int n=1, d=1;
+    T n=1, d=1;
     ar & n;
     ar & d;
     r = ::boost::rational<T>(n, d);
