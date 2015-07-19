@@ -1,6 +1,6 @@
 #include "../src/Signature.hpp"
 #include "catch.hpp"
-
+#include "genericTests.hxx"
 #include <climits>
 #include <exception>
 #include <sstream>
@@ -29,6 +29,11 @@ TEST_CASE("Test of Signature structure","Signature")
                 }
             }
             REQUIRE_NOTHROW(Signature(4,4));
+            forAll<Signature>([](const Signature& c){
+                    /** @todo enable capture when << operator is available*/
+                    //CAPTURE(c);
+                    REQUIRE(c.check());
+                });
         }
         SECTION("Invalid Constructions"){
             FOR(i,Signature::maxNumber){
@@ -112,5 +117,10 @@ TEST_CASE("Test of Signature structure","Signature")
                 }
             }
         }
+        forAll<Signature>([](const Signature& c){
+                /** @todo enable capture when << operator is available*/
+                //CAPTURE(c);
+                REQUIRE(c==c);
+            });
     }
 }
