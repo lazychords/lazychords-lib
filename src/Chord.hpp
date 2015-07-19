@@ -23,6 +23,9 @@ private :
     Pitch base;
     Type5 fifth;
     Type7 seventh;
+
+    static std::vector<std::vector<Pitch> > getAllChordsNotes();
+    std::vector<Pitch> getChordNotes() const;
 public :
     bool check() const;
     void save(std::ostream& o) const;
@@ -57,7 +60,7 @@ public :
     static Chord fromStream(std::istream& i);
 
     /** @author Valentin
-     * Basic constructor for 3-notes chord
+     * @brief Basic constructor for 3-notes chord
      * @param The tonic note of the chord
      * @param The quality of the chord (Major, Minor, Diminished, Augmented)
      * @return a Chord object corresponding to its parameters
@@ -65,7 +68,7 @@ public :
      */
     Chord(const Pitch&, const Type5&);
     /** @author Valentin
-     * Basic constructor for 4-notes chord
+     * @brief Basic constructor for 4-notes chord
      * @param The tonic note of the chord
      * @param The quality of the chord (Major, Minor, Diminished, Augmented)
      * @param The quality of the seventh (Major7, 7, Dim7)
@@ -79,24 +82,24 @@ public :
     ~Chord() = default;
 
     /** @author Valentin
-     * Usual equality testing operator
+     * @brief Usual equality testing operator
      * @return true iff both Chords are equal
      * @todo Test
      */
     bool operator==(const Chord&) const;
     /** @author Valentin
-     * Usual difference testing operator
+     * @brief Usual difference testing operator
      * @return true iff both Chords are different
      * @todo Test
      */
     bool operator!=(const Chord&) const;
 
     /** @author Valentin
-     * Transforms a chord into its notes (no octava taken into account)
+     * @brief Transforms a chord into its notes (no octava taken into account)
      * @return a vector of notes containing the 3 (or 4) notes of the chord
      * @todo Test
      */
-    std::vector<Pitch> getNotes() const;
+    const std::vector<Pitch>& getNotes() const;
 };
 
 using ChordProgression = std::vector<Chord>;

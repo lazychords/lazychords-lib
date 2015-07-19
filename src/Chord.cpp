@@ -43,7 +43,17 @@ bool Chord::operator!=(const Chord& other) const
     return !(*this==other);
 }
 
-std::vector<Pitch> Chord::getNotes() const
+std::vector<std::vector<Pitch> > Chord::getAllChordsNotes()
+{
+    std::vector<std::vector<Pitch> > chordList;
+    for (unsigned i=0; i<maxId(); i++)
+    {
+        chordList.push_back(fromId(i).getChordNotes());
+    }
+    return chordList;
+}
+
+std::vector<Pitch> Chord::getChordNotes() const
 {
     std::vector<Pitch> noteList;
     noteList.push_back(base);
@@ -88,4 +98,10 @@ std::vector<Pitch> Chord::getNotes() const
             break;
     }
     return noteList;
+}
+
+const std::vector<Pitch>& Chord::getNotes() const
+{
+    static std::vector<std::vector<Pitch> > chordList = getAllChordsNotes();
+    return chordList[id()];
 }
