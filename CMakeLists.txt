@@ -76,6 +76,7 @@ SET(LazyChordsLib_SRCS
   src/Pitch.cpp
   src/Log.cpp
   src/Utilities.cpp
+  src/Random.cpp
 )
 
 
@@ -93,6 +94,7 @@ SET(Tests_SRCS
     tests/musicTest.cxx
     tests/TestMain.cxx
     tests/signatureTests.cxx
+    tests/utilitiesTests.cxx
 )
 
 INCLUDE_DIRECTORIES(tests/)

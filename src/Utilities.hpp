@@ -72,7 +72,7 @@ using UFraction = boost::rational<unsigned>;
  *@return the string representing the content of the file
  *@throw std::runtime_error("Could not read file") when the file described by str could not be opened.
  *@author Julien
- *@todo tests
+ * tested (alcinos)
 **/
 std::string getFile(const std::string& str);
 
