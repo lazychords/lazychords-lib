@@ -55,6 +55,7 @@ GCC_IGNORE_WARNINGS
 GCC_PUT_BACK_WARNINGS
 
 #include "Log.hpp"
+#include "Caster.hpp"
 
 /**
  *@typedef UFraction = boost::rational<unsigned>
