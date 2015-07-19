@@ -53,7 +53,7 @@ public :
      * @ref ConceptId
      * @todo Test
      */
-    static unsigned maxId();
+    static constexpr unsigned maxId();
 
     std::ostream& operator<<(std::ostream& o) const;
     std::ostream& operator>>(std::istream& i);

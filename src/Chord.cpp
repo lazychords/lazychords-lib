@@ -21,7 +21,7 @@ Chord Chord::randomInstance()
     return fromId(Random::uniform_int(0u,maxId()));
 }
 
-unsigned Chord::maxId()
+constexpr unsigned Chord::maxId()
 {
     return 12*5*4;
 }
