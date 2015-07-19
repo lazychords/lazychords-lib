@@ -1,7 +1,7 @@
 #include "../src/Signature.hpp"
+#include "../src/Utilities.hpp"
 #include "catch.hpp"
 #include "genericTests.hxx"
-#include <climits>
 #include <exception>
 #include <sstream>
 #include <array>
@@ -24,8 +24,8 @@ TEST_CASE("Test of Signature structure","Signature")
         SECTION("Valid Constructions"){
             FOR(i,6){
                 FOR(j,127){
-                    REQUIRE_NOTHROW(Signature(j+1,1<<i));
-                    Signature S(j+1,1<<i);
+                    REQUIRE_NOTHROW(Signature(j+1,safe_cast<unsigned>(1<<i)));
+                    Signature S(j+1,safe_cast<unsigned>(1<<i));
                 }
             }
             REQUIRE_NOTHROW(Signature(4,4));
@@ -102,10 +102,10 @@ TEST_CASE("Test of Signature structure","Signature")
     SECTION("Comparison operators"){
         FOR(i,6){
             FOR(j,63){
-                Signature S1(j+1,1<<i);
+                Signature S1(j+1,safe_cast<unsigned>(1<<i));
                 FOR(k,6){
                     FOR(l,63){
-                        Signature S2(l+1,1<<k);
+                        Signature S2(l+1,safe_cast<unsigned>(1<<k));
                         if(i==k && j==l){
                              REQUIRE(S1==S2);
                              REQUIRE_FALSE(S1!=S2);
