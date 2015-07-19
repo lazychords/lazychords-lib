@@ -88,7 +88,6 @@ SET(Tests_SRCS
     tests/MusicRulesTest.cxx
     tests/musicTest.cxx
     tests/TestMain.cxx
-    tests/genericTests.cxx
     tests/signatureTests.cxx
 )
 
