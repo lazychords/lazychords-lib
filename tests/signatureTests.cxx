@@ -2,11 +2,6 @@
 #include "../src/Utilities.hpp"
 #include "catch.hpp"
 #include "genericTests.hxx"
-#include <exception>
-#include <sstream>
-#include <array>
-#include <map>
-#include <algorithm>
 
 #define FOR(i,n) for(unsigned i=0;i<n;i++)
 using namespace std;
