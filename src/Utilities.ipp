@@ -13,7 +13,7 @@ std::string toString(const T& a)
     return o.str();
 }
 
-namespace boost { namespace serailization {
+namespace boost { namespace serialization {
 
 template <typename Archive, typename T>
 void save(Archive& ar, ::boost::rational<T> const& r, unsigned /*version*/)
@@ -26,7 +26,7 @@ void save(Archive& ar, ::boost::rational<T> const& r, unsigned /*version*/)
 template <typename Archive, typename T>
 void load(Archive& ar, ::boost::rational<T>& r, unsigned version)
 {
-    int n, d;
+    int n=1, d=1;
     ar & n;
     ar & d;
     r = ::boost::rational<T>(n, d);
