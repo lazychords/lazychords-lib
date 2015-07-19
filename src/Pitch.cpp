@@ -58,7 +58,7 @@ bool Pitch::operator!=(const Pitch& other) const
 Pitch& Pitch::operator+=(int added)
 {
     ASSERT(check());
-    halfTone = (halfTone+added)%12;
+    halfTone = safe_mod(safe_cast<int>(halfTone)+added,12);
     ASSERT(check());
     return (*this);
 }
@@ -66,7 +66,7 @@ Pitch& Pitch::operator+=(int added)
 Pitch& Pitch::operator-=(int sub)
 {
     ASSERT(check());
-    halfTone = (halfTone-sub)%12;
+    halfTone = safe_mod(safe_cast<int>(halfTone)-sub,12);
     ASSERT(check());
     return (*this);
 }

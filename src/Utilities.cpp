@@ -36,3 +36,11 @@ unsigned log(unsigned base, unsigned x)
     ASSERT(x==1);
     return p;
 }
+
+unsigned safe_mod(int number, unsigned mod)
+{
+    ASSERT(mod != 0);
+    if(number<0)
+        return safe_mod(number+mod,mod);
+    return safe_cast<unsigned>(number%mod);
+}

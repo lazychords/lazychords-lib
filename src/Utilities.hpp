@@ -156,6 +156,16 @@ unsigned pow(unsigned base, unsigned power);
 **/
 unsigned log(unsigned base, unsigned x);
 
+/** 
+ * @brief safe modulo functions that gives correct result even if number is negative
+ * @param number integer to take modulo from
+ * @param mod value of the modulo
+ * @pre mod must be different than 0
+ * @return number%mod
+ * @author alcinos
+ */
+unsigned safe_mod(int number, unsigned mod);
+
 /**
  *@fn template<typename T> T rand()
  *@brief returns a uniform random element of type T
