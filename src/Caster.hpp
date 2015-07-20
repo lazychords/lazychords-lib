@@ -81,7 +81,7 @@ struct safe_static_cast_helper<true, true>
     }
 };
 
-template <typename TO, typename FROM>
+/*template <typename TO, typename FROM>
 inline TO safe_cast(FROM from)
 {
 #ifdef NDEBUG
@@ -93,5 +93,5 @@ inline TO safe_cast(FROM from)
     //return static_cast<TO>(from);
 
 
-}
+}*/
 #endif

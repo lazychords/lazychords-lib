@@ -85,7 +85,7 @@ template<typename C>
 struct IsCheckable
 {
 
-    static constexpr bool value;
+    static constexpr bool value=true;
     /**
      *@anchor ConceptCheck
     **/
@@ -96,7 +96,7 @@ template<typename C>
 struct IsEqualityComparable
 {
 
-    static constexpr bool value;
+    static constexpr bool value = true;
     /**
      *@anchor ConceptEquality
     **/
@@ -107,7 +107,7 @@ template<typename C>
 struct IsPrintable
 {
 
-    static constexpr bool value;
+    static constexpr bool value = true;
     /**
      *@anchor ConceptPrint
     **/
@@ -118,7 +118,7 @@ template<typename C>
 struct IsSerializable
 {
 
-    static constexpr bool value;
+    static constexpr bool value = true;
     /**
      *@anchor ConceptSerialize
     **/
@@ -129,7 +129,7 @@ template<typename C>
 struct IsStringConstructible
 {
 
-    static constexpr bool value;
+    static constexpr bool value = true;
     /**
      *@anchor ConceptStringConstructible
     **/
