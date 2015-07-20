@@ -8,21 +8,18 @@
 #else
     #define ASSERT(X) ;
 #endif
-#include <memory>
 #include <stdexcept>
 
-class LogImpl;
 
 struct AssertExcpt : public std::runtime_error
 {
 public :
-    AssertExcpt(const std::string& w) : std::runtime_error(w) {}
+    explicit AssertExcpt(const std::string& w) : std::runtime_error(w) {}
 };
 
 class Log
 {
     ///@todo comment this class
-    static std::unique_ptr<LogImpl> l;
     static bool fatalErrors;
 public :
     Log() = delete;
