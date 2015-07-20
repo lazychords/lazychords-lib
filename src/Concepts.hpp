@@ -68,13 +68,72 @@ struct HasId
      *@note this function is equivalent to a test.
      *@author Julien
     **/
-    static void test();
+    static void test(unsigned n = 1000);
 };
 
 template<typename C>
 struct HasRandomInstance
 {
     static constexpr bool value = impl::HasRandomInstanceImpl<C, std::is_class<C>::value>::value;
+    /**
+     *@anchor ConceptRandomInstance
+    **/
+    static void test(unsigned n = 1000);
+};
+
+template<typename C>
+struct IsCheckable
+{
+
+    static constexpr bool value;
+    /**
+     *@anchor ConceptCheck
+    **/
+    static void test(unsigned n = 1000);
+};
+
+template<typename C>
+struct IsEqualityComparable
+{
+
+    static constexpr bool value;
+    /**
+     *@anchor ConceptEquality
+    **/
+    static void test(unsigned n = 1000);
+};
+
+template<typename C>
+struct IsPrintable
+{
+
+    static constexpr bool value;
+    /**
+     *@anchor ConceptPrint
+    **/
+    static void test(unsigned n = 1000);
+};
+
+template<typename C>
+struct IsSerializable
+{
+
+    static constexpr bool value;
+    /**
+     *@anchor ConceptSerialize
+    **/
+    static void test(unsigned n = 1000);
+};
+
+template<typename C>
+struct IsStringConstructible
+{
+
+    static constexpr bool value;
+    /**
+     *@anchor ConceptStringConstructible
+    **/
+    static void test(unsigned n = 1000);
 };
 }
 

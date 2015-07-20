@@ -72,7 +72,7 @@ using UFraction = boost::rational<unsigned>;
  *@return the string representing the content of the file
  *@throw std::runtime_error("Could not read file") when the file described by str could not be opened.
  *@author Julien
- * tested (alcinos)
+ *@test alcinos
 **/
 std::string getFile(const std::string& str);
 
@@ -167,7 +167,7 @@ unsigned log_int(unsigned base, unsigned x);
  */
 constexpr unsigned binary_log(unsigned x);
 
-/** 
+/**
  * @brief safe modulo functions that gives correct result even if number is negative
  * @param number integer to take modulo from
  * @param mod value of the modulo
