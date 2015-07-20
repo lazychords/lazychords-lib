@@ -35,7 +35,7 @@ void load(Archive& ar, ::boost::rational<T>& r, unsigned /*version*/)
 
 namespace log_impl{
 //this is the implementation of the binary logarithm. Credit goes John Owens (http://graphics.stanford.edu/~seander/bithacks.html#IntegerLog)
-static constexpr unsigned int b[] = {0xAAAAAAAA, 0xCCCCCCCC, 0xF0F0F0F0, 
+static constexpr unsigned int b[] = {0xAAAAAAAA, 0xCCCCCCCC, 0xF0F0F0F0,
                                  0xFF00FF00, 0xFFFF0000};
 
 static constexpr unsigned binary_log_impl(unsigned x,unsigned r, int i)
@@ -50,6 +50,13 @@ constexpr unsigned binary_log(unsigned x)
     return (x&(x-1))==0 ? //test if power of two
         log_impl::binary_log_impl(x,((x & log_impl::b[0]) != 0),4) : //computation
         throw std::runtime_error(toString(x)+" is not a power of two");
+}
+
+template<typename R, typename A>
+R safe_cast(const A& arg)
+{
+    static_assert(std::is_convertible<A,R>::value, "A must be convertible to R");
+    return static_cast<R>(arg);
 }
 
 #endif // UTILITIES_IPP_H_INCLUDED

@@ -12,7 +12,7 @@ std::string getFile(const std::string& str)
     return s.str();
 }
 
-unsigned pow_int(unsigned base, unsigned power)
+unsigned powUnsigned(unsigned base, unsigned power)
 {
     unsigned x=1;
     for(unsigned i=0;i<power;i++)
@@ -23,7 +23,7 @@ unsigned pow_int(unsigned base, unsigned power)
     return x;
 }
 
-unsigned log_int(unsigned base, unsigned x)
+unsigned logUnsigned(unsigned base, unsigned x)
 {
     ASSERT(base > 1);
     unsigned p=0;
@@ -37,11 +37,11 @@ unsigned log_int(unsigned base, unsigned x)
     return p;
 }
 
-unsigned safe_mod(int number, unsigned mod)
+unsigned safeMod(int number, unsigned mod)
 {
     ASSERT(mod != 0);
     if(number<0)
-        return safe_mod(number+safe_cast<int>(mod),mod);
+        return safeMod(number+safe_cast<int>(mod),mod);
     return safe_cast<unsigned>(number)%mod;
 }
 
