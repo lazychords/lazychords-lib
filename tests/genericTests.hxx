@@ -42,16 +42,17 @@ Of course, do not forget that these are generic tests, you still have to write t
 **/
 
 
-/**@brief This utility function applies the given test to all possible elements of a given class 
+/**@brief This utility function applies the given test to all possible elements of a given class
  * @param test The test function
  * @param C Type of the class to test
  * @param n If enumerations of all possible values of the class is impossible, this value controls the number of random instances that must be generated
  */
-template<typename C, typename Test, typename = typename std::enable_if<Concepts::HasId<C>::value>::type > 
+template<typename C, typename Test, typename = typename std::enable_if<Concepts::HasId<C>::value>::type >
 void forAll(const Test& test, unsigned n = 1000);
 
-template<typename C, typename Test, typename = typename std::enable_if<!Concepts::HasId<C>::value>::type,typename = void > 
+template<typename C, typename Test, typename = typename std::enable_if<!Concepts::HasId<C>::value>::type,typename = void >
 void forAll(const Test& test, unsigned n = 1000);
 
-
+#define REQUIRE_PRECONDITION_FAIL(X) Log::setErrorsFatal(true); REQUIRE_THROWS_AS(X, AssertExcpt);
+#define CHECK_PRECONDITION_FAIL(X) Log::setErrorsFatal(true); CHECK_THROWS_AS(X, AssertExcpt);
 #include "genericTests.cxx"

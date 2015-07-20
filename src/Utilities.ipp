@@ -86,7 +86,7 @@ struct IntegralCase<From, true, To, true>
         using CompareTypeMin = typename biggest<From, To, From>::type;
         using CompareTypeMax = typename biggest<From, To, From>::type;
         CompareTypeMin mmin = static_cast<CompareTypeMin>(std::numeric_limits<To>::min());
-        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::min());
+        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::max());
         ASSERT(mmin <= CompareTypeMin(arg));
         ASSERT(mmax >= CompareTypeMax(arg));
     }
@@ -99,7 +99,7 @@ struct IntegralCase<From, false, To, false>
         using CompareTypeMin = typename biggest<From, To, From>::type;
         using CompareTypeMax = typename biggest<From, To, From>::type;
         CompareTypeMin mmin = static_cast<CompareTypeMin>(std::numeric_limits<To>::min());
-        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::min());
+        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::max());
         ASSERT(mmin <= CompareTypeMin(arg));
         ASSERT(mmax >= CompareTypeMax(arg));
     }
@@ -112,7 +112,7 @@ struct IntegralCase<From, false, To, true>
         using CompareTypeMin = typename biggest<From, To, To>::type;
         using CompareTypeMax = typename biggest<From, To, From>::type;
         CompareTypeMin mmin = static_cast<CompareTypeMin>(std::numeric_limits<To>::min());
-        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::min());
+        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::max());
         ASSERT(mmin <= CompareTypeMin(arg));
         ASSERT(mmax >= CompareTypeMax(arg));
     }
@@ -125,7 +125,7 @@ struct IntegralCase<From, true, To, false>
         using CompareTypeMin = typename biggest<From, To, From>::type;
         using CompareTypeMax = typename biggest<From, To, To>::type;
         CompareTypeMin mmin = static_cast<CompareTypeMin>(std::numeric_limits<To>::min());
-        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::min());
+        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::max());
         ASSERT(mmin <= CompareTypeMin(arg));
         ASSERT(mmax >= CompareTypeMax(arg));
     }

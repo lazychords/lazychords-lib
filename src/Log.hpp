@@ -9,8 +9,15 @@
     #define ASSERT(X) ;
 #endif
 #include <memory>
+#include <stdexcept>
 
 class LogImpl;
+
+struct AssertExcpt : public std::runtime_error
+{
+public :
+    AssertExcpt(const std::string& w) : std::runtime_error(w) {}
+};
 
 class Log
 {
@@ -27,7 +34,7 @@ public :
     static void reportError(const std::string& errorMessage, const std::string& file, unsigned line);
 
     /**
-     *@brief Enables/Disable std::runtime_error throwing when an error is thrown
+     *@brief Enables/Disable AssertionExcpt throwing when an error is thrown. Fatal errors do not show on standard ouput anymore.
      *@author Julien
     **/
     static void setErrorsFatal(bool y = true);

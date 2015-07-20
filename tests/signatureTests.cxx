@@ -14,13 +14,13 @@ TEST_CASE("Test of Signature structure","Signature")
         REQUIRE(S.getNumber() == 4);
         REQUIRE(S.getStep() == 4);
     }
-    
+
     SECTION("Custom Constructor"){
         SECTION("Valid Constructions"){
             FOR(i,6){
                 FOR(j,127){
-                    REQUIRE_NOTHROW(Signature(j+1,safe_cast<unsigned>(1<<i)));
-                    Signature S(j+1,safe_cast<unsigned>(1<<i));
+                    REQUIRE_NOTHROW(Signature(j+1,powUnsigned(2,i)));
+                    Signature S(j+1,powUnsigned(2,i));
                 }
             }
             REQUIRE_NOTHROW(Signature(4,4));
@@ -97,10 +97,10 @@ TEST_CASE("Test of Signature structure","Signature")
     SECTION("Comparison operators"){
         FOR(i,6){
             FOR(j,63){
-                Signature S1(j+1,safe_cast<unsigned>(1<<i));
+                Signature S1(j+1,powUnsigned(2, i));
                 FOR(k,6){
                     FOR(l,63){
-                        Signature S2(l+1,safe_cast<unsigned>(1<<k));
+                        Signature S2(l+1,powUnsigned(2, k));
                         if(i==k && j==l){
                              REQUIRE(S1==S2);
                              REQUIRE_FALSE(S1!=S2);

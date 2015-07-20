@@ -11,21 +11,26 @@ class LogImpl
     friend class Log;
 private :
     LogImpl() = default;
-    void write(const std::string& message, const std::string& file, unsigned line) const
+    void write(const std::string& message, const std::string& file, unsigned line, bool onstd = true) const
     {
         static std::ofstream f("Log.txt");
-        std::cerr<<file + ":" + toString(line) + ":0: "+message<<"\n";
+        if(onstd)
+        {
+            std::cerr<<file + ":" + toString(line) + ":0: "+message<<"\n";
+            std::cerr.flush();
+        }
+
         f<<file + ":" + toString(line) + ":0: "+message<<"\n";
-        std::cerr.flush();
+
         f.flush();
     }
 };
 
 void Log::reportError(const std::string& errorMessage, const std::string& file, unsigned line)
 {
-    l->write("error: " + errorMessage, file, line);
+    l->write("error: " + errorMessage, file, line, !fatalErrors);
     if(fatalErrors)
-        throw std::runtime_error("Fatal error occured : " + errorMessage);
+        throw AssertExcpt("Fatal error occured : " + errorMessage);
 }
 
 void Log::debugInfo(const std::string& info, const std::string& file, unsigned line)
