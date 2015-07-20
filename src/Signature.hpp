@@ -117,5 +117,4 @@ public :
 
 };
 
-#include "Signature.ipp"
 #endif
