@@ -54,7 +54,7 @@ public:
     static Pitch load(std::istream& i);
     unsigned id() const;
     static Pitch fromId(unsigned hashValue);
-    static unsigned maxId();
+    static constexpr unsigned maxId() { return 12; }
 
     /** @author alcinos
      * Generate a random valid instance of the pitch structure

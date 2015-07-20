@@ -3,16 +3,16 @@
 
 unsigned Chord::id() const
 {
-    return base.id()*5*4 + static_cast<unsigned>(fifth)*4 + static_cast<unsigned>(seventh);
+    return base.id()*type5size*type7size + static_cast<unsigned>(fifth)*type7size + static_cast<unsigned>(seventh);
 }
 
 Chord Chord::fromId(unsigned hashValue)
 {
     if (hashValue >= maxId())
         throw std::runtime_error("Invalid ID for Chord::fromId()");
-    Chord::Type7 seventh = static_cast<Type7>(hashValue%4);
-    Chord::Type5 fifth = static_cast<Type5>((hashValue/4)%5);
-    Pitch base(hashValue/(4*5)); 
+    Chord::Type7 seventh = static_cast<Type7>(hashValue%type7size);
+    Chord::Type5 fifth = static_cast<Type5>((hashValue/type7size)%type5size);
+    Pitch base(hashValue/(type7size*type5size)); 
     return Chord(base,fifth,seventh);
 }
 
@@ -23,7 +23,7 @@ Chord Chord::randomInstance()
 
 constexpr unsigned Chord::maxId()
 {
-    return 12*5*4;
+    return Pitch::maxId()*type5size*type7size;
 }
 
 Chord::Chord(const Pitch& p, const Type5& t5) : base(p), fifth(t5), seventh(Chord::NONE)

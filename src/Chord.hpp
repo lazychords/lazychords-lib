@@ -18,7 +18,9 @@ class Chord
 {
 public:
     enum Type5 {MAJ5=0, MIN5, AUG5, DIM5, SUS45};
+    static constexpr unsigned type5size = 5;
     enum Type7 {NONE=0,MAJ7,MIN7,DIM7};
+    static constexpr unsigned type7size = 4;
 private :
     Pitch base;
     Type5 fifth;
