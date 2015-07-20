@@ -27,9 +27,9 @@ TEST_CASE("Test of Utilities","Utilities")
 
     SECTION("binary logarithm"){
         FOR(i,30){
-            REQUIRE(binary_log(safe_cast<unsigned>(1<<i))==i);
+            REQUIRE(logUnsigned(2, safe_cast<unsigned>(1<<i))==i);
             if(i & (i-1)){
-                REQUIRE_THROWS(binary_log(i));
+                REQUIRE_THROWS(logUnsigned(2, i));
             }
         }
     }

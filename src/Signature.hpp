@@ -56,7 +56,7 @@ public :
         Implemented not tested
         @return the maximum of the different ID
      */
-    static constexpr unsigned maxId();
+    static unsigned maxId();
     std::ostream& operator<<(std::ostream& o) const;
     std::ostream& operator>>(std::istream& i);
     static Signature fromStream(std::istream& i);

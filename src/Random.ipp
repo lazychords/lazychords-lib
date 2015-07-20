@@ -35,7 +35,7 @@ T Random::uniform_real(T a ,T b)
 
 namespace rand_impl
 {
-template<typename T,typename = typename std::enable_if<std::is_integral<T>::value>::type>
+template<typename T,typename = typename std::enable_if<std::is_integral<T>::value && !std::is_same<T,bool>::value>::type>
 T rand()
 {
     T elem = Random::uniform_int<T>();
@@ -51,6 +51,12 @@ template<typename T,typename = typename std::enable_if<Concepts::HasRandomInstan
 T rand()
 {
     return T::randomInstance();
+}
+
+template<typename T,typename = typename std::enable_if<std::is_same<T, bool>::value>::type, typename = void, typename = void, typename = void>
+T rand()
+{
+    return Random::rand<unsigned>()%2;
 }
 }
 

@@ -6,25 +6,26 @@
 class Random
 {
 public:
-    /**@brief set the seed that must be used by all random generators 
+    Random() = delete;
+    /**@brief set the seed that must be used by all random generators
      * @author alcinos
      * @param s the seed
      */
     static void setSeed(long unsigned s);
 
-    /** @brief return a random integer between the given bounds. If no bounds are provided, the whole range of the integral type is used. 
+    /** @brief return a random integer between the given bounds. If no bounds are provided, the whole range of the integral type is used.
      * @param a the lower bound
      * @param b the upper bound
      * @pre min(T)<=a<=b<=max(t)
-     * @pre T is an integral type     
+     * @pre T is an integral type
      * @author alcinos
      * @return a random number in [a,b]
      * @todo test
      */
     template<typename T >
     static T uniform_int(T a = std::numeric_limits<T>::lowest(),T b = std::numeric_limits<T>::max());
-    
-    /** @brief return a random real between the given bounds. If no bounds are provided, the number will be between 0 and 1. 
+
+    /** @brief return a random real between the given bounds. If no bounds are provided, the number will be between 0 and 1.
      * @param a the lower bound
      * @param b the upper bound
      * @pre a<=b
@@ -35,11 +36,6 @@ public:
      */
     template<typename T >
     static T uniform_real(T a = 0.0,T b = 1.0);
-
-    /**@brief return a random boolean 
-     * @return a random boolean
-     */
-    static bool random_bool();
 
     /**
      *@brief returns a uniform random element of type T
@@ -52,7 +48,7 @@ public:
     template<typename T>
     static T rand();
 
-    
+
 private:
     static void pickTimeSeed();
     static bool seedSet; ///< true if a seed has been chosen

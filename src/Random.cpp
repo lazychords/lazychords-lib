@@ -20,8 +20,3 @@ void Random::pickTimeSeed()
     setSeed(safe_cast<long unsigned>(std::chrono::system_clock::now().time_since_epoch().count()));
 }
 
-bool Random::random_bool()
-{
-    std::bernoulli_distribution distribution(0.5);
-    return distribution(generator);
-}

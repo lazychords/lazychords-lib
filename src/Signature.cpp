@@ -69,3 +69,8 @@ UFraction Signature::measureTime() const
 {
 	return UFraction(number, step);
 }
+
+unsigned Signature::maxId()
+{
+    return (logUnsigned(2,maxStep)+1)*maxNumber;
+}

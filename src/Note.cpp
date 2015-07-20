@@ -131,7 +131,7 @@ Note Note::randomInstance()
     unsigned num = Random::uniform_int(1u);
     unsigned den = Random::uniform_int(1u);
     UFraction l(num,den);
-    if (Random::random_bool()==0){ //choose between rest and normal note
+    if (Random::rand<bool>()==0){ //choose between rest and normal note
         return Note(l,true);
     }
     return Note(Pitch::randomInstance(),l);

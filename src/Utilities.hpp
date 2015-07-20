@@ -9,6 +9,7 @@
  *@author Julien
  *@todo Add GPL license to the file
  *@defgroup def Defines
+ *@remark defgroup sucks a bit...
 **/
 
 #include <string>
@@ -55,7 +56,6 @@ GCC_IGNORE_WARNINGS
 GCC_PUT_BACK_WARNINGS
 
 #include "Log.hpp"
-#include "Caster.hpp"
 
 /**
  *@typedef UFraction = boost::rational<unsigned>
@@ -156,18 +156,6 @@ unsigned powUnsigned(unsigned base, unsigned power);
 **/
 unsigned logUnsigned(unsigned base, unsigned x);
 
-/** @brief compute log_2(x)
- * @param x the parameter
- * @pre x must be a power of two
- * @throw std::runtime_error if x is not known at compile time and is not a power of two.
- if x is known at runtime and is not a power of two, this function will not compile
- * @return p such that x = 2^p;
- * @author alcinos
- * @note tested (alcinos)
- * @remark remove ?
- */
-constexpr unsigned binary_log(unsigned x);
-
 /**
  * @brief safe modulo functions that gives correct result even if number is negative
  * @param number integer to take modulo from
@@ -187,6 +175,7 @@ unsigned safeMod(int number, unsigned mod);
  * @return arg casted in R
  * @author Julien
  * @todo test
+ * @todo safe_cast for floating point types
  */
 template<typename To, typename From>
 To safe_cast(const From& arg);

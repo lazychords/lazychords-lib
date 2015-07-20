@@ -14,7 +14,6 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -75,7 +74,6 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="src/Caster.hpp" />
 		<Unit filename="src/Chord.cpp" />
 		<Unit filename="src/Chord.hpp" />
 		<Unit filename="src/ConceptBase.hpp" />
@@ -99,7 +97,6 @@
 		<Unit filename="src/Random.ipp" />
 		<Unit filename="src/Signature.cpp" />
 		<Unit filename="src/Signature.hpp" />
-		<Unit filename="src/Signature.ipp" />
 		<Unit filename="src/Utilities.cpp" />
 		<Unit filename="src/Utilities.hpp" />
 		<Unit filename="src/Utilities.ipp" />
