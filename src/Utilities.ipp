@@ -52,11 +52,126 @@ constexpr unsigned binary_log(unsigned x)
         throw std::runtime_error(toString(x)+" is not a power of two");
 }
 
-template<typename R, typename A>
-R safe_cast(const A& arg)
+namespace impl {
+template<typename From, typename To>
+struct SafeCast;
+}
+
+
+template<typename To, typename From>
+To safe_cast(const From& arg)
 {
-    static_assert(std::is_convertible<A,R>::value, "A must be convertible to R");
-    return static_cast<R>(arg);
+    static_assert(std::is_convertible<From,To>::value, "From must be convertible to To");
+    impl::SafeCast<From, To>::canConvert(arg);
+    return To(arg);
+}
+
+namespace impl
+{
+
+template<typename From, typename To, typename Default, int F, bool Eq>
+struct biggest_impl
+{
+    using type = To;
+};
+
+template<typename From, typename To, typename Default, int F>
+struct biggest_impl<From, To, Default, F, true>
+{
+    using type = Default;
+};
+
+template<typename From, typename To, typename Default, bool Eq>
+struct biggest_impl<From, To, Default, true, Eq>
+{
+    using type = From;
+};
+
+
+template<typename From, typename To, typename Default>
+struct biggest
+{
+    using type = typename biggest_impl<From, To, Default,  sizeof(To) < sizeof(From), sizeof(From) == sizeof(To)>::type;
+};
+
+template<typename From, bool FromSigned, typename To, bool ToSigned>
+struct IntegralCase;
+
+template<typename From, typename To>
+struct IntegralCase<From, true, To, true>
+{
+    static void canConvert(const From& arg)
+    {
+        using CompareTypeMin = typename biggest<From, To, From>::type;
+        using CompareTypeMax = typename biggest<From, To, From>::type;
+        CompareTypeMin mmin = static_cast<CompareTypeMin>(std::numeric_limits<To>::min());
+        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::min());
+        ASSERT(mmin <= CompareTypeMin(arg));
+        ASSERT(mmax >= CompareTypeMax(arg));
+    }
+};
+template<typename From, typename To>
+struct IntegralCase<From, false, To, false>
+{
+    static void canConvert(const From& arg)
+    {
+        using CompareTypeMin = typename biggest<From, To, From>::type;
+        using CompareTypeMax = typename biggest<From, To, From>::type;
+        CompareTypeMin mmin = static_cast<CompareTypeMin>(std::numeric_limits<To>::min());
+        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::min());
+        ASSERT(mmin <= CompareTypeMin(arg));
+        ASSERT(mmax >= CompareTypeMax(arg));
+    }
+};
+template<typename From, typename To>
+struct IntegralCase<From, false, To, true>
+{
+    static void canConvert(const From& arg)
+    {
+        using CompareTypeMin = typename biggest<From, To, To>::type;
+        using CompareTypeMax = typename biggest<From, To, From>::type;
+        CompareTypeMin mmin = static_cast<CompareTypeMin>(std::numeric_limits<To>::min());
+        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::min());
+        ASSERT(mmin <= CompareTypeMin(arg));
+        ASSERT(mmax >= CompareTypeMax(arg));
+    }
+};
+template<typename From, typename To>
+struct IntegralCase<From, true, To, false>
+{
+    static void canConvert(const From& arg)
+    {
+        using CompareTypeMin = typename biggest<From, To, From>::type;
+        using CompareTypeMax = typename biggest<From, To, To>::type;
+        CompareTypeMin mmin = static_cast<CompareTypeMin>(std::numeric_limits<To>::min());
+        CompareTypeMax mmax = static_cast<CompareTypeMax>(std::numeric_limits<To>::min());
+        ASSERT(mmin <= CompareTypeMin(arg));
+        ASSERT(mmax >= CompareTypeMax(arg));
+    }
+};
+
+template<typename From, typename To, bool areIntegrals, bool areFloatingPoints>
+struct DispatchCase
+{
+    static void canConvert(const From&) {}
+};
+
+template<typename From, typename To>
+struct DispatchCase<From, To, true, false>
+{
+    static void canConvert(const From& arg) {IntegralCase<From, std::is_signed<From>::value, To, std::is_signed<To>::value>::canConvert(arg);}
+};
+
+template<typename From, typename To>
+struct SafeCast
+{
+    static void canConvert(const From& arg)
+    {
+        DispatchCase<From, To, std::is_integral<From>::value && std::is_integral<To>::value, std::is_floating_point<From>::value && std::is_floating_point<To>::value>::canConvert(arg);
+    }
+};
+
+
 }
 
 #endif // UTILITIES_IPP_H_INCLUDED

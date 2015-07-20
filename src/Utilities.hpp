@@ -182,13 +182,14 @@ unsigned safeMod(int number, unsigned mod);
 /**
  * @brief safe type conversion (should be used instead of static_cast)
  * @param arg is the argument to cast
- * @pre Type A should be convertible to type R (std::_is_convertible<A, R>::value = true)
- * @throw std::runtime_error("Invalid cast") when arg could not be converted to type R (for example -10 to unsigned).
+ * @pre Type From should be convertible to type To (std::_is_convertible<From, To>::value = true)
+ * @pre arg should fit into type To. For example, you are not allowed to convert -10 to unsigned.
  * @return arg casted in R
  * @author Julien
+ * @todo test
  */
-template<typename R, typename A>
-R safe_cast(const A& arg);
+template<typename To, typename From>
+To safe_cast(const From& arg);
 
 #include "Utilities.ipp"
 #endif // UTILITIES_HPP_INCLUDED

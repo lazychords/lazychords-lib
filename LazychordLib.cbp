@@ -38,6 +38,14 @@
 				<Linker>
 					<Add option="-s" />
 				</Linker>
+				<MakeCommands>
+					<Build command="$make -f $makefile" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile" />
+					<SilentBuild command="$make -f $makefile &gt; $(CMD_NULL)" />
+				</MakeCommands>
 			</Target>
 			<Target title="Doc">
 				<Option output="main" prefix_auto="1" extension_auto="1" />
@@ -67,118 +75,45 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="src/Chord.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Chord.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/ConceptBase.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Concepts.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Figure.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Figure.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Key.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Key.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Log.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Log.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Melody.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Melody.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Music.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Note.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Note.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Pitch.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Pitch.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Signature.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Signature.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Utilities.cpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Utilities.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="src/Utilities.ipp">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="tests/MusicRulesTest.cxx">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="tests/TestMain.cxx">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
+		<Unit filename="src/Caster.hpp" />
+		<Unit filename="src/Chord.cpp" />
+		<Unit filename="src/Chord.hpp" />
+		<Unit filename="src/ConceptBase.hpp" />
+		<Unit filename="src/Concepts.hpp" />
+		<Unit filename="src/Figure.cpp" />
+		<Unit filename="src/Figure.hpp" />
+		<Unit filename="src/Key.cpp" />
+		<Unit filename="src/Key.hpp" />
+		<Unit filename="src/Log.cpp" />
+		<Unit filename="src/Log.hpp" />
+		<Unit filename="src/Melody.cpp" />
+		<Unit filename="src/Melody.hpp" />
+		<Unit filename="src/Music.cpp" />
+		<Unit filename="src/Music.hpp" />
+		<Unit filename="src/Note.cpp" />
+		<Unit filename="src/Note.hpp" />
+		<Unit filename="src/Pitch.cpp" />
+		<Unit filename="src/Pitch.hpp" />
+		<Unit filename="src/Random.cpp" />
+		<Unit filename="src/Random.hpp" />
+		<Unit filename="src/Random.ipp" />
+		<Unit filename="src/Signature.cpp" />
+		<Unit filename="src/Signature.hpp" />
+		<Unit filename="src/Signature.ipp" />
+		<Unit filename="src/Utilities.cpp" />
+		<Unit filename="src/Utilities.hpp" />
+		<Unit filename="src/Utilities.ipp" />
+		<Unit filename="tests/MusicRulesTest.cxx" />
+		<Unit filename="tests/TestMain.cxx" />
 		<Unit filename="tests/catch.hpp">
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="tests/genericTests.cxx">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="tests/musicTest.cxx">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="tests/signatureTests.cxx">
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
+		<Unit filename="tests/genericTests.cxx" />
+		<Unit filename="tests/genericTests.hxx" />
+		<Unit filename="tests/musicTest.cxx" />
+		<Unit filename="tests/signatureTests.cxx" />
+		<Unit filename="tests/utilitiesTests.cxx" />
 		<Extensions>
 			<code_completion />
 			<envvars />

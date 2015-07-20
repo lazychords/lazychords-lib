@@ -4,7 +4,7 @@
 ///@todo comment this file + add GPL information
 ///@todo comment ASSERT
 #ifdef DEBUG
-    #define ASSERT(X) if(!X) Log::reportError(std::string(#X), std::string(__FILE__), __LINE__);
+    #define ASSERT(X) if(!(X)) Log::reportError(std::string(#X), std::string(__FILE__), __LINE__);
 #else
     #define ASSERT(X) ;
 #endif
