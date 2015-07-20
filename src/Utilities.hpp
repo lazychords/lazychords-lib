@@ -133,13 +133,13 @@ BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
  *@brief pow function in for unsigned integers.
  *@note the function does not use quick exponentiation as p should be under 64 and in practice under 8.
  *@param power is the power
- *@param base is the base
+ *@param base is the bas
  *@pre base^power must fit into an unsigned
  *@return base^power
  *@author Julien
  *@todo tests
 **/
-unsigned pow(unsigned base, unsigned power);
+unsigned pow_int(unsigned base, unsigned power);
 
 /**
  *@fn unsigned log(unsigned base, unsigned x)
@@ -154,7 +154,7 @@ unsigned pow(unsigned base, unsigned power);
  *@author Julien
  *@todo tests
 **/
-unsigned log(unsigned base, unsigned x);
+unsigned log_int(unsigned base, unsigned x);
 
 /** @brief compute log_2(x)
  * @param x the parameter

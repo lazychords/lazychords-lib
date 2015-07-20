@@ -28,14 +28,15 @@ bool Signature::check() const
 
 unsigned Signature::id() const
 {
-    unsigned logDenom = binary_log(step);
+    unsigned logDenom = log_int(2,step);
     return logDenom * maxNumber + (number-1);
 }
 
 Signature Signature::fromId(unsigned hashValue)
 {
     return Signature(hashValue%maxNumber+1,
-                     1u<<(hashValue/maxNumber));
+                     pow_int(2,(hashValue/maxNumber)));
+
 }
 
 Signature Signature::randomInstance()

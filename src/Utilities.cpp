@@ -12,7 +12,7 @@ std::string getFile(const std::string& str)
     return s.str();
 }
 
-unsigned pow(unsigned base, unsigned power)
+unsigned pow_int(unsigned base, unsigned power)
 {
     unsigned x=1;
     for(unsigned i=0;i<power;i++)
@@ -23,7 +23,7 @@ unsigned pow(unsigned base, unsigned power)
     return x;
 }
 
-unsigned log(unsigned base, unsigned x)
+unsigned log_int(unsigned base, unsigned x)
 {
     ASSERT(base > 1);
     unsigned p=0;
