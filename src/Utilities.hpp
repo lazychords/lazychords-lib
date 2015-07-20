@@ -129,7 +129,7 @@ void load(Archive& ar, ::boost::rational<T>& r, unsigned version);
 BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
 
 /**
- *@fn unsigned pow(unsigned base, unsigned power)
+ *@fn unsigned powUnsigned(unsigned base, unsigned power)
  *@brief pow function in for unsigned integers.
  *@note the function does not use quick exponentiation as p should be under 64 and in practice under 8.
  *@param power is the power
@@ -139,10 +139,10 @@ BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
  *@author Julien
  *@todo tests
 **/
-unsigned pow_int(unsigned base, unsigned power);
+unsigned powUnsigned(unsigned base, unsigned power);
 
 /**
- *@fn unsigned log(unsigned base, unsigned x)
+ *@fn unsigned logUnsigned(unsigned base, unsigned x)
  *@brief log function for unsigned integers.
  *@note the function uses naive logarithm algorithm
  *@param x is the number from which to take the log
@@ -154,7 +154,7 @@ unsigned pow_int(unsigned base, unsigned power);
  *@author Julien
  *@todo tests
 **/
-unsigned log_int(unsigned base, unsigned x);
+unsigned logUnsigned(unsigned base, unsigned x);
 
 /** @brief compute log_2(x)
  * @param x the parameter
@@ -174,6 +174,7 @@ constexpr unsigned binary_log(unsigned x);
  * @pre mod must be different than 0
  * @return number%mod
  * @author alcinos
+ * @remark remove ?
  */
 unsigned safe_mod(int number, unsigned mod);
 
