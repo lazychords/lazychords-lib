@@ -17,6 +17,7 @@ void Random::setSeed(long unsigned s)
 
 void Random::pickTimeSeed()
 {
-    setSeed(safe_cast<long unsigned>(std::chrono::system_clock::now().time_since_epoch().count()));
+    //Why use safe_cast, we do not care here
+    setSeed(static_cast<long unsigned>(std::chrono::system_clock::now().time_since_epoch().count()));
 }
 

@@ -17,7 +17,9 @@ public:
      * @param a the lower bound
      * @param b the upper bound
      * @pre min(T)<=a<=b<=max(t)
-     * @pre T is an integral type
+     * @pre T is an integral type (not bool)
+     * @note This function should not be used for cryptographic applications as the output is predictable.
+     * @note If the seed for the generator had not been set, it uses a random seed based on the time
      * @author alcinos
      * @return a random number in [a,b]
      * @todo test
@@ -31,6 +33,8 @@ public:
      * @pre a<=b
      * @pre T is an real type
      * @return a random number in [a,b]
+     * @note This function should not be used for cryptographic applications as the output is predictable.
+     * @note If the seed for the generator had not been set, it uses a random seed based on the time
      * @author alcinos
      * @todo test
      */
@@ -42,6 +46,7 @@ public:
      *@return a uniform random element of type T
      *@pre T must either be a primitive type or a type with randomInstance function
      *@note This function should not be used for cryptographic applications as the output is predictable.
+     *@note If the seed for the generator had not been set, it uses a random seed based on the time
      *@author Julien & alcinos
      *@todo tests
      **/
