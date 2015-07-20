@@ -10,8 +10,6 @@
 #ifndef NOTE_HPP_INCLUDED
 #define NOTE_HPP_INCLUDED
 
-#include <iostream>
-#include <vector>
 #include "Utilities.hpp"
 #include "Pitch.hpp"
 

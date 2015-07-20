@@ -13,8 +13,6 @@
 #include "Figure.hpp"
 #include "Key.hpp"
 #include "Signature.hpp"
-#include <functional>
-#include <iostream>
 
 
 class Melody

@@ -11,7 +11,6 @@
 #define KEY_HPP_INCLUDED
 
 #include "Pitch.hpp"
-#include <iostream>
 
 struct Key
 {

@@ -10,8 +10,6 @@
 #ifndef SIGNATURE_HPP_INCLUDED
 #define SIGNATURE_HPP_INCLUDED
 
-#include <iostream>
-#include <cmath>
 #include "Utilities.hpp"
 
 struct Signature

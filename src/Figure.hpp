@@ -11,7 +11,6 @@
 #define FIGURE_HPP
 
 #include <vector>
-#include <iostream>
 #include "Note.hpp"
 
 class Figure

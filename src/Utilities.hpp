@@ -13,8 +13,6 @@
 **/
 
 #include <string>
-#include <sstream>
-#include <vector>
 
 /**
  *@addtogroup def
@@ -46,7 +44,6 @@ _Pragma("GCC diagnostic ignored \"-Wlogical-op\"")
  *@}
  **/
 GCC_IGNORE_WARNINGS
-#include <boost/filesystem.hpp>
 #include <boost/rational.hpp>
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/serialization.hpp>

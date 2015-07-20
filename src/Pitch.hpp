@@ -10,8 +10,6 @@
 #ifndef PITCH_HPP_INCLUDED
 #define PITCH_HPP_INCLUDED
 
-#include <vector>
-#include <iostream>
 #include "Utilities.hpp"
 
 class Pitch;

@@ -10,8 +10,6 @@
 #ifndef CHORD_HPP_INCLUDED
 #define CHORD_HPP_INCLUDED
 
-#include <iostream>
-#include <vector>
 #include "Pitch.hpp"
 
 class Chord
@@ -75,7 +73,7 @@ public :
      * @param The quality of the chord (Major, Minor, Diminished, Augmented)
      * @param The quality of the seventh (Major7, 7, Dim7)
      * @return a Chord object corresponding to its parameters
-     * @todo Test 
+     * @todo Test
      */
     Chord(const Pitch&, const Type5&, const Type7&);
     Chord(const Chord&) = default;
