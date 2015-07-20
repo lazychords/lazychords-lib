@@ -164,6 +164,7 @@ unsigned logUnsigned(unsigned base, unsigned x);
  * @return p such that x = 2^p;
  * @author alcinos
  * @note tested (alcinos)
+ * @remark remove ?
  */
 constexpr unsigned binary_log(unsigned x);
 
@@ -174,7 +175,6 @@ constexpr unsigned binary_log(unsigned x);
  * @pre mod must be different than 0
  * @return number%mod
  * @author alcinos
- * @remark remove ?
  */
 unsigned safe_mod(int number, unsigned mod);
 
