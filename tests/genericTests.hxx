@@ -52,6 +52,6 @@ void forAll(const Test& test, unsigned n = 1000);
 template<typename C, typename Test, typename = typename std::enable_if<!Concepts::HasId<C>::value>::type,typename = void >
 void forAll(const Test& test, unsigned n = 1000);
 
-#define REQUIRE_PRECONDITION_FAIL(X) Log::setErrorsFatal(true); REQUIRE_THROWS_AS(X, AssertExcpt);
-#define CHECK_PRECONDITION_FAIL(X) Log::setErrorsFatal(true); CHECK_THROWS_AS(X, AssertExcpt);
+#define REQUIRE_PRECONDITION_FAIL(X) {Log::pushState();Log::setErrorsFatal(true); REQUIRE_THROWS_AS(X, AssertExcpt);Log::popState();}
+#define CHECK_PRECONDITION_FAIL(X) {Log::pushState();Log::setErrorsFatal(true); CHECK_THROWS_AS(X, AssertExcpt);Log::popState();}
 #include "genericTests.cxx"

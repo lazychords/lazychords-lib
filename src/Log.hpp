@@ -9,7 +9,7 @@
     #define ASSERT(X) ;
 #endif
 #include <stdexcept>
-
+#include <stack>
 
 struct AssertExcpt : public std::runtime_error
 {
@@ -20,7 +20,7 @@ public :
 class Log
 {
     ///@todo comment this class
-    static bool fatalErrors;
+    static std::stack<bool> fatalErrors;
 public :
     Log() = delete;
 
@@ -47,6 +47,9 @@ public :
      *@author Julien
     **/
     static void reportWarning(const std::string& warning, const std::string& file, unsigned line);
+
+    static void pushState();
+    static void popState();
 };
 
 

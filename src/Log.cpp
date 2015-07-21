@@ -24,8 +24,8 @@ void write(const std::string& message, const std::string& file, unsigned line, b
 }
 void Log::reportError(const std::string& errorMessage, const std::string& file, unsigned line)
 {
-    impl::write("error: " + errorMessage, file, line, !fatalErrors);
-    if(fatalErrors)
+    impl::write("error: " + errorMessage, file, line, !fatalErrors.top());
+    if(fatalErrors.top())
         throw AssertExcpt("Fatal error occured : " + errorMessage);
 }
 
@@ -41,8 +41,31 @@ void Log::reportWarning(const std::string& warning, const std::string& file, uns
 
 void Log::setErrorsFatal(bool y)
 {
-    fatalErrors = y;
+    fatalErrors.top() = y;
 }
 
-bool Log::fatalErrors = false;
+namespace impl
+{
+std::stack<bool> createStack()
+{
+    std::stack<bool> s;
+    s.push(false);
+    return s;
+}
+}
+
+void Log::pushState()
+{
+    fatalErrors.push(fatalErrors.top());
+}
+
+void Log::popState()
+{
+    if(fatalErrors.size()>1)
+        fatalErrors.pop();
+    else
+        reportError("You should not pop all states of Log", __FILE__, __LINE__);
+}
+
+std::stack<bool> Log::fatalErrors = impl::createStack();
 
