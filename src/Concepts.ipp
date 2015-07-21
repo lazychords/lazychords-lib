@@ -68,22 +68,39 @@ ENABLE_CALLABLE_TEST(id)
 ENABLE_CALLABLE_TEST(maxId)
 ENABLE_CALLABLE_TEST(fromId)
 ENABLE_CALLABLE_TEST(randomInstance)
+ENABLE_CALLABLE_TEST(check)
 
 
 namespace impl {
+
+template<typename C, bool b>
+struct HasCheckImpl;
+
+
+template<typename C>
+struct HasCheckImpl<C, true>
+{
+    static constexpr bool value = IS_CALLABLE_MEMBER(check, void (C::*) ());
+};
+
+template<typename C>
+struct HasCheckImpl<C, false>
+{
+    static constexpr bool value = false;
+};
+
+
 template<typename C, bool b>
 struct HasIdImpl;
 
 template<typename C, bool b>
 struct HasRandomInstanceImpl;
-}
 
-namespace impl {
 template<typename C>
 struct HasIdImpl<C, true>
 {
     static constexpr bool value = IS_CALLABLE_MEMBER(id, int (C::*) ()) && IS_CALLABLE_MEMBER(maxId, int (C::*) ()) && IS_CALLABLE_MEMBER(fromId, C (C::*) (int));
-    static_assert(value || (!IS_CALLABLE_MEMBER(id, int (C::*) ()) && !IS_CALLABLE_MEMBER(maxId, int (C::*) ()) && !IS_CALLABLE_MEMBER(fromId, C (C::*) (int))), "A class must either have all three functions id, maxId and fromId, or none");
+    static_assert((value && Concepts::IsCheckable<C>::value && Concepts::HasRandomInstance<C>::value) || (!IS_CALLABLE_MEMBER(id, int (C::*) ()) && !IS_CALLABLE_MEMBER(maxId, int (C::*) ()) && !IS_CALLABLE_MEMBER(fromId, C (C::*) (int))), "A class must either have all three functions id, maxId and fromId, or none. If it has id, maxId, and fromId, it must also have check and randomInstance.");
 };
 
 template<typename C>
@@ -96,6 +113,8 @@ template<typename C>
 struct HasRandomInstanceImpl<C, true>
 {
     static constexpr bool value = IS_CALLABLE_MEMBER(randomInstance, C (C::*) ());
+    static_assert((value && Concepts::IsCheckable<C>::value) || ! value, "Having a randomInstance function implies having a check function.");
+
 };
 
 template<typename C>
