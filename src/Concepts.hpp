@@ -21,6 +21,31 @@ struct HasRandomInstance;
 
 #include "Concepts.ipp"
 
+/**
+ *@namespace Concepts
+ *@brief This namespace is used for Concepts, that it to say for checking if types follow the desired behavior.
+ *@details Here is the Concept implication graph
+ *  @dot
+ *  digraph Concepts {
+ *      node [shape=record, fontname=Helvetica, fontsize=10];
+ *      a [ label="IsCheckable" URL="@ref ConceptCheck"];
+ *      b [ label="IsEqualityComparable" URL="@ref ConceptEquality"];
+ *      c [ label="HasRandomInstance" URL="@ref ConceptRandomInstance"];
+ *      d [ label="IsSerializable" URL="@ref ConceptSerialize"];
+ *      e [ label="HasId" URL="@ref ConceptId"];
+ *      f [ label="IsPrintable" URL="@ref ConceptPrint"];
+ *      g [ label="IsStringConstructible" URL="@ref ConceptStringConstructible"];
+ *      b -> a;
+ *      c -> b;
+ *      d -> b;
+ *      e -> d;
+ *      e -> c;
+ *      f -> d;
+ *      g -> f;
+ *  }
+ *  @enddot
+ *@note This is only for the main classes done is our project. Use type_traits to test for other things
+**/
 namespace Concepts
 {
 /**
