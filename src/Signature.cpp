@@ -14,13 +14,8 @@ void Signature::check() const
 {
     ASSERT (number <= maxNumber) ;
     ASSERT (step <= maxStep);
-	unsigned test = step;
-	while (test > 1)
-	{
-		ASSERT(test % 2 == 0)
-		test /= 2;
-	}
-	ASSERT(number>0 && step>0);
+    ASSERT(number >0);
+	ASSERT(isPowerUnsigned(2, step));
 }
 
 unsigned Signature::id() const

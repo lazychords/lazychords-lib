@@ -23,6 +23,18 @@ unsigned powUnsigned(unsigned base, unsigned power)
     return x;
 }
 
+bool isPowerUnsigned(unsigned base, unsigned x)
+{
+    ASSERT(base > 1);
+    while(x >= base)
+    {
+        if(x%base !=0)
+            return false;
+        x/=base;
+    }
+    return x==1;
+}
+
 unsigned logUnsigned(unsigned base, unsigned x)
 {
     ASSERT(base > 1);

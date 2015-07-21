@@ -139,6 +139,19 @@ BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
 unsigned powUnsigned(unsigned base, unsigned power);
 
 /**
+ *@fn bool isPowerUnsigned(unsigned base, unsigned x)
+ *@brief returns if there exists p such that x = pow(base, p)
+ *@note the function uses naive logarithm algorithm
+ *@param x is the number to look
+ *@param base is the base.
+ *@pre base must be strictly bigger than 1
+ *@return if there exists p such that x = pow(base, p)
+ *@author Julien
+ *@todo tests
+**/
+bool isPowerUnsigned(unsigned base, unsigned x);
+
+/**
  *@fn unsigned logUnsigned(unsigned base, unsigned x)
  *@brief log function for unsigned integers.
  *@note the function uses naive logarithm algorithm

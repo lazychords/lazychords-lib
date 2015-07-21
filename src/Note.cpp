@@ -34,7 +34,8 @@ Note::Note(const Pitch& pitch, const UFraction& d) :
 void Note::check() const
 {
     p.check();
-    logUnsigned(2, duration.denominator());
+    ASSERT(duration.denominator()<=maxStep);
+    ASSERT(isPowerUnsigned(2, duration.denominator()));
 }
 
 bool Note::operator==(const Note& other) const
