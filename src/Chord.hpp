@@ -59,23 +59,23 @@ public :
     std::ostream& operator>>(std::istream& i);
     static Chord fromStream(std::istream& i);
 
-    /** @author Valentin
+    /**@author Valentin
      * @brief Basic constructor for 3-notes chord
-     * @param The tonic note of the chord
-     * @param The quality of the chord (Major, Minor, Diminished, Augmented)
+     * @param p is the tonic note of the chord
+     * @param t is the quality of the chord (Major, Minor, Diminished, Augmented)
      * @return a Chord object corresponding to its parameters
      * @todo Test
      */
-    Chord(const Pitch&, const Type5&);
+    Chord(const Pitch& p, const Type5& t);
     /** @author Valentin
      * @brief Basic constructor for 4-notes chord
-     * @param The tonic note of the chord
-     * @param The quality of the chord (Major, Minor, Diminished, Augmented)
-     * @param The quality of the seventh (Major7, 7, Dim7)
+     * @param p is the tonic note of the chord
+     * @param t5 is the quality of the chord (Major, Minor, Diminished, Augmented)
+     * @param t7 is the quality of the seventh (Major7, 7, Dim7)
      * @return a Chord object corresponding to its parameters
      * @todo Test
      */
-    Chord(const Pitch&, const Type5&, const Type7&);
+    Chord(const Pitch& p, const Type5& t5, const Type7& t7);
     Chord(const Chord&) = default;
     Chord(Chord&&) = default;
     Chord& operator=(const Chord&) = default;

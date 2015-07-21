@@ -39,7 +39,7 @@ public :
     /** @author Valentin
         @brief Creates a Signature given an ID
         Implemented not tested
-        @param unsigned value that should be a valid ID for Signature
+        @param hashValue is the unsigned value that should be a valid ID for Signature
         @return the Signature corresponding to the ID
      */
     static Signature fromId(unsigned hashValue);

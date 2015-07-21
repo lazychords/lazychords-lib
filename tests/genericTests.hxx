@@ -44,7 +44,6 @@ Of course, do not forget that these are generic tests, you still have to write t
 
 /**@brief This utility function applies the given test to all possible elements of a given class
  * @param test The test function
- * @param C Type of the class to test
  * @param n If enumerations of all possible values of the class is impossible, this value controls the number of random instances that must be generated
  */
 template<typename C, typename Test, typename = typename std::enable_if<Concepts::HasId<C>::value>::type >

@@ -55,9 +55,9 @@ GCC_PUT_BACK_WARNINGS
 #include "Log.hpp"
 
 /**
- *@typedef UFraction = boost::rational<unsigned>
+ *@typedef UFraction boost::rational<unsigned>
  *@brief We will be using the boost Fraction class for Fractions.
- *@note UFraction are unsigned Fractions.
+ *@note We will should always be using unsigned Fraction, thus the use of unsigned instead of int. But beware of subtractions !
  *@author Julien
 **/
 using UFraction = boost::rational<unsigned>;
@@ -76,7 +76,7 @@ std::string getFile(const std::string& str);
 /**
  *@fn template<typename T> std::string toString(const T& a)
  *@brief Tries to convert a type into a string using operator<<
- *@param a, the object to convert into a string
+ *@param a the object to convert into a string
  *@pre T must have ostream& operator<<(ostream& const T& defined)
  *@return the string that represents the object
  *@author Julien
