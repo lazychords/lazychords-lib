@@ -5,13 +5,42 @@
 
 #define IS_CALLABLE_MEMBER(F, Type) impl::Callable_##F<Type>::value
 
-#include "Concepts.ipp"
-/**
- *@namespace Concepts
- *@brief toto2
-**/
+
+
 namespace Concepts
 {
+template<typename C>
+struct IsCheckable;
+
+template<typename C>
+struct HasId;
+
+template<typename C>
+struct HasRandomInstance;
+}
+
+#include "Concepts.ipp"
+
+namespace Concepts
+{
+/**
+ *@class IsCheckable
+ *@brief Allows for static and dynamic of the Check Concept
+ *@pre One of the two following conditions must be followed :
+ *- C does not have a check function
+ *- C follows the Check Concept which is described @ref ConceptCheck "here".
+ *@author Julien
+**/
+template<typename C>
+struct IsCheckable
+{
+
+    static constexpr bool value=impl::HasCheckImpl<C, std::is_class<C>::value>::value;
+    /**
+     *@anchor ConceptCheck
+    **/
+    static void test(unsigned n = 1000);
+};
 
 /**
  *@class HasId
@@ -37,15 +66,15 @@ struct HasId
      *@brief If HasId<C>::value = true, checks if C::id, C::maxId, C::fromId respect the dynamic part of the concept id concept. Otherwise does not do anything.
      *
      *@details Respecting the Id concept means :
-     *- Having all the functions needed for all that follows
+     *- Having all the functions needed for all that follows (fails means ASSERT failed)
      *- From x = 0 to maxId -1 we have :
-     *  -# fromId(x) never throws
+     *  -# fromId(x) never throws (or fails)
      *  -# We have check(fromId(x))
-     *  -# id(fromId(x)) never throws and is equal to x
+     *  -# id(fromId(x)) never throws (or fails) and is equal to x
      *- For each randomInstance :
-     *  -# id(randomInstance) does not throw
+     *  -# id(randomInstance) does not throw (or fail)
      *  -# id(randomInstance) is between 0 and maxId-1
-     *- For each x >= maxId, fromId throws
+     *- For each x >= maxId, fromId fails
      *
      *@throw never throws
      *@note this function is equivalent to a test.
@@ -60,17 +89,6 @@ struct HasRandomInstance
     static constexpr bool value = impl::HasRandomInstanceImpl<C, std::is_class<C>::value>::value;
     /**
      *@anchor ConceptRandomInstance
-    **/
-    static void test(unsigned n = 1000);
-};
-
-template<typename C>
-struct IsCheckable
-{
-
-    static constexpr bool value=true;
-    /**
-     *@anchor ConceptCheck
     **/
     static void test(unsigned n = 1000);
 };
