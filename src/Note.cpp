@@ -7,34 +7,34 @@
 using namespace std;
 
 Note::Note(const UFraction& d, bool rest) :
-    Pitch(),
+    p(Pitch()),
     silence(rest),
     duration(d)
 {
-    ASSERT(check());
+    check();
 }
 
 Note::Note(unsigned halfTones, const UFraction& d) :
-    Pitch(halfTones),
+    p(halfTones),
     silence(false),
     duration(d)
 {
-    ASSERT(check());
+    check();
 }
 
-Note::Note(const Pitch& p, const UFraction& d) :
-    Pitch(p),
+Note::Note(const Pitch& pitch, const UFraction& d) :
+    p(pitch),
     silence(false),
     duration(d)
 {
-    ASSERT(check());
+    check();
 }
 
 
-bool Note::check() const
+void Note::check() const
 {
-    //duration==duration ensures that we do not have a NaN
-    return Pitch::check() && duration>0 && duration<1e9 && duration==duration;
+    p.check();
+    logUnsigned(2, duration.denominator());
 }
 
 bool Note::operator==(const Note& other) const
@@ -42,7 +42,8 @@ bool Note::operator==(const Note& other) const
     if(silence){
         return other.silence && duration==other.duration;
     }
-    return Pitch::operator==(other) && duration==other.duration;
+    else
+        return p==other.p && duration==other.duration;
 }
 
 bool Note::operator!=(const Note& other) const
@@ -52,36 +53,36 @@ bool Note::operator!=(const Note& other) const
 
 Note& Note::operator+=(int halfTones)
 {
-    ASSERT(check());
-    Pitch::operator+=(halfTones);
-    ASSERT(check());
+    check();
+    p+=halfTones;
+    check();
     return (*this);
 }
 
 Note Note::operator+(int halfTones) const
 {
-    ASSERT(check());
+    check();
     Note result(*this);
     result+=halfTones;
-    ASSERT(result.check());
+    result.check();
     return result;
 }
 
 
 Note& Note::operator-=(int halfTones)
 {
-    ASSERT(check());
-    Pitch::operator-=(halfTones);
-    ASSERT(check());
+    check();
+    p-=halfTones;
+    check();
     return (*this);
 }
 
 Note Note::operator-(int halfTones) const
 {
-    ASSERT(check());
+    check();
     Note result(*this);
     result-=halfTones;
-    ASSERT(result.check());
+    result.check();
     return result;
 }
 
@@ -97,16 +98,16 @@ const UFraction& Note::getDuration() const
 
 void Note::changeDuration(const UFraction& d)
 {
-    ASSERT(check());
+    check();
     duration = d;
-    ASSERT(check());
+    check();
 }
 
 template<class Archive>
 void Note::serialize(Archive & ar, const unsigned int)
 {
     // serialize base class information
-    ar & boost::serialization::base_object<Pitch>(*this);
+    ar & p;
     ar & silence;
     ar & duration;
 }
@@ -127,10 +128,9 @@ Note Note::load(std::istream& i)
 
 Note Note::randomInstance()
 {
-    //picking random integers > 1
-    unsigned num = Random::uniform_int(1u);
-    unsigned den = Random::uniform_int(1u);
-    UFraction l(num,den);
+    unsigned num = Random::uniform_int(1u, 4*maxStep);
+    unsigned den = Random::uniform_int(1u, logUnsigned(2, maxStep));
+    UFraction l(num,powUnsigned(2,den));
     if (Random::rand<bool>()==0){ //choose between rest and normal note
         return Note(l,true);
     }

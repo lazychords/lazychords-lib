@@ -14,12 +14,12 @@
 #include "Pitch.hpp"
 
 
-class Note : private Pitch
+class Note
 {
 private :
+    Pitch p;
     bool silence;
     UFraction duration;
-
     //we declare this class as friend to allow serialization
     friend class boost::serialization::access;
     // When the class Archive corresponds to an output archive, the
@@ -29,12 +29,11 @@ private :
     void serialize(Archive & ar, const unsigned int version);
 
 public :
-    /**@author alcinos
-     * Sanity check of the class
-     * Implemented
-     * @return true iff the class's invariants are met
+    static const unsigned maxStep = 64;
+    /**
+     * @author Julien
      */
-    bool check() const;
+    inline void check() const;
 
     /** @author alcinos
      * Serialize the object to the given output stream
@@ -42,7 +41,7 @@ public :
      * Implemented
      * @param o the output stream
      */
-    void save(std::ostream& o) const;
+    inline void save(std::ostream& o) const;
     /** @author alcinos
      * Deserialization of an object written on the input stream
      * Implemented
