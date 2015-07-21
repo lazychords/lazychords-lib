@@ -31,7 +31,7 @@ public :
     using Iterator = std::vector<PositionedFigure>::iterator;
     using ConstIterator = std::vector<PositionedFigure>::const_iterator;
 
-    bool check() const;
+    void check() const;
     void save(std::ostream& o) const;
     static Melody load(std::istream& i);
     static Melody randomInstance();

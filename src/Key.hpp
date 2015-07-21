@@ -17,7 +17,7 @@ struct Key
     Pitch base; ///< Base note of the key
     Pitch mode; ///< Mode of the key
 
-    bool check() const;
+    void check() const;
     void save(std::ostream& o) const;
     static Key load(std::istream& i);
     unsigned id() const;

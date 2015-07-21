@@ -27,7 +27,7 @@ TEST_CASE("Test of Signature structure","Signature")
             forAll<Signature>([](const Signature& c){
                     /** @todo enable capture when << operator is available*/
                     //CAPTURE(c);
-                    REQUIRE(c.check());
+                    REQUIRE_NOTHROW(c.check());
                 });
         }
         SECTION("Invalid Constructions"){

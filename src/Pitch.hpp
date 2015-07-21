@@ -33,7 +33,7 @@ public:
      * Implemented
      * @return true iff the class's invariants are met
      */
-    bool check() const;
+    void check() const;
 
     /** @author alcinos
      * Serialize the object to the given output stream

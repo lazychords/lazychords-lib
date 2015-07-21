@@ -27,7 +27,7 @@ private :
     static std::vector<std::vector<Pitch> > getAllChordsNotes();
     std::vector<Pitch> getChordNotes() const;
 public :
-    bool check() const;
+    void check() const;
     void save(std::ostream& o) const;
     static Chord load(std::istream& i);
 

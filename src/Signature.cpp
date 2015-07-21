@@ -2,28 +2,25 @@
 #include "Random.hpp"
 Signature::Signature() : number(4), step(4)
 {
-	if (!check())
-		throw std::runtime_error("Invalid signature definition.");
+	check();
 }
 
 Signature::Signature(unsigned n, unsigned s) : number(n), step(s)
 {
-	if (!check())
-		throw std::runtime_error("Invalid signature definition.");
+	check();
 }
 
-bool Signature::check() const
+void Signature::check() const
 {
-    if (number > maxNumber) return false;
-    if (step > maxStep) return false;
+    ASSERT (number <= maxNumber) ;
+    ASSERT (step <= maxStep);
 	unsigned test = step;
 	while (test > 1)
 	{
-		if (test % 2 != 0)
-			return false;
+		ASSERT(test % 2 == 0)
 		test /= 2;
 	}
-	return (number>0 && step>0);
+	ASSERT(number>0 && step>0);
 }
 
 unsigned Signature::id() const

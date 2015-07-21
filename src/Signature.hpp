@@ -26,7 +26,7 @@ public :
      *  Implemented
      *  @return true iff the signature is valid
      */
-    bool check() const;
+    void check() const;
     void save(std::ostream& o) const;
     static Signature load(std::istream& i);
 

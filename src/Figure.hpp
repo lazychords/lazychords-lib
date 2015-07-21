@@ -25,7 +25,7 @@ private :
 public :
     using ConstIterator = std::vector<WeightedNote>::const_iterator;
     using Iterator = std::vector<WeightedNote>::iterator;
-    bool check() const;
+    void check() const;
     void save(std::ostream& o) const;
     static Figure load(std::istream& i);
     static Figure randomInstance();

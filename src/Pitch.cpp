@@ -25,7 +25,7 @@ const Pitch Pitch::B = Pitch(11);
 
 Pitch::Pitch(unsigned halfTones) : halfTone(halfTones)
 {
-    ASSERT(check());
+    check();
 }
 
 
@@ -35,12 +35,9 @@ void Pitch::serialize(Archive & ar, const unsigned int)
     ar & halfTone;
 }
 
-bool Pitch::check() const
+void Pitch::check() const
 {
-    if(halfTone>11){
-        return false;
-    }
-    return true;
+    ASSERT(halfTone<=11);
 }
 
 
@@ -56,17 +53,17 @@ bool Pitch::operator!=(const Pitch& other) const
 
 Pitch& Pitch::operator+=(int added)
 {
-    ASSERT(check());
+    check();
     halfTone = safeMod(safe_cast<int>(halfTone)+added,12);
-    ASSERT(check());
+    check();
     return (*this);
 }
 
 Pitch& Pitch::operator-=(int sub)
 {
-    ASSERT(check());
+    check();
     halfTone = safeMod(safe_cast<int>(halfTone)-sub,12);
-    ASSERT(check());
+    check();
     return (*this);
 }
 
@@ -74,7 +71,7 @@ Pitch Pitch::operator+(int add) const
 {
     Pitch result(*this);
     result += add;
-    ASSERT(result.check());
+    result.check();
     return result;
 }
 
@@ -82,7 +79,7 @@ Pitch Pitch::operator-(int sub) const
 {
     Pitch result(*this);
     result -= sub;
-    ASSERT(result.check());
+    result.check();
     return result;
 }
 
