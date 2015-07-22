@@ -147,7 +147,7 @@ template<typename C>
 struct IsSerializable
 {
 
-    static constexpr bool value = impl::IsSerializableImpl<C>::value;
+    static constexpr bool value = impl::IsSerializableImpl<C, std::is_class<C>::value>::value;
     /**
      *@anchor ConceptSerialize
     **/

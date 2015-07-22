@@ -135,14 +135,20 @@ struct IsEqualityComparableImpl
     static_assert((value && boost::has_not_equal_to<C, C, bool>::value) || (!value && !boost::has_not_equal_to<C, C, bool>::value), "A type should either have both == and != defined or none of them");
 };
 
+template<typename C, bool b>
+struct IsSerializableImpl;
+
 template<typename C>
-struct IsSerializableImpl
+struct IsSerializableImpl<C, true>
 {
-    static const bool value /*= !std::is_same<decltype(operator<<(std::declval<boost::archive::text_oarchive&>(), std::declval<C>())), std::false_type>::value*/;
+    static constexpr bool value = IS_CALLABLE_MEMBER(save, void (C::*) (std::ostream&) const);
 };
 
-
-
+template<typename C>
+struct IsSerializableImpl<C, false>
+{
+    static constexpr bool value = false;
+};
 
 }
 
