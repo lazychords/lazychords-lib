@@ -3,10 +3,6 @@
 #define CONCEPTS_HPP_INCLUDED
 
 
-#define IS_CALLABLE_MEMBER(F, Type) impl::Callable_##F<Type>::value
-#define IS_CALLABLE_MEMBER_LEFTSHIFT(Type) impl::Callable_opLeftShift<Type>::value
-
-
 namespace Concepts
 {
 template<typename C>
@@ -23,6 +19,13 @@ struct IsEqualityComparable;
 
 template<typename C>
 struct IsSerializable;
+
+template<typename C>
+struct IsPrintable;
+
+template<typename C>
+struct IsReadable;
+
 
 
 }
@@ -48,7 +51,6 @@ struct IsSerializable;
  *      d -> b;
  *      e -> d;
  *      e -> c;
- *      g -> d;
  *      g -> f;
  *      f -> d [style=dotted];
  *      b -> a [style=dotted];
@@ -165,7 +167,7 @@ template<typename C>
 struct IsReadable
 {
 
-    static constexpr bool value = true;
+    static constexpr bool value = impl::IsReadableImpl<C, std::is_class<C>::value>::value;
     /**
      *@anchor ConceptReadable
     **/
