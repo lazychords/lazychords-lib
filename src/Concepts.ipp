@@ -59,6 +59,63 @@ struct Callable_##F<void (T::*)(Args...) const>\
 };\
 }
 
+namespace impl
+{
+template<typename ...Args>
+struct Callable_opLeftShift
+{
+    static constexpr int value = -1;
+};
+
+template<typename T, typename Ret, typename ...Args>
+struct Callable_opLeftShift<Ret (T::*)(Args...)>
+{
+
+    template<typename C>
+    static std::true_type test(decltype(std::declval<C>().operator<<(std::declval<Args>()...)));
+
+    template<typename C> static std::false_type test(...);
+
+    static constexpr bool value = decltype(test<T>(std::declval<Ret>()))::value;
+};
+
+template<typename T, typename ...Args>
+struct Callable_opLeftShift<void (T::*)(Args...)>
+{
+
+    template<typename C>
+    static std::true_type test(decltype(std::declval<C>().operator<<(std::declval<Args>()...))*);
+
+    template<typename C> static std::false_type test(...);
+
+    static constexpr bool value = decltype(test<T>(nullptr))::value;
+};
+
+template<typename T, typename Ret, typename ...Args>
+struct Callable_opLeftShift<Ret (T::*)(Args...) const>
+{
+
+    template<typename C>
+    static std::true_type test(decltype(std::declval<C>().operator<<(std::declval<Args>()...)));
+
+    template<typename C> static std::false_type test(...);
+
+    static constexpr bool value = decltype(test<const T>(std::declval<Ret>()))::value;
+};
+
+template<typename T, typename ...Args>
+struct Callable_opLeftShift<void (T::*)(Args...) const>
+{
+
+    template<typename C>
+    static std::true_type test(decltype(std::declval<C>().F(std::declval<Args>()...))*);
+
+    template<typename C> static std::false_type test(...);
+
+    static constexpr bool value = decltype(test<const T>(nullptr))::value;
+};
+}
+
 #include "Utilities.hpp"
 
 GCC_IGNORE_WARNINGS
@@ -105,7 +162,8 @@ template<typename C>
 struct HasIdImpl<C, true>
 {
     static constexpr bool value = IS_CALLABLE_MEMBER(id, int (C::*) ()) && IS_CALLABLE_MEMBER(maxId, int (C::*) ()) && IS_CALLABLE_MEMBER(fromId, C (C::*) (int));
-    static_assert((value && Concepts::IsCheckable<C>::value && Concepts::HasRandomInstance<C>::value) || (!IS_CALLABLE_MEMBER(id, int (C::*) ()) && !IS_CALLABLE_MEMBER(maxId, int (C::*) ()) && !IS_CALLABLE_MEMBER(fromId, C (C::*) (int))), "A class must either have all three functions id, maxId and fromId, or none. If it has id, maxId, and fromId, it must also have check and randomInstance.");
+    static_assert(value || (!IS_CALLABLE_MEMBER(id, int (C::*) ()) && !IS_CALLABLE_MEMBER(maxId, int (C::*) ()) && !IS_CALLABLE_MEMBER(fromId, C (C::*) (int))), "A class must either have all three functions id, maxId and fromId, or none.");
+    static_assert(!value || (Concepts::IsSerializable<C>::value && Concepts::HasRandomInstance<C>::value), "Ideability implies RandomInstanciability and Serialization");
 };
 
 template<typename C>
@@ -118,7 +176,7 @@ template<typename C>
 struct HasRandomInstanceImpl<C, true>
 {
     static constexpr bool value = IS_CALLABLE_MEMBER(randomInstance, C (C::*) ());
-    static_assert((value && Concepts::IsCheckable<C>::value) || ! value, "Having a randomInstance function implies having a check function.");
+    static_assert(!value || (Concepts::IsCheckable<C>::value && Concepts::IsEqualityComparable<C>::value), "RandomInstanciability implies checkability and equality comparabality");
 
 };
 
@@ -142,12 +200,35 @@ template<typename C>
 struct IsSerializableImpl<C, true>
 {
     static constexpr bool value = IS_CALLABLE_MEMBER(save, void (C::*) (std::ostream&) const);
+    static_assert((value && IS_CALLABLE_MEMBER(load, C (C::*) (std::istream&))) || (!value && !IS_CALLABLE_MEMBER(load, C (C::*) (std::istream&))), "The class must either have both load and save function, or none");
+    static_assert(!value || (Concepts::IsCheckable<C>::value), "Serialization implies checkability");
 };
 
 template<typename C>
 struct IsSerializableImpl<C, false>
 {
     static constexpr bool value = false;
+};
+
+template<typename C>
+constexpr bool f()
+{
+    return boost::has_left_shift<std::ostream&,const C&, std::ostream&>::value || IS_CALLABLE_MEMBER_LEFTSHIFT(std::ostream& (C::*) (std::ostream&));
+}
+
+template<typename C, bool b>
+struct IsPrintableImpl;
+
+template<typename C>
+struct IsPrintableImpl<C, true>
+{
+    static constexpr bool value = boost::has_left_shift<std::ostream&,const C&, std::ostream&>::value || IS_CALLABLE_MEMBER_LEFTSHIFT(std::ostream& (C::*) (std::ostream&));
+};
+
+template<typename C>
+struct IsPrintableImpl<C, false>
+{
+    static constexpr bool value = boost::has_left_shift<std::ostream&,const C&, std::ostream&>::value;
 };
 
 }

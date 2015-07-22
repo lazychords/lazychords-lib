@@ -4,7 +4,7 @@
 
 
 #define IS_CALLABLE_MEMBER(F, Type) impl::Callable_##F<Type>::value
-
+#define IS_CALLABLE_MEMBER_LEFTSHIFT(Type) impl::Callable_opLeftShift<Type>::value
 
 
 namespace Concepts
@@ -17,6 +17,13 @@ struct HasId;
 
 template<typename C>
 struct HasRandomInstance;
+
+template<typename C>
+struct IsEqualityComparable;
+
+template<typename C>
+struct IsSerializable;
+
 
 }
 
@@ -136,7 +143,7 @@ template<typename C>
 struct IsPrintable
 {
 
-    static constexpr bool value = true;
+    static constexpr bool value = impl::IsPrintableImpl<C, std::is_class<C>::value>::value;
     /**
      *@anchor ConceptPrint
     **/
