@@ -33,7 +33,7 @@ public :
     /**
      * @author Julien
      */
-    inline void check() const;
+    void check() const;
 
     /** @author alcinos
      * Serialize the object to the given output stream
@@ -41,7 +41,7 @@ public :
      * Implemented
      * @param o the output stream
      */
-    inline void save(std::ostream& o) const;
+    void save(std::ostream& o) const;
     /** @author alcinos
      * Deserialization of an object written on the input stream
      * Implemented

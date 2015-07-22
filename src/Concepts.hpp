@@ -26,8 +26,6 @@ struct IsPrintable;
 template<typename C>
 struct IsReadable;
 
-
-
 }
 
 #include "Concepts.ipp"

@@ -54,4 +54,5 @@ void forAll(const Test& test, unsigned n = 1000);
 
 #define REQUIRE_PRECONDITION_FAIL(X) {Log::pushState();Log::setErrorsFatal(true); REQUIRE_THROWS_AS(X, AssertExcpt);Log::popState();}
 #define CHECK_PRECONDITION_FAIL(X) {Log::pushState();Log::setErrorsFatal(true); CHECK_THROWS_AS(X, AssertExcpt);Log::popState();}
+_Pragma("GCC diagnostic ignored \"-Wunused-variable\"")
 #include "genericTests.cxx"
