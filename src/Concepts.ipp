@@ -59,16 +59,21 @@ struct Callable_##F<void (T::*)(Args...) const>\
 };\
 }
 
-#include "Concepts.ipp"
-/**
- *@file
- *@brief toto
-**/
+#include "Utilities.hpp"
+
+GCC_IGNORE_WARNINGS
+#include <boost/type_traits/has_operator.hpp>
+GCC_PUT_BACK_WARNINGS
+
+
+
 ENABLE_CALLABLE_TEST(id)
 ENABLE_CALLABLE_TEST(maxId)
 ENABLE_CALLABLE_TEST(fromId)
 ENABLE_CALLABLE_TEST(randomInstance)
 ENABLE_CALLABLE_TEST(check)
+ENABLE_CALLABLE_TEST(save)
+ENABLE_CALLABLE_TEST(load)
 
 
 namespace impl {
@@ -80,7 +85,7 @@ struct HasCheckImpl;
 template<typename C>
 struct HasCheckImpl<C, true>
 {
-    static constexpr bool value = IS_CALLABLE_MEMBER(check, void (C::*) ());
+    static constexpr bool value = IS_CALLABLE_MEMBER(check, void (C::*) () const);
 };
 
 template<typename C>
@@ -122,6 +127,23 @@ struct HasRandomInstanceImpl<C, false>
 {
     static constexpr bool value = false;
 };
+
+template<typename C>
+struct IsEqualityComparableImpl
+{
+    static constexpr bool value = boost::has_equal_to<C, C, bool>::value;
+    static_assert((value && boost::has_not_equal_to<C, C, bool>::value) || (!value && !boost::has_not_equal_to<C, C, bool>::value), "A type should either have both == and != defined or none of them");
+};
+
+template<typename C>
+struct IsSerializableImpl
+{
+    static const bool value /*= !std::is_same<decltype(operator<<(std::declval<boost::archive::text_oarchive&>(), std::declval<C>())), std::false_type>::value*/;
+};
+
+
+
+
 }
 
 

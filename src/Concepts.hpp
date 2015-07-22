@@ -17,6 +17,7 @@ struct HasId;
 
 template<typename C>
 struct HasRandomInstance;
+
 }
 
 #include "Concepts.ipp"
@@ -34,7 +35,7 @@ struct HasRandomInstance;
  *      d [ label="IsSerializable" URL="@ref ConceptSerialize"];
  *      e [ label="HasId" URL="@ref ConceptId"];
  *      f [ label="IsPrintable" URL="@ref ConceptPrint"];
- *      g [ label="IsStringConstructible" URL="@ref ConceptStringConstructible"];
+ *      g [ label="IsReadable" URL="@ref ConceptReadable"];
  *      c -> a;
  *      c -> b;
  *      d -> b;
@@ -124,7 +125,7 @@ template<typename C>
 struct IsEqualityComparable
 {
 
-    static constexpr bool value = true;
+    static constexpr bool value = impl::IsEqualityComparableImpl<C>::value;
     /**
      *@anchor ConceptEquality
     **/
@@ -146,7 +147,7 @@ template<typename C>
 struct IsSerializable
 {
 
-    static constexpr bool value = true;
+    static constexpr bool value = impl::IsSerializableImpl<C>::value;
     /**
      *@anchor ConceptSerialize
     **/
@@ -154,12 +155,12 @@ struct IsSerializable
 };
 
 template<typename C>
-struct IsStringConstructible
+struct IsReadable
 {
 
     static constexpr bool value = true;
     /**
-     *@anchor ConceptStringConstructible
+     *@anchor ConceptReadable
     **/
     static void test(unsigned n = 1000);
 };
