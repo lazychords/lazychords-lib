@@ -35,16 +35,18 @@ struct HasRandomInstance;
  *      e [ label="HasId" URL="@ref ConceptId"];
  *      f [ label="IsPrintable" URL="@ref ConceptPrint"];
  *      g [ label="IsStringConstructible" URL="@ref ConceptStringConstructible"];
- *      b -> a;
+ *      c -> a;
  *      c -> b;
  *      d -> b;
  *      e -> d;
  *      e -> c;
- *      f -> d;
+ *      g -> d;
  *      g -> f;
+ *      f -> d [style=dotted];
+ *      b -> a [style=dotted];
  *  }
  *  @enddot
- *@note This is only for the main classes done is our project. Use type_traits to test for other things
+ *@note Dotted lines is for classes that are from our project only.
 **/
 namespace Concepts
 {
