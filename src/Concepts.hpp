@@ -93,7 +93,7 @@ struct HasId
      *@details Respecting the Id concept means :
      *- Having all the functions needed for all that follows (fails means ASSERT failed)
      *- From x = 0 to maxId -1 we have :
-     *  -# fromId(x) never throws (or fails)
+     *  -# fromId(x) never throws (or fails) if check(x)
      *  -# We have check(fromId(x))
      *  -# id(fromId(x)) never throws (or fails) and is equal to x
      *- For each randomInstance :
