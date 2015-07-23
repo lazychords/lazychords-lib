@@ -32,7 +32,7 @@ public :
     static Chord load(std::istream& i);
 
     /**@author Valentin
-     *@brief Follows the @ref ConceptId "Id" concept
+     *@brief Follows the @ref ConceptId "Id concept"
      *@todo Test
     **/
     unsigned id() const;

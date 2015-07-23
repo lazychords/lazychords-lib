@@ -8,16 +8,11 @@
  If many functions that can be grouped together are created, they will be merged to a separate file.
  *@author Julien
  *@todo Add GPL license to the file
- *@defgroup def Defines
- *@remark defgroup sucks a bit...
 **/
 
 #include <string>
 
 /**
- *@addtogroup def
- *@{
- *@def GCC_IGNORE_WARNINGS
  *@brief Disables g++ warnings, use it before including external libraries.
  Do not forget to use GCC_PUT_BACK_WARNINGS after including them.
  *@author Julien
@@ -34,15 +29,11 @@ _Pragma("GCC diagnostic ignored \"-Wtype-limits\"") \
 _Pragma("GCC diagnostic ignored \"-Wlogical-op\"")
 
 /**
- *@def GCC_PUT_BACK_WARNINGS
  *@brief Reactivates g++ warnings after having used GCC_IGNORE_WARNINGS
  *@author Julien
 **/
 #define GCC_PUT_BACK_WARNINGS _Pragma("GCC diagnostic pop")
 
-/**
- *@}
- **/
 GCC_IGNORE_WARNINGS
 #include <boost/rational.hpp>
 #include <boost/serialization/access.hpp>
@@ -55,7 +46,6 @@ GCC_PUT_BACK_WARNINGS
 #include "Log.hpp"
 
 /**
- *@typedef UFraction boost::rational<unsigned>
  *@brief We will be using the boost Fraction class for Fractions.
  *@note We will should always be using unsigned Fraction, thus the use of unsigned instead of int. But beware of subtractions !
  *@author Julien
@@ -63,7 +53,6 @@ GCC_PUT_BACK_WARNINGS
 using UFraction = boost::rational<unsigned>;
 
 /**
- *@fn std::string getFile(const std::string& str)
  *@brief Puts the content of a file into a string
  *@param str is the file name to read
  *@return the string representing the content of the file
@@ -74,7 +63,6 @@ using UFraction = boost::rational<unsigned>;
 std::string getFile(const std::string& str);
 
 /**
- *@fn template<typename T> std::string toString(const T& a)
  *@brief Tries to convert a type into a string using operator<<
  *@param a the object to convert into a string
  *@pre T must have ostream& operator<<(ostream& const T& defined)
@@ -90,7 +78,6 @@ std::string toString(const T& a);
 namespace boost { namespace serialization {
 
 /**
- *@fn template <typename Archive, typename T> void save(Archive& ar, ::boost::rational<T> const& r, unsigned version)
  *@brief Serialization (saving part) for boost::rational<T>
  *@param ar is the archive in which we are saving the fraction
  *@param r is the fraction
@@ -103,7 +90,6 @@ template <typename Archive, typename T>
 void save(Archive& ar, ::boost::rational<T> const& r, unsigned version);
 
 /**
- *@fn template <typename Archive, typename T> void load(Archive& ar, ::boost::rational<T>& r, unsigned version)
  *@brief Serialization (loading part) for boost::rational<T>
  *@param ar is the archive from which we are loading the fraction
  *@param r is the fraction
@@ -126,7 +112,6 @@ void load(Archive& ar, ::boost::rational<T>& r, unsigned version);
 BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
 
 /**
- *@fn unsigned powUnsigned(unsigned base, unsigned power)
  *@brief pow function in for unsigned integers.
  *@note the function does not use quick exponentiation as p should be under 64 and in practice under 8.
  *@param power is the power
@@ -139,7 +124,6 @@ BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
 unsigned powUnsigned(unsigned base, unsigned power);
 
 /**
- *@fn bool isPowerUnsigned(unsigned base, unsigned x)
  *@brief returns if there exists p such that x = pow(base, p)
  *@note the function uses naive logarithm algorithm
  *@param x is the number to look
@@ -152,7 +136,6 @@ unsigned powUnsigned(unsigned base, unsigned power);
 bool isPowerUnsigned(unsigned base, unsigned x);
 
 /**
- *@fn unsigned logUnsigned(unsigned base, unsigned x)
  *@brief log function for unsigned integers.
  *@note the function uses naive logarithm algorithm
  *@param x is the number from which to take the log
