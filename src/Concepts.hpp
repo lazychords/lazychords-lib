@@ -89,7 +89,7 @@ namespace Concepts
  *@anchor CheckDescription
  *@fn void C::check() const
  *@brief Checks whether the classes invariants are met
- *@pre for all x of type C, check(x)
+ *@property for all x of type C, check(x)
  *@author Julien
 **/
 
