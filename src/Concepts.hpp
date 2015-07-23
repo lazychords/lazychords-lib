@@ -30,8 +30,31 @@ struct IsReadable;
 
 #include "Concepts.ipp"
 
+namespace doc_impl
+{
+    /**
+     *@brief This class is just meant for doxygen documentation, do not use it.
+     *@author Julien
+     *@todo Try to remove this class
+    **/
+    struct C
+    {
+        void check() const;
+        bool operator==(const C& other) const;
+        bool operator!=(const C& other) const;
+        static void randomInstance();
+        void save(std::ostream& o) const;
+        static C load(std::istream& i);
+        static unsigned maxId();
+        unsigned id() const;
+        static C fromId(unsigned id);
+        std::ostream& operator<<(std::ostream& o) const;
+        std::istream& operator>>(std::istream& i);
+        static C fromStream(std::istream& i);
+    };
+}
+
 /**
- *@namespace Concepts
  *@brief This namespace is used for Concepts, that it to say for checking if types follow the desired behavior.
  *@details Here is the Concept implication graph
  *  @dot
@@ -56,31 +79,9 @@ struct IsReadable;
  *  @enddot
  *@note Dotted lines is for classes that are from our project only.
  *@todo Find a way to put the Concept name in bold in graph and add links in graph to functions
+ *
+ *@author Julien
 **/
-
-namespace doc_impl
-{
-    /**
-     *@brief This class is just meant for doxygen documentation, do not use it.
-     *@author Julien
-     *@todo Try to remove this class
-    **/
-    struct C
-    {
-        void check() const;
-        bool operator==(const C& other) const;
-        bool operator!=(const C& other) const;
-        static void randomInstance();
-        void save(std::ostream& o) const;
-        static C load(std::istream& i);
-        static unsigned maxId();
-        unsigned id() const;
-        static C fromId(unsigned id);
-        std::ostream& operator<<(std::ostream& o) const;
-        std::istream& operator>>(std::istream& i);
-        static C fromStream(std::istream& i);
-    };
-}
 namespace Concepts
 {
 
@@ -117,7 +118,6 @@ struct IsCheckable
      *@brief If IsCheckable<C>::value = true, checks if C::check respect the dynamic part of the Check concept. Otherwise does not do anything.
      *@param n is the number of instances on which we try the requirements
      *@note This function should only be used for testing.
-     *@author Julien
     **/
     static void test(unsigned n = 1000);
 };
@@ -168,7 +168,6 @@ struct IsEqualityComparable
      *@brief If IsEqualityComparable<C>::value = true, checks if C==C and C!=C respect the dynamic part of the EqualityComparable concept. Otherwise does not do anything.
      *@param n is the number of instances on which we try the requirements
      *@note This function should only be used for testing and will thus be defined in genericTests.hxx
-     *@author Julien
     **/
     static void test(unsigned n = 1000);
 };
@@ -207,7 +206,6 @@ struct HasRandomInstance
      *@brief If HasRandomInstance<C>::value = true, checks if C::randomInstance respect the dynamic part of the RandomInstance concept. Otherwise does not do anything.
      *@param n is the number of instances on which we try the requirements
      *@note This function should only be used for testing.
-     *@author Julien
     **/
     static void test(unsigned n = 1000);
 };
@@ -265,7 +263,6 @@ struct IsSerializable
      *@brief If IsSerializable<C>::value = true, checks if load and save respect the dynamic part of the Serialize concept. Otherwise does not do anything.
      *@param n is the number of instances on which we try the requirements
      *@note This function should only be used for testing and will thus be defined in genericTests.hxx
-     *@author Julien
     **/
     static void test(unsigned n = 1000);
 };
@@ -329,7 +326,6 @@ struct HasId
      *@brief If HasId<C>::value = true, checks if C::id, C::maxId, C::fromId respect the dynamic part of the Id concept. Otherwise does not do anything.
      *@param n is the number of instances on which we try the requirements
      *@note This function should only be used for testing.
-     *@author Julien
     **/
     static void test(unsigned n = 1000);
 };
@@ -372,7 +368,6 @@ struct IsPrintable
      *@brief If IsPrintable<C>::value = true, checks if ostream<<C respect the dynamic part of the Print concept. Otherwise does not do anything.
      *@param n is the number of instances on which we try the requirements
      *@note This function should only be used for testing and will thus be defined in genericTests.hxx
-     *@author Julien
     **/
     static void test(unsigned n = 1000);
 };
@@ -430,7 +425,6 @@ struct IsReadable
      *@brief If IsReadable<C>::value = true, checks if operator<< respect the dynamic part of the Print concept. Otherwise does not do anything.
      *@param n is the number of instances on which we try the requirements
      *@note This function should only be used for testing and will thus be defined in genericTests.hxx
-     *@author Julien
     **/
     static void test(unsigned n = 1000);
 };
