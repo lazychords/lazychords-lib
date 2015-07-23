@@ -1,36 +1,39 @@
+#include <ostream>
 #include <iostream>
-#include <fstream>
-#include "src/Music.hpp"
-#include "src/Concepts.hpp"
-#include "src/Random.hpp"
-#include "src/Note.hpp"
+#include <type_traits>
 
-//std::ostream& operator<<(std::ostream&, const Pitch&);
-
-
-
-class mTest
+#define BUG
+class Test
 {
 
 };
+
+struct delay
+{
+    template<typename T>
+    delay(const T&);
+};
+
+std::false_type operator<<(std::ostream&, delay);
+
+template<typename T>
+struct Has
+{
+    static constexpr bool value = !std::is_same<decltype(std::declval<std::ostream&>() << std::declval<const T&>()), std::false_type>::value;
+};
+
+#ifdef BUG
+bool deb = Has<Test>::value;
+#endif
+
+std::ostream& operator<<(std::ostream&, const Test&);
+
+bool end = Has<Test>::value;
+
 int main()
 {
-    std::cout<<Concepts::IsSerializable<Pitch>::value<<" "<<Concepts::IsSerializable<mTest>::value<<"\n";
-    std::cout<<Concepts::IsPrintable<int>::value<<"\n";
-    std::cout<<Concepts::IsPrintable<std::vector<int> >::value<<"\n";
-    std::cout<<Concepts::IsPrintable<mTest>::value<<"\n";
-    std::cout<<Concepts::IsPrintable<Pitch>::value<<"\n";
-
-    std::cout<<Concepts::IsReadable<int>::value<<"\n";
-    std::cout<<Concepts::IsReadable<std::vector<int> >::value<<"\n";
-    std::cout<<Concepts::IsReadable<mTest>::value<<"\n";
-    std::cout<<Concepts::IsReadable<Pitch>::value<<"\n";
-    std::cout<<"hello world\n";
-    std::cout<<Random::uniform_int<uint64_t>()<<std::endl;
-    std::cout<<Random::uniform_int<uint64_t>()<<std::endl;
-    std::cout<<Random::uniform_int<uint64_t>()<<std::endl;
-    /*std::cout<<Random::uniform_real<double>()<<std::endl;
-    int truc = Random::rand<int>();
-    std::cout<<truc<<std::endl;
-    Note bidule = Random::rand<Note>();*/
+    #ifdef BUG
+    std::cout<<"deb = "<<deb<<"\n";
+    #endif
+    std::cout<<"end = "<<end<<"\n";
 }
