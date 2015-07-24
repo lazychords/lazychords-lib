@@ -82,7 +82,6 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="ConceptLast.hpp" />
 		<Unit filename="main.cpp">
 			<Option target="Debug" />
 			<Option target="Release" />
@@ -221,10 +220,6 @@
 			<Option target="Debug" />
 			<Option target="Release" />
 			<Option target="Doc" />
-		</Unit>
-		<Unit filename="tests/catch.hpp">
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="tests/genericTests.cxx">
 			<Option target="Debug" />

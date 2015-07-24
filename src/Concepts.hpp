@@ -150,8 +150,8 @@ struct IsCheckable
  *- C does not have operator== nor operator!= defined
  *- C follows the EqualityComparable Concept.
  *@details Respecting the EqualityComparable concept means having :
- *1. @ref EqualOperatorDescription "bool C::operator==(const C& other) const"
- *2. @ref DifferentOperatorDescription "bool C::operator!=(const C& other) const"
+ *1. @ref EqualOperatorDescription "bool C::operator==(const C& other) const" as a member function or free function
+ *2. @ref DifferentOperatorDescription "bool C::operator!=(const C& other) const" as a member function or free function
  *
  *@author Julien
 **/
@@ -160,6 +160,7 @@ struct IsEqualityComparable
 {
     /**
      *@brief value is true if C has operator== and operator != defined
+     *@warning For free functions, the value for a given class is calculated only the first time, so if == and != are not defined at this moment...
      *@author Julien
      *@todo hide the value of value in the documentation
     **/
@@ -360,6 +361,7 @@ struct IsPrintable
 {
     /**
      *@brief value is true if we can call std::ostream& << C
+     *@warning For free functions, the value for a given class is calculated only the first time, so if << is not defined at this moment...
      *@author Julien
      *@todo hide the value of value in the documentation
     **/
@@ -417,6 +419,7 @@ struct IsReadable
 {
     /**
      *@brief value is true if std::istream& >> C is callable
+     *@warning For free functions, the value for a given class is calculated only the first time, so if >> is not defined at this moment...
      *@author Julien
      *@todo hide the value of value in the documentation
     **/

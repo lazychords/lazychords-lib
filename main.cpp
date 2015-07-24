@@ -1,12 +1,16 @@
 #include <ostream>
 #include <iostream>
 #include <type_traits>
+#include "Concepts.hpp"
 
 #define BUG
 class Test
 {
 
 };
+
+bool operator==(const Test&, const Test&);
+bool operator!=(const Test&, const Test&);
 
 struct delay
 {
@@ -32,8 +36,5 @@ bool end = Has<Test>::value;
 
 int main()
 {
-    #ifdef BUG
-    std::cout<<"deb = "<<deb<<"\n";
-    #endif
-    std::cout<<"end = "<<end<<"\n";
+    std::cout<<Concepts::IsEqualityComparable<Test>::value<<"\n";
 }
