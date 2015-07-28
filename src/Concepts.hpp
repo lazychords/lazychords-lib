@@ -127,6 +127,8 @@ struct IsCheckable
  *@fn void bool C::operator==(const C& other) const
  *@brief indicates whether to objects are semantically equal
  *@param other is the object to compare this with
+ *@property for all c, c==c
+ *@property for all c, c', c==c' <=> c'==c
  *@property if c==c' and c' == c'' then c==c''
  *@property for all c, c == c' xor c @ref DifferentOperatorDescription "!=" c'
  *@return if the two objects are equal
