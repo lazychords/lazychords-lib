@@ -97,6 +97,7 @@ public :
      * @return true iff both Notes are equal
      */
     bool operator==(const Note&) const;
+
     /** @author
      * Usual difference testing operator
      * Implemented
@@ -104,40 +105,24 @@ public :
      */
     bool operator!=(const Note&) const;
 
-    /** @author alcinos
-     * Add some semitones to the current note.
-     * Note that the addition occurs modulo the number of semitones in the scale (12)
-     * Implemented
-     * @param halfTones number of semitones to add
-     * @return a reference to the resulting object
-     */
-    Note& operator+=(int halfTones);
+    /**
+     *@brief Allow access to the Note's pitch
+     *@return The note's pitch
+     *@pre The note must not be a silence
+     *@author Julien
+     *@todo tests
+    **/
+    Pitch& pitch();
 
-    /** @author alcinos
-     * Subtract some semitones to the current note.
-     * Note that the subtraction occurs modulo the number of semitones in the scale (12)
-     * Implemented
-     * @param halfTones number of semitones to subtract
-     * @return a reference to the resulting object
-     */
-    Note& operator-=(int halfTones);
+     /**
+     *@brief Allow access to the Note's pitch
+     *@return The note's pitch
+     *@pre The note must not be a silence
+     *@author Julien
+     *@todo tests
+    **/
+    const Pitch& pitch() const;
 
-    /** @author alcinos
-     * Binary addition operator
-     * Note that the addition occurs modulo the number of semitones in the scale (12)
-     * Implemented
-     * @param halfTones number of semitones to add
-     * @return the resulting object
-     */
-    Note operator+(int halfTones) const;
-    /** @author alcinos
-     * Binary subtractio operator
-     * Note that the subtraction occurs modulo the number of semitones in the scale (12)
-     * Implemented
-     * @param halfTones number of semitones to subtract
-     * @return the resulting object
-     */
-    Note operator-(int halfTones) const;
 
     /** @author alcinos
      * getter for the rest parameter

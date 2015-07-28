@@ -22,8 +22,8 @@ Note::Note(unsigned halfTones, const UFraction& d) :
     check();
 }
 
-Note::Note(const Pitch& pitch, const UFraction& d) :
-    p(pitch),
+Note::Note(const Pitch& ptch, const UFraction& d) :
+    p(ptch),
     silence(false),
     duration(d)
 {
@@ -52,39 +52,16 @@ bool Note::operator!=(const Note& other) const
     return !(other == (*this));
 }
 
-Note& Note::operator+=(int halfTones)
+Pitch& Note::pitch()
 {
-    check();
-    p+=halfTones;
-    check();
-    return (*this);
+    ASSERT(!silence);
+    return p;
 }
 
-Note Note::operator+(int halfTones) const
+const Pitch& Note::pitch() const
 {
-    check();
-    Note result(*this);
-    result+=halfTones;
-    result.check();
-    return result;
-}
-
-
-Note& Note::operator-=(int halfTones)
-{
-    check();
-    p-=halfTones;
-    check();
-    return (*this);
-}
-
-Note Note::operator-(int halfTones) const
-{
-    check();
-    Note result(*this);
-    result-=halfTones;
-    result.check();
-    return result;
+    ASSERT(!silence);
+    return p;
 }
 
 bool Note::isRest() const
