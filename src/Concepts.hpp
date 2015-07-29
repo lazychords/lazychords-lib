@@ -89,7 +89,9 @@ namespace Concepts
  *@anchor CheckDescription
  *@fn void C::check() const
  *@brief Checks whether the classes invariants are met
+ *
  *@property for all x of type C, check(x)
+ *
  *@author Julien
 **/
 
@@ -132,6 +134,7 @@ struct IsCheckable
  *@property if c==c' and c' == c'' then c==c''
  *@property for all c, c == c' xor c @ref DifferentOperatorDescription "!=" c'
  *@return if the two objects are equal
+ *
  *@author Julien
 **/
 
@@ -142,6 +145,7 @@ struct IsCheckable
  *@param other is the object to compare this with
  *@property for all c, c @ref EqualOperatorDescription "==" c' xor c != c'
  *@return if the two objects are not equal
+ *
  *@author Julien
 **/
 
@@ -181,6 +185,7 @@ struct IsEqualityComparable
  *@brief Creates a uniform random object of type C
  *@property for all x, y of type C, Pr(randomInstance() @ref EqualOperatorDescription "==" x) = Pr(randomInstance() @ref EqualOperatorDescription "==" y)
  *@property each call to randomInstance should seem independent
+ *
  *@author Julien
 **/
 
@@ -223,6 +228,7 @@ struct HasRandomInstance
  *@post Nothing is deleted/changed in o, only a string is appended
  *@post Either o is unchanged and an exception was thrown or o.str() is appended with a string str uniquely representing : str(c) = str(c') <=> c==c'
  *@property @ref LoadDescription "load" and save are inverse functions.
+ *
  *@author Julien
 **/
 
@@ -237,6 +243,7 @@ struct HasRandomInstance
  *@post Either i is unchanged and an exception was thrown or i.str() is consumed with a string str uniquely representing : str(c) = str(c') <=> c @ref EqualOperatorDescription "==" c'
  *@property load and @ref SaveDescription "save" are inverse functions.
  *@return The object created from the stream
+ *
  *@author Julien
 **/
 
@@ -276,6 +283,7 @@ struct IsSerializable
  *@fn static unsigned C::maxId()
  *@brief Returns the number of different elements that the type C can represent
  *@return Returns the number of different elements that the type C can represent
+ *
  *@author Julien
 **/
 
@@ -287,6 +295,7 @@ struct IsSerializable
  *@post id is between [0, @ref MaxIdDescription "maxId"[
  *@post id uniquely identifies the object : id(c) = id(c') <=> c @ref EqualOperatorDescription "==" c'
  *@property @ref FromIdDescription "fromId" and Id are inverse functions
+ *
  *@author Julien
 **/
 
@@ -298,6 +307,7 @@ struct IsSerializable
  *@pre id must be between [0, @ref MaxIdDescription "maxId" [
  *@return The object created
  *@property fromId and @ref IdDescription "Id" are inverse functions
+ *
  *@author Julien
 **/
 
@@ -344,6 +354,7 @@ struct HasId
  *@post If it succeeds, it appends the stream with a human readable string uniquely identifying the object. Otherwise, o is unchanged.
  *@note This function can also be non member
  *@property The result of this function should be loadable by @ref RightShiftDescription "operator>>" when the latter exists
+ *
  *@author Julien
 **/
 
@@ -387,6 +398,7 @@ struct IsPrintable
  *@post If it succeeds, it consumes the stream the end of the stream to construct the object, otherwise, i is unchanged.
  *@note This function can also be non member
  *@property  io @ref LeftShiftDescription "<<" c; io >> c' should always succeed when io is valid and give c @ref EqualOperatorDescription "==" c'
+ *
  *@author Julien
 **/
 
@@ -401,6 +413,7 @@ struct IsPrintable
  *  throw std::runtime_error("Unable to load object from stream")
  *@endcode
  *@todo finish documentation
+ *
  *@author Julien
 **/
 
