@@ -118,6 +118,7 @@ BOOST_SERIALIZATION_SPLIT_FREE(UFraction)
  *@param base is the bas
  *@pre base^power must fit into an unsigned
  *@return base^power
+ *@nothrow
  *@author Julien
  *@todo tests
 **/
@@ -130,6 +131,7 @@ unsigned powUnsigned(unsigned base, unsigned power);
  *@param base is the base.
  *@pre base must be strictly bigger than 1
  *@return if there exists p such that x = pow(base, p)
+ *@nothrow
  *@author Julien
  *@todo tests
 **/
@@ -144,6 +146,7 @@ bool isPowerUnsigned(unsigned base, unsigned x);
  *@pre there must exist an integer p such that x = pow(base, p)
  *@note You should use another function if you want a truncated output
  *@return p such that x = pow(base, p)
+ *@nothrow
  *@author Julien
  *@todo tests
 **/

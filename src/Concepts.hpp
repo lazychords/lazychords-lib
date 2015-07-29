@@ -180,6 +180,7 @@ struct IsEqualityComparable
  *@fn void static C C::randomInstance()
  *@brief Creates a uniform random object of type C
  *@property for all x, y of type C, Pr(randomInstance() @ref EqualOperatorDescription "==" x) = Pr(randomInstance() @ref EqualOperatorDescription "==" y)
+ *@property each call to randomInstance should seem independent
  *@author Julien
 **/
 
