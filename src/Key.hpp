@@ -24,8 +24,6 @@ struct Key
     static Key fromId(unsigned hashValue);
     static Key randomInstance();
     static unsigned maxId();
-    std::ostream& operator<<(std::ostream& o) const;
-    std::ostream& operator>>(std::istream& i);
     static Key fromStream(std::istream& i);
 
     explicit Key(const Pitch& base = Pitch::C, const Pitch& mode = Pitch::C);
@@ -40,6 +38,8 @@ struct Key
     const std::vector<Pitch>& getNotes() const;
 };
 
+std::ostream& operator<<(std::ostream& o, const Key& k);
+std::istream& operator>>(std::istream& i, Key& k);
 
 
 

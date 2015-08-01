@@ -299,11 +299,6 @@ struct IsSerializableImpl<C, false>
     static constexpr bool value = false;
 };
 
-template<typename C>
-constexpr bool f()
-{
-    return boost::has_left_shift<std::ostream&,const C&, std::ostream&>::value || IS_CALLABLE_MEMBER_LEFTSHIFT(std::ostream& (C::*) (std::ostream&));
-}
 
 template<typename C, bool b>
 struct IsPrintableImpl;
@@ -311,14 +306,14 @@ struct IsPrintableImpl;
 template<typename C>
 struct IsPrintableImpl<C, true>
 {
-    static constexpr bool value = boost::has_left_shift<std::ostream&,const C&, std::ostream&>::value || IS_CALLABLE_MEMBER_LEFTSHIFT(std::ostream& (C::*) (std::ostream&)const);
+    static constexpr bool value = boost::has_left_shift<std::ostream&, std::ostream&, const C&>::value;
     static_assert(!value || !Concepts::IsCheckable<C>::value || Concepts::IsSerializable<C>::value, "Printable implies Serializable when it is one of our classes (=check defined)");
 };
 
 template<typename C>
 struct IsPrintableImpl<C, false>
 {
-    static constexpr bool value = boost::has_left_shift<std::ostream&,const C&, std::ostream&>::value;
+    static constexpr bool value = boost::has_left_shift<std::ostream&, std::ostream&, const C&>::value;
 };
 
 template<typename C, bool b>
@@ -327,7 +322,7 @@ struct IsReadableImpl;
 template<typename C>
 struct IsReadableImpl<C, true>
 {
-    static constexpr bool value = boost::has_right_shift<std::istream&, C&, std::istream&>::value || IS_CALLABLE_MEMBER_RIGHTSHIFT(std::istream& (C::*) (std::istream&));
+    static constexpr bool value = boost::has_right_shift<std::istream&, std::istream&, C&>::value;
     static_assert(!value || Concepts::IsPrintable<C>::value, "Readable implies Printable");
     static_assert(!value || !Concepts::IsCheckable<C>::value || IS_CALLABLE_MEMBER_STATIC(fromStream, C (C::*)(std::istream&)), "If a class of our project is readable, it has the function fromStream");
 
@@ -336,7 +331,7 @@ struct IsReadableImpl<C, true>
 template<typename C>
 struct IsReadableImpl<C, false>
 {
-    static constexpr bool value = boost::has_right_shift<std::istream&, C&, std::istream&>::value;
+    static constexpr bool value = boost::has_right_shift<std::istream&, std::istream&, C&>::value;
     static_assert(!value || Concepts::IsPrintable<C>::value, "Readable implies Printable");
 };
 

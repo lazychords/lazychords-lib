@@ -57,8 +57,6 @@ public :
      * @return A random instance
      */
     static Note randomInstance();
-    std::ostream& operator<<(std::ostream& o) const;
-    std::istream& operator>>(std::istream& i);
     static Note fromStream(std::istream& i);
 
     /** @author alcinos
@@ -145,5 +143,8 @@ public :
     void changeDuration(const UFraction& d);
 
 };
+
+std::ostream& operator<<(std::ostream& o, const Note& n);
+std::istream& operator>>(std::istream& i, Note& n);
 
 #endif

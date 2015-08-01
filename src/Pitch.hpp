@@ -60,8 +60,6 @@ public:
      * @return A random instance
      */
     static Pitch randomInstance();
-    std::ostream& operator<<(std::ostream& o) const;
-    std::istream& operator>>(std::istream& i);
     static Pitch fromStream(std::istream& i);
 
     /** @author alcinos
@@ -145,6 +143,9 @@ public:
     static const Pitch Bf;
     static const Pitch B;
 };
+
+std::ostream& operator<<(std::ostream& o, const Pitch& p);
+std::istream& operator>>(std::istream& i, Pitch& p);
 
 
 #endif

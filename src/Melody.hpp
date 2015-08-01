@@ -35,8 +35,6 @@ public :
     void save(std::ostream& o) const;
     static Melody load(std::istream& i);
     static Melody randomInstance();
-    std::ostream& operator<<(std::ostream& o) const;
-    std::ostream& operator>>(std::istream& i);
     static Melody fromStream(std::istream& i);
 
     Melody(const Key& k, const Signature& s);
@@ -61,5 +59,8 @@ public :
 
     Melody transpose(const Key& newKey) const;
 };
+
+std::ostream& operator<<(std::ostream& o, const Melody& m);
+std::istream& operator>>(std::istream& i, Melody& m);
 
 #endif

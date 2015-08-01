@@ -29,8 +29,6 @@ public :
     void save(std::ostream& o) const;
     static Figure load(std::istream& i);
     static Figure randomInstance();
-    std::ostream& operator<<(std::ostream& o) const;
-    std::ostream& operator>>(std::istream& i);
     static Figure fromStream(std::istream& i);
 
     Figure() = default;
@@ -55,5 +53,8 @@ public :
 
     std::vector<UFraction> getNotePercentage() const;
 };
+
+std::ostream& operator<<(std::ostream& o, const Figure& g);
+std::istream& operator>>(std::istream& i, Figure& g);
 
 #endif // FIGURE_HPP

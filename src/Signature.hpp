@@ -55,8 +55,6 @@ public :
         @return the maximum of the different ID
      */
     static unsigned maxId();
-    std::ostream& operator<<(std::ostream& o) const;
-    std::ostream& operator>>(std::istream& i);
     static Signature fromStream(std::istream& i);
     /** @author Valentin
      * @brief Default constructor for a signature, 4 quarter notes a bar
@@ -114,5 +112,11 @@ public :
     UFraction measureTime() const;
 
 };
+
+/**
+ *@todo Implement
+**/
+inline std::ostream& operator<<(std::ostream& o, const Signature& s){return o;};
+std::istream& operator>>(std::istream& i, Signature& s);
 
 #endif

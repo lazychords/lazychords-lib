@@ -48,10 +48,10 @@ namespace doc_impl
         static unsigned maxId();
         unsigned id() const;
         static C fromId(unsigned id);
-        std::ostream& operator<<(std::ostream& o) const;
-        std::istream& operator>>(std::istream& i);
         static C fromStream(std::istream& i);
     };
+    std::ostream& operator<<(std::ostream& o, const C& c);
+    std::istream& operator>>(std::istream& i, C& c);
 }
 
 /**
@@ -346,7 +346,7 @@ struct HasId
 
 /**
  *@anchor LeftShiftDescription
- *@fn std::ostream& C::operator<<(std::ostream& o) const
+ *@fn std::ostream& operator<<(std::ostream& o, const C&)
  *@brief Saves the object in a human readable format into a stream. Should behave on C just like on any other class of the std.
  *@param o is the stream to save into
  *@return The stream
@@ -365,7 +365,7 @@ struct HasId
  *- We can not write std::ostream& << const C&
  *- C follows the Print Concept.
  *@details Respecting the Print concept means having :
- *1. @ref LeftShiftDescription "std::ostream& C::operator<<(std::ostream& o) const" as a member function or free function
+ *1. @ref LeftShiftDescription "std::ostream& operator<<(std::ostream& o, const C&)"
  *2. @ref ConceptEquality "EqualityComparable concept"
  *
  *@author Julien
@@ -390,7 +390,7 @@ struct IsPrintable
 
 /**
  *@anchor RightShiftDescription
- *@fn std::istream& C::operator>>(std::istream& i)
+ *@fn std::istream& operator>>(std::istream& i, C& c)
  *@brief Loads the object from a stream. Should behave on C just like on any other class of the std.
  *@param i is the stream to load from
  *@return The stream
@@ -406,7 +406,7 @@ struct IsPrintable
  *@anchor FromStreamDescription
  *@fn static C C::fromStream(std::istream& i)
  *@brief Loads the object from a stream.
- *@details Should behave exactly as
+ *@details Should behave exactly (if C has a default constructor) as
  *@code
  *C c;
  *if(!(i >> c))
@@ -424,7 +424,7 @@ struct IsPrintable
  *- We can not call std::istream& operator>> C&
  *- C follows the Read Concept.
  *@details Respecting the Read concept means having :
- *1. @ref RightShiftDescription "std::istream& C::operator<<(std::istream& i)" as a member function or free function
+ *1. @ref RightShiftDescription "std::istream& operator<<(std::istream& i, C& c)"
  *1. @ref FromStreamDescription "static C C::fromStream(std::istream& i)" if C is one o the classes of our project
  *1. @ref ConceptPrint "Print concept"
  *

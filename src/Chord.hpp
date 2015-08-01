@@ -55,8 +55,6 @@ public :
      */
     static constexpr unsigned maxId();
 
-    std::ostream& operator<<(std::ostream& o) const;
-    std::ostream& operator>>(std::istream& i);
     static Chord fromStream(std::istream& i);
 
     /**@author Valentin
@@ -104,5 +102,7 @@ public :
 
 using ChordProgression = std::vector<Chord>;
 
+std::ostream& operator<<(std::ostream& o, const Chord& c);
+std::ostream& operator>>(std::istream& i, Chord& c);
 
 #endif
